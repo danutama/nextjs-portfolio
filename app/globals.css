@@ -63,6 +63,11 @@ a:hover {
   transition: opacity 0.3s ease;
 }
 
+a,
+button {
+  cursor: pointer;
+}
+
 /* ==== IMAGE ==== */
 img {
   max-width: 100%;

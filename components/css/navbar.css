@@ -20,10 +20,10 @@
 .logo {
   font-size: 3rem;
   font-weight: bold;
+  margin: 0;
 }
 
 .menu-btn {
-  background: none;
   font-size: 0.8rem;
   color: #fff;
   background-color: #000;
@@ -43,9 +43,8 @@
   padding: 1rem;
   background: #f9f9f9;
   display: flex;
-  align-items: start;
-  justify-content: center;
-  flex-direction: column;
+  align-items: end;
+  justify-content: space-between;
   transform: translateY(-100%);
   z-index: 50;
 }
@@ -57,17 +56,42 @@
   margin: 0;
 }
 
+.menu-info {
+  color: #000;
+}
+
+.menu-info p {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  overflow: hidden;
+  display: flex;
+}
+
+.menu-info p span {
+  display: inline-block;
+  transform: translateY(100%);
+}
+
+.menu-info h3 {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
 .menu-item {
   margin: 0.25rem 0;
   overflow: hidden;
 }
 
-.menu-item a {
+.menu-link {
   text-transform: uppercase;
   display: inline-block;
   font-size: 5rem;
   font-weight: 700;
   line-height: 1;
+  background-color: transparent;
+  border: none;
   letter-spacing: -0.02em;
   color: #000;
   text-decoration: none;
@@ -75,8 +99,20 @@
   transition: color 0.3s ease;
 }
 
-.menu-item a:hover {
+.menu-link.active,
+.menu-link:hover {
   color: #555;
+}
+
+@media (max-width: 890px) {
+  .menu-overlay {
+    align-items: start;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 3rem;
+    padding-top: 5rem;
+    overflow-y: auto;
+  }
 }
 
 @media (max-width: 640px) {
@@ -85,8 +121,11 @@
     font-size: 2rem;
   }
 
-  .menu-item a {
-    font-size: 3rem;
-    line-height: 1.2;
+  .menu-link {
+    font-size: 3.5rem;
+  }
+
+  .menu-info p {
+    font-size: 1rem;
   }
 }
