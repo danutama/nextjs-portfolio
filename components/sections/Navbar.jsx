@@ -16,16 +16,12 @@ export default function Navbar() {
   const currentYear = new Date().getFullYear();
 
   const menuItems = ['Index', 'About', 'Projects', 'Contact'];
-  const infoItems = ['danupratama.dev@gmail.com', 'Jakarta, Indonesia', `©${currentYear} Danu Pratama`, 'Plus Jakarta Sans, font by Tokotype'];
+  const infoItems = ['danupratama.dev@gmail.com', 'Jakarta, Indonesia', `©${currentYear} Danu Pratama`, 'Plus Jakarta Sans by Tokotype', 'Times New Roman'];
 
   // Setup GSAP
   useEffect(() => {
     gsap.set(menuRef.current, { y: '-100%' });
-    gsap.set(linksRef.current, { y: '100%' });
-    gsap.set(
-      infoRef.current.map((p) => p.querySelector('span')),
-      { y: '100%' }
-    );
+    gsap.set(linksRef.current, { y: '-100%' });
   }, []);
 
   // Animasi saat open berubah
@@ -33,43 +29,57 @@ export default function Navbar() {
     if (open) {
       gsap.to(menuRef.current, { y: 0, duration: 0.8, ease: 'power3.out' });
 
-      gsap.to(linksRef.current, {
-        y: '0%',
-        duration: 0.8,
-        ease: 'power3.out',
-        stagger: 0.2,
-        delay: 0.3,
-      });
-
-      gsap.to(
-        infoRef.current.map((p) => p.querySelector('span')),
+      // menu items
+      gsap.fromTo(
+        linksRef.current,
+        { y: '-100%' }, // from top
         {
           y: '0%',
           duration: 0.8,
           ease: 'power3.out',
-          stagger: 0.2,
+          stagger: { each: 0.2, from: 'end' },
+          delay: 0.3,
+        }
+      );
+
+      gsap.fromTo(
+        infoRef.current.map((p) => p.querySelector('span')),
+        { y: '-100%' }, // from top
+        {
+          y: '0%',
+          duration: 0.8,
+          ease: 'power3.out',
+          stagger: { each: 0.2, from: 'end' },
           delay: 0.5,
         }
       );
     } else {
+      // to bottom
       gsap.to(
         infoRef.current.map((p) => p.querySelector('span')),
         {
           y: '100%',
-          duration: 0.5,
+          duration: 0.3,
           ease: 'power3.in',
           stagger: { each: 0.1, from: 'end' },
         }
       );
 
+      // to bottom
       gsap.to(linksRef.current, {
         y: '100%',
-        duration: 0.5,
+        duration: 0.4,
         ease: 'power3.in',
         stagger: { each: 0.1, from: 'end' },
       });
 
-      gsap.to(menuRef.current, { y: '-100%', duration: 0.5, ease: 'power3.in', delay: 0.5 });
+      // overlay tutup ke atas
+      gsap.to(menuRef.current, {
+        y: '-100%',
+        duration: 0.5,
+        ease: 'power3.in',
+        delay: 0.5,
+      });
     }
   }, [open]);
 
@@ -78,7 +88,7 @@ export default function Navbar() {
       infoRef.current.map((p) => p.querySelector('span')),
       {
         y: '100%',
-        duration: 0.5,
+        duration: 0.3,
         ease: 'power3.in',
         stagger: { each: 0.1, from: 'end' },
       }
@@ -86,7 +96,7 @@ export default function Navbar() {
 
     gsap.to(linksRef.current, {
       y: '100%',
-      duration: 0.5,
+      duration: 0.4,
       ease: 'power3.in',
       stagger: { each: 0.1, from: 'end' },
     });
@@ -107,8 +117,11 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="navbar-container">
         <h1 className="logo">dp</h1>
-        <button className="menu-btn" onClick={() => setOpen(!open)}>
-          {open ? 'Close' : 'Menu'}
+
+        {/* Toggle*/}
+        <button className={`menu-btn ${open ? 'open' : ''}`} onClick={() => setOpen(!open)}>
+          <span></span>
+          <span></span>
         </button>
       </div>
 

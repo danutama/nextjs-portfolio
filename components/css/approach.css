@@ -1,0 +1,9 @@
+#approach h2 {
+  font-size: 3rem;
+}
+
+@media (max-width: 640px) {
+  #approach h2 {
+    line-height: 1;
+  }
+}

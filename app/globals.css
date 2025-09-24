@@ -104,6 +104,11 @@ img {
 
 @media (max-width: 640px) {
   /* mobile */
+
+  section {
+    padding: 0;
+  }
+
   a,
   button {
     cursor: default !important;
