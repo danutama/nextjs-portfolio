@@ -44,14 +44,20 @@ export default function Navbar() {
 
   // Setup GSAP
   useEffect(() => {
-    gsap.set(menuRef.current, { y: '-100%' });
+    gsap.set(menuRef.current, {
+      clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
+    });
     gsap.set(linksRef.current, { y: '-100%' });
   }, []);
 
   // Animasi saat open berubah
   useEffect(() => {
     if (open) {
-      gsap.to(menuRef.current, { y: 0, duration: 0.8, ease: 'power3.out' });
+      gsap.to(menuRef.current, {
+        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+        duration: 0.8,
+        ease: 'power3.out',
+      });
 
       // menu items
       gsap.fromTo(
@@ -99,10 +105,15 @@ export default function Navbar() {
 
       // overlay tutup ke atas
       gsap.to(menuRef.current, {
-        y: '-100%',
+        clipPath: 'polygon(0 0, 100% 0, 100% 0.1%, 0 0.1%)',
         duration: 0.5,
         ease: 'power3.in',
         delay: 0.5,
+        onComplete: () => {
+          gsap.set(menuRef.current, {
+            clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
+          });
+        },
       });
     }
   }, [open]);
@@ -126,11 +137,14 @@ export default function Navbar() {
     });
 
     gsap.to(menuRef.current, {
-      y: '-100%',
+      clipPath: 'polygon(0 0, 100% 0, 100% 0.1%, 0 0.1%)',
       duration: 0.5,
       ease: 'power3.in',
       delay: 0.5,
       onComplete: () => {
+        gsap.set(menuRef.current, {
+          clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
+        });
         setOpen(false);
         router.push(href);
       },
