@@ -7,6 +7,7 @@ import '../css/navbar.css';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [theme, setTheme] = useState('system');
   const menuRef = useRef(null);
   const linksRef = useRef([]);
   const infoRef = useRef([]);
@@ -15,8 +16,31 @@ export default function Navbar() {
 
   const currentYear = new Date().getFullYear();
 
-  const menuItems = ['Index', 'About', 'Projects', 'Contact'];
-  const infoItems = ['danupratama.dev@gmail.com', 'Jakarta, Indonesia', `©${currentYear} Danu Pratama`, 'Plus Jakarta Sans by Tokotype', 'Times New Roman'];
+  const menuItems = ['Index', 'About', 'Projects', 'Archive'];
+  const infoItems = ['danupratama.dev@gmail.com', 'Jakarta, Indonesia', `©${currentYear} Danu Pratama`, 'Plus Jakarta Sans by Tokotype', 'Playfair Display'];
+
+  // --- THEME SETUP ---
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      applyTheme(savedTheme);
+    } else {
+      applyTheme('system'); // default
+    }
+  }, []);
+
+  const applyTheme = (mode) => {
+    let finalTheme = mode;
+
+    if (mode === 'system') {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      finalTheme = prefersDark ? 'dark' : 'light';
+    }
+
+    document.documentElement.setAttribute('data-theme', finalTheme);
+    setTheme(mode);
+    localStorage.setItem('theme', mode);
+  };
 
   // Setup GSAP
   useEffect(() => {
@@ -50,7 +74,7 @@ export default function Navbar() {
           duration: 0.8,
           ease: 'power3.out',
           stagger: { each: 0.2, from: 'end' },
-          delay: 0.5,
+          delay: 0.4,
         }
       );
     } else {
@@ -118,7 +142,7 @@ export default function Navbar() {
       <div className="navbar-container">
         <h1 className="logo">dp</h1>
 
-        {/* Toggle*/}
+        {/* Menu Toggle*/}
         <button className={`menu-btn ${open ? 'open' : ''}`} onClick={() => setOpen(!open)}>
           <span></span>
           <span></span>
@@ -126,19 +150,34 @@ export default function Navbar() {
       </div>
 
       <div ref={menuRef} className="menu-overlay">
-        <ul>
-          {menuItems.map((item, i) => {
-            const href = item === 'Index' ? '/' : `/${item.toLowerCase()}`;
-            const isActive = pathname === href;
-            return (
-              <li key={item} className="menu-item">
-                <button className={`menu-link ${isActive ? 'active' : ''}`} ref={(el) => (linksRef.current[i] = el)} onClick={() => handleLinkClick(href)}>
-                  {item}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+        <div>
+          <ul>
+            {menuItems.map((item, i) => {
+              const href = item === 'Index' ? '/' : `/${item.toLowerCase()}`;
+              const isActive = pathname === href;
+              return (
+                <li key={item} className="menu-item">
+                  <button className={`menu-link ${isActive ? 'active' : ''}`} ref={(el) => (linksRef.current[i] = el)} onClick={() => handleLinkClick(href)}>
+                    {item}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* THEME TOGGLE */}
+          <div className="theme-toggle">
+            <button onClick={() => applyTheme('light')} className={theme === 'light' ? 'active' : ''}>
+              Light
+            </button>
+            <button onClick={() => applyTheme('dark')} className={theme === 'dark' ? 'active' : ''}>
+              Dark
+            </button>
+            <button onClick={() => applyTheme('system')} className={theme === 'system' ? 'active' : ''}>
+              System
+            </button>
+          </div>
+        </div>
 
         <div className="menu-info">
           <h3>dp</h3>
@@ -147,6 +186,20 @@ export default function Navbar() {
               <span>{text}</span>
             </p>
           ))}
+
+          <hr />
+
+          <div className="menu-socials">
+            <a href="https://www.linkedin.com/in/danu-agus-pratama" target="_blank" rel="noopener noreferrer">
+              LinkedIn
+            </a>
+            <a href="https://github.com/danutama" target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
+            <a href="https://danutama.github.io" target="_blank" rel="noopener noreferrer">
+              Portfolio v3
+            </a>
+          </div>
         </div>
       </div>
     </nav>

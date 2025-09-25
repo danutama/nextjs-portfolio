@@ -5,16 +5,68 @@
   box-sizing: border-box;
 }
 
+:root {
+  --font-jakarta: 'Plus Jakarta Sans', sans-serif;
+  --font-playfair: 'Playfair Display', serif;
+
+  /* Backgrounds */
+  --color-bg: #ffffff;
+  --color-bg-2: #f9f9f9;
+  --color-surface: #f5f5f5;
+  --color-inverse: #111111;
+  --color-gray: #d3d3d3;
+
+  /* Text */
+  --color-text: #111111;
+  --color-text-inverse: #ffffff;
+
+  /* Accent */
+}
+
+/* Dark mode */
+[data-theme='dark'] {
+  --color-bg: #111111;
+  --color-bg-2: #141414;
+  --color-surface: #222222;
+  --color-inverse: #ffffff;
+  --color-gray: #474747;
+
+  --color-text: #ffffff;
+  --color-text-inverse: #111111;
+}
+
 html,
 body {
   height: 100%;
   width: 100%;
   font-family: var(--font-jakarta), sans-serif;
-  background-color: #fff;
-  color: #111;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   line-height: 1.6;
   scroll-behavior: smooth;
   overflow-x: hidden;
+}
+
+/* ==== THEME TOGGLE ==== */
+.theme-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.theme-toggle button {
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--color-inverse);
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+
+.theme-toggle button.active {
+  background: var(--color-inverse);
+  color: var(--color-text-inverse);
 }
 
 /* ==== GLOBAL LAYOUT ==== */

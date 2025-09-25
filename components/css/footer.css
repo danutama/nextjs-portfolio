@@ -1,0 +1,32 @@
+#footer {
+  width: 100%;
+  background-color: var(--color-inverse);
+  position: fixed;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.marquee {
+  width: 100%;
+  overflow: hidden;
+}
+
+.marquee__inner {
+  display: inline-block;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.marquee__inner span {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text-inverse);
+  text-transform: uppercase;
+  padding-right: 2rem;
+}
+
+@media (max-width: 640px) {
+  #footer {
+    display: none;
+  }
+}
