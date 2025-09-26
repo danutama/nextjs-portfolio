@@ -1,6 +1,7 @@
 #about {
   position: relative;
   text-align: center;
+  padding: 15rem 1rem 5rem 1rem;
 }
 
 #about .container {
@@ -35,10 +36,33 @@
 }
 
 #about h2 {
-  font-size: 3rem;
+  font-size: 8rem;
+  color: var(--color-gray);
   position: relative;
   z-index: 2;
   overflow: hidden;
+}
+
+.about-description {
+  padding-top: 15rem;
+}
+
+.about-description p {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.about-description h3 {
+  font-size: 3rem;
+  line-height: 1;
+  margin: 5rem 0;
+}
+
+.about-socials {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 1rem;
 }
 
 @media (max-width: 640px) {
@@ -68,7 +92,16 @@
 
   #about h2 {
     position: static;
+    font-size: 3rem;
     line-height: 1;
     margin: 0.5rem 0;
+  }
+
+  .about-description {
+    padding-top: 1rem;
+  }
+
+  .about-description p {
+    font-size: 1.2rem;
   }
 }

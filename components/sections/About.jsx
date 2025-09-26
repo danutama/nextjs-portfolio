@@ -49,12 +49,10 @@ export default function About() {
 
     gsap.set(h2, {
       clipPath: 'inset(0 0 100% 0)',
-      opacity: 0,
     });
 
     gsap.to(h2, {
       clipPath: 'inset(0% 0 0% 0)',
-      opacity: 1,
       duration: 1.2,
       ease: 'power2.out',
       delay: 0.3,
@@ -68,7 +66,26 @@ export default function About() {
           <div ref={wrapperRef} className="profile-img-wrapper">
             <Image src="/profile.jpg" alt="Profile picture" width={300} height={400} className="profile-img" priority />
           </div>
-          <h2 ref={h2Ref}>Let’s turn your ideas into reality on the web.</h2>
+          <h2 ref={h2Ref}>ABOUT ME</h2>
+        </div>
+
+        <div className="about-description">
+          <p className="text-start">
+            My name is Danu Pratama, a web programmer working on small to medium-scale projects. I focus on creating web interfaces that are visually appealing, responsive, and user-friendly. I also have experience developing complete web
+            applications, including both frontend and backend, helping to build functional web solutions that meet project needs.
+          </p>
+
+          <h3 className="text-start">Let’s turn your ideas into reality on the web.</h3>
+
+          <div className="about-socials">
+            <a href="https://www.linkedin.com/in/danu-agus-pratama" target="_blank" rel="noopener noreferrer">
+              (LinkedIn)
+            </a>
+            <a href="https://github.com/danutama" target="_blank" rel="noopener noreferrer">
+              (GitHub)
+            </a>
+            <a href="mailto:danupratama.dev@gmail.com">(e-mail)</a>
+          </div>
         </div>
       </div>
     </section>
