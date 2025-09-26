@@ -14,7 +14,7 @@ export default function PageTransition() {
   // update bar count based on screen size
   useEffect(() => {
     const updateCount = () => {
-      setCount(window.innerWidth < 640 ? 5 : 15);
+      setCount(window.innerWidth < 640 ? 7 : 15);
     };
     updateCount();
     window.addEventListener('resize', updateCount);
@@ -42,7 +42,7 @@ export default function PageTransition() {
       // enter
       tl.to(bars, {
         yPercent: 0,
-        duration: 0.4,
+        duration: 0.5,
         ease: 'power2.out',
         stagger: { each: 0.05, from: 'start' },
       });
@@ -55,8 +55,8 @@ export default function PageTransition() {
         bars,
         {
           yPercent: 100,
-          duration: 0.4,
-          ease: 'power2.in',
+          duration: 0.5,
+          ease: 'power2.out',
           stagger: { each: 0.05, from: 'start' },
         },
         '+=0.1'
