@@ -1,0 +1,19 @@
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  display: flex;
+  flex-direction: row;
+  background: transparent;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.page-transition .bar {
+  flex: 1;
+  height: 100vh;
+  background: var(--color-inverse);
+  will-change: transform;
+  margin-right: -1px;
+}

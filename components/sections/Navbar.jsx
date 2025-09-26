@@ -119,24 +119,44 @@ export default function Navbar() {
   }, [open]);
 
   const handleLinkClick = (href) => {
-    gsap.to(
+    const tl = gsap.timeline({
+      onComplete: () => {
+        window.dispatchEvent(
+          new CustomEvent('page-transition', {
+            detail: {
+              callback: () => router.push(href),
+            },
+          })
+        );
+      },
+    });
+
+    // 1. Close info
+    tl.to(
       infoRef.current.map((p) => p.querySelector('span')),
       {
         y: '100%',
         duration: 0.3,
         ease: 'power3.in',
         stagger: { each: 0.1, from: 'end' },
-      }
+      },
+      0
     );
 
-    gsap.to(linksRef.current, {
-      y: '100%',
-      duration: 0.4,
-      ease: 'power3.in',
-      stagger: { each: 0.1, from: 'end' },
-    });
+    // 2. Close links
+    tl.to(
+      linksRef.current,
+      {
+        y: '100%',
+        duration: 0.4,
+        ease: 'power3.in',
+        stagger: { each: 0.1, from: 'end' },
+      },
+      0
+    );
 
-    gsap.to(menuRef.current, {
+    // 3. Close overlay menu
+    tl.to(menuRef.current, {
       clipPath: 'polygon(0 0, 100% 0, 100% 0.1%, 0 0.1%)',
       duration: 0.5,
       ease: 'power3.in',
@@ -146,7 +166,6 @@ export default function Navbar() {
           clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
         });
         setOpen(false);
-        router.push(href);
       },
     });
   };

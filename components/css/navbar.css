@@ -79,6 +79,7 @@
   inset: 0;
   overflow: hidden;
   z-index: 50;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
 }
 
 .menu-overlay ul {

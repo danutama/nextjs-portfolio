@@ -1,4 +1,5 @@
 import Navbar from '@/components/sections/Navbar';
+import PageTransition from '@/components/sections/PageTransition';
 import './globals.css';
 
 import { Plus_Jakarta_Sans, Playfair_Display } from 'next/font/google';
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${jakarta.variable} ${playfair.variable}`}>
       <body>
         <Navbar />
+        <PageTransition />
         {children}
       </body>
     </html>
