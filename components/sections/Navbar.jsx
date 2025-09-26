@@ -79,7 +79,7 @@ export default function Navbar() {
           y: '0%',
           duration: 0.8,
           ease: 'power3.out',
-          stagger: { each: 0.2, from: 'end' },
+          stagger: { each: 0.1, from: 'end' },
           delay: 0.4,
         }
       );
@@ -220,17 +220,15 @@ export default function Navbar() {
             </p>
           ))}
 
-          <hr />
-
           <div className="menu-socials">
             <a href="https://www.linkedin.com/in/danu-agus-pratama" target="_blank" rel="noopener noreferrer">
-              LinkedIn
+              (LinkedIn)
             </a>
             <a href="https://github.com/danutama" target="_blank" rel="noopener noreferrer">
-              GitHub
+              (GitHub)
             </a>
             <a href="https://danutama.github.io" target="_blank" rel="noopener noreferrer">
-              Portfolio v3
+              (Portfolio v3)
             </a>
           </div>
         </div>

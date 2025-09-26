@@ -36,7 +36,8 @@
 }
 
 #about h2 {
-  font-size: 8rem;
+  font-size: 7rem;
+  line-height: 0.9;
   color: var(--color-gray);
   position: relative;
   z-index: 2;
@@ -47,6 +48,7 @@
   padding-top: 15rem;
 }
 
+.skill-list,
 .about-description p {
   font-size: 1.5rem;
   line-height: 1.2;
@@ -56,6 +58,34 @@
   font-size: 3rem;
   line-height: 1;
   margin: 5rem 0;
+}
+
+h3.skill-title {
+  margin-bottom: 1rem;
+}
+
+p.skill-subtitle {
+  margin-bottom: 3rem;
+  color: var(--color-gray);
+}
+
+.skill-wrapper {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 1rem;
+  align-items: start;
+  margin-bottom: 2rem;
+}
+
+.skill-item {
+  font-weight: 600;
+  margin: 0;
+}
+
+.skill-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .about-socials {
@@ -93,7 +123,6 @@
   #about h2 {
     position: static;
     font-size: 3rem;
-    line-height: 1;
     margin: 0.5rem 0;
   }
 
@@ -101,7 +130,12 @@
     padding-top: 1rem;
   }
 
+  .skill-list,
   .about-description p {
     font-size: 1.2rem;
+  }
+
+  .skill-wrapper {
+    grid-template-columns: 130px 1fr;
   }
 }

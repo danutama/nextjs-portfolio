@@ -64,16 +64,42 @@ export default function About() {
       <div className="container">
         <div className="content">
           <div ref={wrapperRef} className="profile-img-wrapper">
-            <Image src="/profile.jpg" alt="Profile picture" width={300} height={400} className="profile-img" priority />
+            <Image src="/profile.png" alt="Profile picture" width={300} height={400} className="profile-img" priority />
           </div>
-          <h2 ref={h2Ref}>ABOUT ME</h2>
+          <h2 ref={h2Ref}>ABOUT ME AS A WEB DEVELOPER</h2>
         </div>
 
         <div className="about-description">
           <p className="text-start">
-            My name is Danu Pratama, a web programmer working on small to medium-scale projects. I focus on creating web interfaces that are visually appealing, responsive, and user-friendly. I also have experience developing complete web
+            My name is Danu Pratama, a web developer working on small to medium-scale projects. I focus on creating web interfaces that are visually appealing, responsive, and user-friendly. I also have experience developing complete web
             applications, including both frontend and backend, helping to build functional web solutions that meet project needs.
           </p>
+
+          <div className="skill">
+            <h3 className="text-start skill-title">I can help you with</h3>
+            <p className="text-start skill-subtitle">Turning your ideas into reality on the web through design and development</p>
+
+            <div className="skill-wrapper">
+              <p className="skill-item text-start">Frontend</p>
+              <ul className="skill-list text-start">
+                <li>HTML, CSS, Bootstrap, React.js, Next.js, Axios, Vite, GSAP</li>
+              </ul>
+            </div>
+
+            <div className="skill-wrapper">
+              <p className="skill-item text-start">Backend</p>
+              <ul className="skill-list text-start">
+                <li>PHP, Laravel, Node.js, Express, Supabase, MySQL, PostgreSQL</li>
+              </ul>
+            </div>
+
+            <div className="skill-wrapper">
+              <p className="skill-item text-start">Tools, etc</p>
+              <ul className="skill-list text-start">
+                <li>GitHub, Visual Studio Code, Vercel, Netlify, Webflow</li>
+              </ul>
+            </div>
+          </div>
 
           <h3 className="text-start">Let’s turn your ideas into reality on the web.</h3>
 
