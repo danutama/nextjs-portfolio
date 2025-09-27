@@ -67,7 +67,7 @@ export default function Navbar() {
           y: '0%',
           duration: 0.8,
           ease: 'power3.out',
-          stagger: { each: 0.2, from: 'end' },
+          stagger: { each: 0.1, from: 'end' },
           delay: 0.3,
         }
       );

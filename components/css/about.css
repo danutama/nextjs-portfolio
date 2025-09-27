@@ -59,7 +59,7 @@
 .skill-list,
 .about-description p {
   font-size: 1.5rem;
-  line-height: 1.2;
+  line-height: 1.4;
 }
 
 .about-description h3 {
@@ -75,6 +75,12 @@ h3.skill-title {
 p.skill-subtitle {
   margin-bottom: 3rem;
   color: var(--color-gray);
+  font-weight: 500;
+}
+
+.sub-heading {
+  font-size: 2rem;
+  margin: 3rem 0 2rem 0;
 }
 
 .skill-wrapper {
@@ -93,6 +99,7 @@ p.skill-subtitle {
   margin: 0;
   padding: 0;
   list-style: none;
+  text-align: end;
 }
 
 .about-socials {
@@ -140,6 +147,7 @@ p.skill-subtitle {
   .skill-list,
   .about-description p {
     font-size: 1.2rem;
+    text-align: start;
   }
 
   .skill-wrapper {

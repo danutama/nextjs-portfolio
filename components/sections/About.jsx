@@ -127,11 +127,11 @@ export default function About() {
 
             <div className="skill-wrapper">
               <p className="skill-item text-start text-animate">
-                Frontend <br />
-                <span className="text-secondary small">Development</span>
+                Company Profile <br />
+                <span className="text-secondary small">Website</span>
               </p>
-              <ul className="skill-list text-start text-animate">
-                <li>HTML, CSS, Bootstrap, React.js, Next.js, Axios, Vite, GSAP</li>
+              <ul className="skill-list text-animate">
+                <li>Build a strong online presence for your business</li>
               </ul>
             </div>
 
@@ -139,19 +139,62 @@ export default function About() {
 
             <div className="skill-wrapper">
               <p className="skill-item text-start text-animate">
-                Backend <br />
-                <span className="text-secondary small">Development</span>
+                Landing Page <br />
+                <span className="text-secondary small">Website</span>
               </p>
-              <ul className="skill-list text-start text-animate">
-                <li>PHP, Laravel, Node.js, Express, Supabase, MySQL, PostgreSQL</li>
+              <ul className="skill-list text-animate">
+                <li>High-converting pages that capture leads & sales</li>
               </ul>
             </div>
 
             <hr ref={(el) => (hrRefs.current[1] = el)} />
 
             <div className="skill-wrapper">
-              <p className="skill-item text-start text-animate">Tools, etc</p>
-              <ul className="skill-list text-start text-animate">
+              <p className="skill-item text-start text-animate">
+                Personal Portfolio <br />
+                <span className="text-secondary small">Website</span>
+              </p>
+              <ul className="skill-list text-animate">
+                <li>Showcase your skills and stand out from the crowd</li>
+              </ul>
+            </div>
+
+            {/* -------------------------------------- */}
+
+            <h4 className="sub-heading fw-normal text-start">
+              My <i className="font-secondary fw-normal">Expertise</i>
+            </h4>
+
+            <div className="skill-wrapper">
+              <p className="skill-item text-start text-animate">
+                Frontend <br />
+                <span className="text-secondary small">Development</span>
+              </p>
+              <ul className="skill-list text-animate">
+                <li>HTML, CSS, Bootstrap, React.js, Next.js, Axios, Vite, GSAP</li>
+              </ul>
+            </div>
+
+            <hr ref={(el) => (hrRefs.current[2] = el)} />
+
+            <div className="skill-wrapper">
+              <p className="skill-item text-start text-animate">
+                Backend <br />
+                <span className="text-secondary small">Development</span>
+              </p>
+              <ul className="skill-list text-animate">
+                <li>PHP, Laravel, Node.js, Express, Supabase, MySQL, PostgreSQL</li>
+              </ul>
+            </div>
+
+            <hr ref={(el) => (hrRefs.current[3] = el)} />
+
+            <div className="skill-wrapper">
+              <p className="skill-item text-start text-animate">
+                Tools <br />
+                <span className="text-secondary small">& others</span>
+              </p>
+              <ul className="skill-list text-animate">
                 <li>GitHub, Visual Studio Code, Vercel, Netlify, Webflow</li>
               </ul>
             </div>
