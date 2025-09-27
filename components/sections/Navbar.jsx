@@ -118,24 +118,28 @@ export default function Navbar() {
     }
   }, [open]);
 
+  // Handle hover prefetch
+  const handleLinkHover = (href) => {
+    // Skip prefetch
+    if (href !== pathname) {
+      router.prefetch(href);
+    }
+  };
+
   const handleLinkClick = (href) => {
-    const prefetchPromise = router.prefetch(href);
+    // Skip
+    if (href === pathname) {
+      setOpen(false);
+      return;
+    }
 
-    const tl = gsap.timeline({
-      onComplete: async () => {
-        await prefetchPromise;
+    // 1. Start prefetch immediately
+    router.prefetch(href);
 
-        window.dispatchEvent(
-          new CustomEvent('page-transition', {
-            detail: {
-              callback: () => router.push(href),
-            },
-          })
-        );
-      },
-    });
+    // 2. Start close menu
+    const tl = gsap.timeline();
 
-    // 1. Close info
+    // Close info items
     tl.to(
       infoRef.current.map((p) => p.querySelector('span')),
       {
@@ -147,7 +151,7 @@ export default function Navbar() {
       0
     );
 
-    // 2. Close links
+    // Close menu links
     tl.to(
       linksRef.current,
       {
@@ -159,17 +163,27 @@ export default function Navbar() {
       0
     );
 
-    // 3. Close overlay menu
+    // Close overlay menu
     tl.to(menuRef.current, {
       clipPath: 'polygon(0 0, 100% 0, 100% 0.1%, 0 0.1%)',
       duration: 0.5,
       ease: 'power3.in',
       delay: 0.5,
       onComplete: () => {
+        // Reset menu state
         gsap.set(menuRef.current, {
           clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
         });
         setOpen(false);
+
+        // 3. Navigate
+        window.dispatchEvent(
+          new CustomEvent('page-transition', {
+            detail: {
+              callback: () => router.push(href),
+            },
+          })
+        );
       },
     });
   };
@@ -194,7 +208,7 @@ export default function Navbar() {
               const isActive = pathname === href;
               return (
                 <li key={item} className="menu-item">
-                  <button className={`menu-link ${isActive ? 'active' : ''}`} ref={(el) => (linksRef.current[i] = el)} onClick={() => handleLinkClick(href)}>
+                  <button className={`menu-link ${isActive ? 'active' : ''}`} ref={(el) => (linksRef.current[i] = el)} onClick={() => handleLinkClick(href)} onMouseEnter={() => handleLinkHover(href)}>
                     {item}
                   </button>
                 </li>

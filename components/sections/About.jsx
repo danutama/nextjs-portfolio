@@ -131,7 +131,7 @@ export default function About() {
                 <span className="text-secondary small">Website</span>
               </p>
               <ul className="skill-list text-animate">
-                <li>Build a strong online presence for your business</li>
+                <li>Create a professional online presence that represents your brand and builds trust.</li>
               </ul>
             </div>
 
@@ -143,7 +143,7 @@ export default function About() {
                 <span className="text-secondary small">Website</span>
               </p>
               <ul className="skill-list text-animate">
-                <li>High-converting pages that capture leads & sales</li>
+                <li>Goal-oriented pages that engage visitors and capture leads effectively.</li>
               </ul>
             </div>
 
@@ -155,7 +155,31 @@ export default function About() {
                 <span className="text-secondary small">Website</span>
               </p>
               <ul className="skill-list text-animate">
-                <li>Showcase your skills and stand out from the crowd</li>
+                <li>Showcase your skills, projects, and achievements in a memorable way.</li>
+              </ul>
+            </div>
+
+            <hr ref={(el) => (hrRefs.current[2] = el)} />
+
+            <div className="skill-wrapper">
+              <p className="skill-item text-start text-animate">
+                Blog / News <br />
+                <span className="text-secondary small">Website</span>
+              </p>
+              <ul className="skill-list text-animate">
+                <li>Share your insights, updates, and stories with your audience.</li>
+              </ul>
+            </div>
+
+            <hr ref={(el) => (hrRefs.current[3] = el)} />
+
+            <div className="skill-wrapper">
+              <p className="skill-item text-start text-animate">
+                Others <br />
+                <span className="text-secondary small">Web Application</span>
+              </p>
+              <ul className="skill-list text-animate">
+                <li>Develop tailored web applications to meet your business requirements.</li>
               </ul>
             </div>
 
@@ -175,7 +199,7 @@ export default function About() {
               </ul>
             </div>
 
-            <hr ref={(el) => (hrRefs.current[2] = el)} />
+            <hr ref={(el) => (hrRefs.current[4] = el)} />
 
             <div className="skill-wrapper">
               <p className="skill-item text-start text-animate">
@@ -187,7 +211,7 @@ export default function About() {
               </ul>
             </div>
 
-            <hr ref={(el) => (hrRefs.current[3] = el)} />
+            <hr ref={(el) => (hrRefs.current[5] = el)} />
 
             <div className="skill-wrapper">
               <p className="skill-item text-start text-animate">
