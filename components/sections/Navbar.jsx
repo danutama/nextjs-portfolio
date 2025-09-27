@@ -119,8 +119,12 @@ export default function Navbar() {
   }, [open]);
 
   const handleLinkClick = (href) => {
+    const prefetchPromise = router.prefetch(href);
+
     const tl = gsap.timeline({
-      onComplete: () => {
+      onComplete: async () => {
+        await prefetchPromise;
+
         window.dispatchEvent(
           new CustomEvent('page-transition', {
             detail: {

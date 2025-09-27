@@ -10,6 +10,7 @@
   --font-playfair: 'Playfair Display', serif;
 
   /* Backgrounds */
+  --white: #fff;
   --color-bg: #ffffff;
   --color-bg-2: #f9f9f9;
   --color-surface: #f5f5f5;
@@ -37,7 +38,7 @@
 
 html,
 body {
-  height: 100%;
+  min-height: 100%;
   width: 100%;
   font-family: var(--font-jakarta), sans-serif;
   background-color: var(--color-bg);
@@ -45,28 +46,6 @@ body {
   line-height: 1.6;
   scroll-behavior: smooth;
   overflow-x: hidden;
-}
-
-/* ==== THEME TOGGLE ==== */
-.theme-toggle {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.theme-toggle button {
-  padding: 0.3rem 0.8rem;
-  border: 1px solid var(--color-inverse);
-  background: transparent;
-  color: var(--color-text);
-  cursor: pointer;
-  border-radius: 20px;
-  transition: all 0.2s;
-}
-
-.theme-toggle button.active {
-  background: var(--color-inverse);
-  color: var(--color-text-inverse);
 }
 
 /* ==== GLOBAL LAYOUT ==== */
@@ -107,6 +86,37 @@ p {
   text-align: start;
 }
 
+.text-center {
+  text-align: center;
+}
+
+.small {
+  font-size: 1rem;
+}
+
+.text-secondary {
+  color: var(--color-gray);
+}
+
+.font-secondary {
+  font-family: var(--font-playfair);
+  font-weight: 500;
+}
+
+.fw-normal {
+  font-weight: 400 !important;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--color-gray);
+  margin: 1rem 0;
+}
+
+br {
+  margin: 0;
+}
+
 /* ==== LINK ==== */
 a {
   color: inherit;
@@ -137,10 +147,6 @@ img {
   padding: 0 1rem;
 }
 
-.text-center {
-  text-align: center;
-}
-
 .btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
@@ -155,6 +161,28 @@ img {
 .btn:hover {
   background: #111;
   color: #fff;
+}
+
+/* ==== THEME TOGGLE ==== */
+.theme-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.theme-toggle button {
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--color-inverse);
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+
+.theme-toggle button.active {
+  background: var(--color-inverse);
+  color: var(--color-text-inverse);
 }
 
 @media (max-width: 640px) {
