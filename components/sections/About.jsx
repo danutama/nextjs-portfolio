@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
@@ -11,6 +11,7 @@ export default function About() {
   const wrapperRef = useRef(null);
   const h2Ref = useRef(null);
   const hrRefs = useRef([]);
+  const [loaded, setLoaded] = useState(false);
 
   // data skill
   const skills = [
@@ -152,11 +153,11 @@ export default function About() {
       <div className="container">
         <div className="content">
           <div ref={wrapperRef} className="profile-img-wrapper">
-            <Image src="/profile.png" alt="Profile picture" width={300} height={400} className="profile-img" priority />
+            <Image src="/profile.png" alt="Profile picture" width={300} height={400} className={`profile-img ${loaded ? 'visible' : ''}`} onLoad={() => setLoaded(true)} priority />
             <span className="font-secondary">Ja·karta [dʒəˈkɑːtə]</span>
           </div>
           <h2 ref={h2Ref}>
-            ABOUT ME <i className="font-secondary">AS A</i> WEB DEVELOPER
+            ABOUT ME <i className="font-secondary">AS A</i> <span>&mdash;</span> WEB DEVELOPER
           </h2>
         </div>
 

@@ -25,6 +25,7 @@
   overflow: hidden;
   transition: transform 0.2s ease-out;
   z-index: 1;
+  background-color: var(--color-gray);
 }
 
 .profile-img {
@@ -33,6 +34,12 @@
   display: block;
   object-fit: cover;
   filter: brightness(0.8);
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+
+.profile-img.visible {
+  opacity: 1;
 }
 
 #about h2 {
@@ -42,6 +49,10 @@
   position: relative;
   z-index: 2;
   overflow: hidden;
+}
+
+#about h2 > span {
+  display: none;
 }
 
 .profile-img-wrapper span {
@@ -138,6 +149,10 @@ p.skill-subtitle {
     position: static;
     font-size: 3rem;
     margin: 0.5rem 0;
+  }
+
+  #about h2 > span {
+    display: inline-block;
   }
 
   .about-description {

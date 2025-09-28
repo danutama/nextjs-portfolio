@@ -220,7 +220,7 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <h1 className="logo">dp</h1>
+        <a href='/' className="logo">dp</a>
 
         {/* Menu Toggle*/}
         <button className={`menu-btn ${open ? 'open' : ''}`} onClick={() => setOpen(!open)}>
