@@ -30,15 +30,29 @@
 
 .percent {
   position: absolute;
-  bottom: 10px;
+  bottom: 20px;
   right: 20px;
-  font-size: 2rem;
+  padding: 0 3px;
+  overflow: hidden;
+  display: flex;
+}
+
+.percent p {
+  display: inline-block;
+  transform: translateY(0);
+  font-size: 4rem;
   font-weight: 600;
   letter-spacing: -3px;
+  line-height: 1;
   color: var(--color-text-inverse);
+  margin: 0;
 }
 
 @media (max-width: 640px) {
+  .percent p {
+    font-size: 2rem;
+  }
+
   .top {
     top: 0;
     height: 47.5%;
