@@ -10,6 +10,7 @@ export default function Navbar() {
   const [theme, setTheme] = useState('system');
   const menuRef = useRef(null);
   const linksRef = useRef([]);
+  const logoRef = useRef(null);
   const infoRef = useRef([]);
   const router = useRouter();
   const pathname = usePathname();
@@ -47,6 +48,7 @@ export default function Navbar() {
     gsap.set(menuRef.current, {
       clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
     });
+    gsap.set(logoRef.current, { y: '-100%' });
     gsap.set(linksRef.current, { y: '-100%' });
   }, []);
 
@@ -72,6 +74,18 @@ export default function Navbar() {
         }
       );
 
+      // logo
+      gsap.fromTo(
+        logoRef.current,
+        { y: '-100%' },
+        {
+          y: '0%',
+          duration: 0.8,
+          ease: 'power3.out',
+          delay: 0.4,
+        }
+      );
+
       gsap.fromTo(
         infoRef.current.map((p) => p.querySelector('span')),
         { y: '-100%' }, // from top
@@ -84,6 +98,14 @@ export default function Navbar() {
         }
       );
     } else {
+      // to bottom
+      gsap.to(logoRef.current, {
+        y: '100%',
+        duration: 0.3,
+        ease: 'power3.in',
+        delay: 0.6,
+      });
+
       // to bottom
       gsap.to(
         infoRef.current.map((p) => p.querySelector('span')),
@@ -151,6 +173,13 @@ export default function Navbar() {
       0
     );
 
+    tl.to(logoRef.current, {
+      y: '100%',
+      duration: 0.3,
+      ease: 'power3.in',
+      delay: 0,
+    });
+
     // Close menu links
     tl.to(
       linksRef.current,
@@ -206,10 +235,13 @@ export default function Navbar() {
             {menuItems.map((item, i) => {
               const href = item === 'Index' ? '/' : `/${item.toLowerCase()}`;
               const isActive = pathname === href;
+              const number = String(i + 1).padStart(2, '0');
+
               return (
                 <li key={item} className="menu-item">
                   <button className={`menu-link ${isActive ? 'active' : ''}`} ref={(el) => (linksRef.current[i] = el)} onClick={() => handleLinkClick(href)} onMouseEnter={() => handleLinkHover(href)}>
                     {item}
+                    <span className="small">{number}</span>
                   </button>
                 </li>
               );
@@ -231,7 +263,9 @@ export default function Navbar() {
         </div>
 
         <div className="menu-info">
-          <h3>dp</h3>
+          <h3>
+            <span ref={logoRef}>dp</span>
+          </h3>
           {infoItems.map((text, i) => (
             <p key={i} ref={(el) => (infoRef.current[i] = el)}>
               <span>{text}</span>

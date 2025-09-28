@@ -12,6 +12,53 @@ export default function About() {
   const h2Ref = useRef(null);
   const hrRefs = useRef([]);
 
+  // data skill
+  const skills = [
+    {
+      title: 'Company Profile',
+      subtitle: 'Website',
+      desc: 'Create a professional online presence that represents your brand and builds trust.',
+    },
+    {
+      title: 'Landing Page',
+      subtitle: 'Website',
+      desc: 'Goal-oriented pages that engage visitors and capture leads effectively.',
+    },
+    {
+      title: 'Personal Portfolio',
+      subtitle: 'Website',
+      desc: 'Showcase your skills, projects, and achievements in a memorable way.',
+    },
+    {
+      title: 'Blog / News',
+      subtitle: 'Website',
+      desc: 'Share your insights, updates, and stories with your audience.',
+    },
+    {
+      title: 'Others',
+      subtitle: 'Web Application',
+      desc: 'Develop tailored web applications to meet your business requirements.',
+    },
+  ];
+
+  const expertises = [
+    {
+      title: 'Frontend',
+      subtitle: 'Development',
+      desc: 'HTML, CSS, Bootstrap, React.js, Next.js, Axios, Vite, GSAP',
+    },
+    {
+      title: 'Backend',
+      subtitle: 'Development',
+      desc: 'PHP, Laravel, Node.js, Express, Supabase, MySQL, PostgreSQL',
+    },
+    {
+      title: 'Tools',
+      subtitle: '& others',
+      desc: 'GitHub, Visual Studio Code, Vercel, Netlify, Webflow',
+    },
+  ];
+
   useEffect(() => {
     const hrs = hrRefs.current;
     hrs.forEach((hr) => {
@@ -125,63 +172,21 @@ export default function About() {
             </h3>
             <p className="text-start skill-subtitle">Turning your ideas into reality on the web through design and development</p>
 
-            <div className="skill-wrapper">
-              <p className="skill-item text-start text-animate">
-                Company Profile <br />
-                <span className="text-secondary small">Website</span>
-              </p>
-              <ul className="skill-list text-animate">
-                <li>Create a professional online presence that represents your brand and builds trust.</li>
-              </ul>
-            </div>
-
-            <hr ref={(el) => (hrRefs.current[0] = el)} />
-
-            <div className="skill-wrapper">
-              <p className="skill-item text-start text-animate">
-                Landing Page <br />
-                <span className="text-secondary small">Website</span>
-              </p>
-              <ul className="skill-list text-animate">
-                <li>Goal-oriented pages that engage visitors and capture leads effectively.</li>
-              </ul>
-            </div>
-
-            <hr ref={(el) => (hrRefs.current[1] = el)} />
-
-            <div className="skill-wrapper">
-              <p className="skill-item text-start text-animate">
-                Personal Portfolio <br />
-                <span className="text-secondary small">Website</span>
-              </p>
-              <ul className="skill-list text-animate">
-                <li>Showcase your skills, projects, and achievements in a memorable way.</li>
-              </ul>
-            </div>
-
-            <hr ref={(el) => (hrRefs.current[2] = el)} />
-
-            <div className="skill-wrapper">
-              <p className="skill-item text-start text-animate">
-                Blog / News <br />
-                <span className="text-secondary small">Website</span>
-              </p>
-              <ul className="skill-list text-animate">
-                <li>Share your insights, updates, and stories with your audience.</li>
-              </ul>
-            </div>
-
-            <hr ref={(el) => (hrRefs.current[3] = el)} />
-
-            <div className="skill-wrapper">
-              <p className="skill-item text-start text-animate">
-                Others <br />
-                <span className="text-secondary small">Web Application</span>
-              </p>
-              <ul className="skill-list text-animate">
-                <li>Develop tailored web applications to meet your business requirements.</li>
-              </ul>
-            </div>
+            {/* skill/service */}
+            {skills.map((s, i) => (
+              <div key={i}>
+                <div className="skill-wrapper">
+                  <p className="skill-item text-start text-animate">
+                    {s.title} <br />
+                    <span className="text-secondary small">{s.subtitle}</span>
+                  </p>
+                  <ul className="skill-list text-animate">
+                    <li>{s.desc}</li>
+                  </ul>
+                </div>
+                <hr ref={(el) => (hrRefs.current[i] = el)} />
+              </div>
+            ))}
 
             {/* -------------------------------------- */}
 
@@ -189,39 +194,21 @@ export default function About() {
               My <i className="font-secondary fw-normal">Expertise</i>
             </h4>
 
-            <div className="skill-wrapper">
-              <p className="skill-item text-start text-animate">
-                Frontend <br />
-                <span className="text-secondary small">Development</span>
-              </p>
-              <ul className="skill-list text-animate">
-                <li>HTML, CSS, Bootstrap, React.js, Next.js, Axios, Vite, GSAP</li>
-              </ul>
-            </div>
-
-            <hr ref={(el) => (hrRefs.current[4] = el)} />
-
-            <div className="skill-wrapper">
-              <p className="skill-item text-start text-animate">
-                Backend <br />
-                <span className="text-secondary small">Development</span>
-              </p>
-              <ul className="skill-list text-animate">
-                <li>PHP, Laravel, Node.js, Express, Supabase, MySQL, PostgreSQL</li>
-              </ul>
-            </div>
-
-            <hr ref={(el) => (hrRefs.current[5] = el)} />
-
-            <div className="skill-wrapper">
-              <p className="skill-item text-start text-animate">
-                Tools <br />
-                <span className="text-secondary small">& others</span>
-              </p>
-              <ul className="skill-list text-animate">
-                <li>GitHub, Visual Studio Code, Vercel, Netlify, Webflow</li>
-              </ul>
-            </div>
+            {/* expertise */}
+            {expertises.map((e, i) => (
+              <div key={i + skills.length}>
+                <div className="skill-wrapper">
+                  <p className="skill-item text-start text-animate">
+                    {e.title} <br />
+                    <span className="text-secondary small">{e.subtitle}</span>
+                  </p>
+                  <ul className="skill-list text-animate">
+                    <li>{e.desc}</li>
+                  </ul>
+                </div>
+                <hr ref={(el) => (hrRefs.current[i + skills.length] = el)} />
+              </div>
+            ))}
           </div>
 
           <h3 className="text-start">
