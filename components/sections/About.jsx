@@ -217,13 +217,15 @@ export default function About() {
           </h3>
 
           <div className="about-socials">
-            <a href="https://www.linkedin.com/in/danu-agus-pratama" target="_blank" rel="noopener noreferrer">
-              (LinkedIn)
+            <a className="hover-up" href="https://www.linkedin.com/in/danu-agus-pratama" target="_blank" rel="noopener noreferrer" data-text="(LinkedIn)">
+              <span>(LinkedIn)</span>
             </a>
-            <a href="https://github.com/danutama" target="_blank" rel="noopener noreferrer">
-              (GitHub)
+            <a className="hover-up" href="https://github.com/danutama" target="_blank" rel="noopener noreferrer" data-text="(GitHub)">
+              <span>(GitHub)</span>
             </a>
-            <a href="mailto:danupratama.dev@gmail.com">(e-mail)</a>
+            <a className="hover-up" href="mailto:danupratama.dev@gmail.com" data-text="(e-mail)">
+              <span>(e-mail)</span>
+            </a>
           </div>
         </div>
       </div>

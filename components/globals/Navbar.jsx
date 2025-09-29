@@ -45,11 +45,18 @@ export default function Navbar() {
 
   // Setup GSAP
   useEffect(() => {
-    gsap.set(menuRef.current, {
-      clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
-    });
-    gsap.set(logoRef.current, { y: '-100%' });
-    gsap.set(linksRef.current, { y: '-100%' });
+    if (menuRef.current) {
+      const hoverLinks = menuRef.current.querySelectorAll('.hover-up');
+      hoverLinks.forEach((link) => {
+        link.offsetHeight;
+      });
+
+      gsap.set(menuRef.current, {
+        clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
+      });
+      gsap.set(logoRef.current, { y: '-100%' });
+      gsap.set(linksRef.current, { y: '-100%' });
+    }
   }, []);
 
   // Start animation
@@ -220,7 +227,9 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <a href='/' className="logo">dp</a>
+        <a href="/" className="logo">
+          dp
+        </a>
 
         {/* Menu Toggle*/}
         <button className={`menu-btn ${open ? 'open' : ''}`} onClick={() => setOpen(!open)}>
@@ -230,7 +239,7 @@ export default function Navbar() {
       </div>
 
       <div ref={menuRef} className="menu-overlay">
-        <div>
+        <div className="menu-left">
           <ul>
             {menuItems.map((item, i) => {
               const href = item === 'Index' ? '/' : `/${item.toLowerCase()}`;
@@ -262,7 +271,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        <div className="menu-info">
+        <div className="menu-info menu-right">
           <h3>
             <span ref={logoRef}>dp</span>
           </h3>
@@ -273,14 +282,14 @@ export default function Navbar() {
           ))}
 
           <div className="menu-socials">
-            <a href="https://www.linkedin.com/in/danu-agus-pratama" target="_blank" rel="noopener noreferrer">
-              (LinkedIn)
+            <a className="hover-up" href="https://www.linkedin.com/in/danu-agus-pratama" target="_blank" rel="noopener noreferrer" data-text="(LinkedIn)">
+              <span>(LinkedIn)</span>
             </a>
-            <a href="https://github.com/danutama" target="_blank" rel="noopener noreferrer">
-              (GitHub)
+            <a className="hover-up" href="https://github.com/danutama" target="_blank" rel="noopener noreferrer" data-text="(GitHub)">
+              <span>(GitHub)</span>
             </a>
-            <a href="https://danutama.github.io" target="_blank" rel="noopener noreferrer">
-              (Portfolio v3)
+            <a className="hover-up" href="https://danutama.github.io" target="_blank" rel="noopener noreferrer" data-text="(Portfolio v3)">
+              <span>(Portfolio v3)</span>
             </a>
           </div>
         </div>
