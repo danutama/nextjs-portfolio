@@ -127,6 +127,7 @@ br {
 /* ==== LINK ==== */
 a {
   color: inherit;
+  font-weight: 600;
   text-decoration: none;
 }
 
@@ -137,43 +138,6 @@ a:hover {
 a,
 button {
   cursor: pointer;
-}
-
-.hover-up {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-}
-
-.hover-up span {
-  display: inline-block;
-  transition: transform 0.3s ease;
-}
-
-.hover-up::before {
-  content: attr(data-text);
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  transform: translateY(100%);
-  transition: transform 0.3s ease;
-  color: var(--color-text);
-  visibility: visible;
-}
-
-/* Hover effect */
-.hover-up:hover span {
-  transform: translateY(-100%);
-}
-
-.hover-up:hover::before {
-  transform: translateY(0);
-}
-
-.hover-up span,
-.hover-up::before {
-  will-change: transform;
 }
 
 /* ==== IMAGE ==== */

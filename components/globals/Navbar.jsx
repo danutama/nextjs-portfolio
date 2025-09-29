@@ -45,18 +45,11 @@ export default function Navbar() {
 
   // Setup GSAP
   useEffect(() => {
-    if (menuRef.current) {
-      const hoverLinks = menuRef.current.querySelectorAll('.hover-up');
-      hoverLinks.forEach((link) => {
-        link.offsetHeight;
-      });
-
-      gsap.set(menuRef.current, {
-        clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
-      });
-      gsap.set(logoRef.current, { y: '-100%' });
-      gsap.set(linksRef.current, { y: '-100%' });
-    }
+    gsap.set(menuRef.current, {
+      clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
+    });
+    gsap.set(logoRef.current, { y: '-100%' });
+    gsap.set(linksRef.current, { y: '-100%' });
   }, []);
 
   // Start animation
@@ -282,14 +275,14 @@ export default function Navbar() {
           ))}
 
           <div className="menu-socials">
-            <a className="hover-up" href="https://www.linkedin.com/in/danu-agus-pratama" target="_blank" rel="noopener noreferrer" data-text="(LinkedIn)">
-              <span>(LinkedIn)</span>
+            <a href="https://www.linkedin.com/in/danu-agus-pratama" target="_blank" rel="noopener noreferrer">
+              (LinkedIn)
             </a>
-            <a className="hover-up" href="https://github.com/danutama" target="_blank" rel="noopener noreferrer" data-text="(GitHub)">
-              <span>(GitHub)</span>
+            <a href="https://github.com/danutama" target="_blank" rel="noopener noreferrer">
+              (GitHub)
             </a>
-            <a className="hover-up" href="https://danutama.github.io" target="_blank" rel="noopener noreferrer" data-text="(Portfolio v3)">
-              <span>(Portfolio v3)</span>
+            <a href="https://danutama.github.io" target="_blank" rel="noopener noreferrer">
+              (Portfolio v3)
             </a>
           </div>
         </div>
