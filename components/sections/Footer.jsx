@@ -1,44 +1,39 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import '../css/footer.css';
 
 export default function Footer() {
-  const marqueeRef = useRef(null);
+  const containerRef = useRef(null);
+  const textRef = useRef(null);
+  const [scale, setScale] = useState(1);
 
   useEffect(() => {
-    if (window.innerWidth <= 640) return;
+    const resize = () => {
+      if (!containerRef.current || !textRef.current) return;
 
-    const el = marqueeRef.current;
-    let offset = 0;
-    const speed = 1;
+      const parentWidth = containerRef.current.offsetWidth;
+      const textWidth = textRef.current.offsetWidth;
 
-    // duplicate teks >= 2 * layar
-    while (el.scrollWidth < window.innerWidth * 2) {
-      el.innerHTML += el.innerHTML;
-    }
-
-    const textWidth = el.scrollWidth / 2;
-
-    function animate() {
-      offset -= speed;
-      if (Math.abs(offset) >= textWidth) {
-        offset = 0;
+      if (textWidth > 0) {
+        setScale(parentWidth / textWidth);
       }
-      el.style.transform = `translateX(${offset}px)`;
-      requestAnimationFrame(animate);
-    }
+    };
 
-    animate();
+    resize();
+    window.addEventListener('resize', resize);
+    return () => window.removeEventListener('resize', resize);
   }, []);
 
   return (
-    <div id="footer">
-      <div className="marquee">
-        <div className="marquee__inner" ref={marqueeRef}>
-          <span>UNDER DEVELOPMENT</span>
+    <footer id="footer">
+      <div className="container">
+        <div className="footer" ref={containerRef}>
+          <span ref={textRef} className="footer-text" style={{ transform: `scale(${scale})` }}>
+            <span className="small fw-normal">&copy;</span>2025
+          </span>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }

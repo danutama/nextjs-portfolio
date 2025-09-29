@@ -52,13 +52,13 @@ export default function Navbar() {
     gsap.set(linksRef.current, { y: '-100%' });
   }, []);
 
-  // Animasi saat open berubah
+  // Start animation
   useEffect(() => {
     if (open) {
       gsap.to(menuRef.current, {
         clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-        duration: 0.8,
-        ease: 'power3.out',
+        duration: 1,
+        ease: 'power4.inOut',
       });
 
       // menu items
@@ -67,7 +67,7 @@ export default function Navbar() {
         { y: '-100%' }, // from top
         {
           y: '0%',
-          duration: 0.8,
+          duration: 1,
           ease: 'power3.out',
           stagger: { each: 0.1, from: 'end' },
           delay: 0.3,

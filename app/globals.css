@@ -22,6 +22,7 @@
   --color-text-inverse: #ffffff;
 
   /* Accent */
+  --color-accent: #ff3b30;
 }
 
 /* Dark mode */
@@ -34,6 +35,7 @@
 
   --color-text: #ffffff;
   --color-text-inverse: #111111;
+  --color-accent: #565656;
 }
 
 html,
