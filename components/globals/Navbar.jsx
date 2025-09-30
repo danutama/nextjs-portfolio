@@ -80,7 +80,7 @@ export default function Navbar() {
           duration: 0.8,
           ease: 'power3.out',
           stagger: { each: 0.1, from: 'end' },
-          delay: 0.4,
+          delay: 0.8,
         }
       );
     } else {
