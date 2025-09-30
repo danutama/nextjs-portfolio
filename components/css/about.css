@@ -94,6 +94,29 @@ p.skill-subtitle {
   margin: 5rem 0 2rem 0;
 }
 
+.custom-skill-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.custom-skill-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.skill-wrapper.custom {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.skill-number {
+  font-weight: bold;
+  margin: 0;
+}
+
 .skill-wrapper {
   display: grid;
   grid-template-columns: 250px 1fr;
@@ -118,6 +141,16 @@ p.skill-subtitle {
   justify-content: start;
   align-items: center;
   gap: 1rem;
+}
+
+@media (max-width: 700px) {
+  #about h2 {
+    font-size: 5rem;
+  }
+
+  .custom-skill-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 640px) {

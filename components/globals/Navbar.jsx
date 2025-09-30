@@ -10,7 +10,6 @@ export default function Navbar() {
   const [theme, setTheme] = useState('system');
   const menuRef = useRef(null);
   const linksRef = useRef([]);
-  const logoRef = useRef(null);
   const infoRef = useRef([]);
   const router = useRouter();
   const pathname = usePathname();
@@ -18,7 +17,7 @@ export default function Navbar() {
   const currentYear = new Date().getFullYear();
 
   const menuItems = ['Index', 'About', 'Projects', 'Archive'];
-  const infoItems = ['danupratama.dev@gmail.com', 'Jakarta, Indonesia', `©${currentYear} Danu Pratama`, 'Plus Jakarta Sans by Tokotype', 'Playfair Display'];
+  const infoItems = [`©${currentYear} Danu Pratama — Jakarta, ID`, 'Credits:', 'Next.js by Vercel', 'Subdomain by github.com/is-a-dev', 'Footer design inspired by zajno.com', 'Plus Jakarta Sans by Tokotype', 'Playfair Display'];
 
   // --- THEME SETUP ---
   useEffect(() => {
@@ -48,7 +47,6 @@ export default function Navbar() {
     gsap.set(menuRef.current, {
       clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
     });
-    gsap.set(logoRef.current, { y: '-100%' });
     gsap.set(linksRef.current, { y: '-100%' });
   }, []);
 
@@ -70,19 +68,7 @@ export default function Navbar() {
           duration: 1,
           ease: 'power3.out',
           stagger: { each: 0.1, from: 'end' },
-          delay: 0.3,
-        }
-      );
-
-      // logo
-      gsap.fromTo(
-        logoRef.current,
-        { y: '-100%' },
-        {
-          y: '0%',
-          duration: 0.8,
-          ease: 'power3.out',
-          delay: 0.4,
+          delay: 0.5,
         }
       );
 
@@ -99,21 +85,13 @@ export default function Navbar() {
       );
     } else {
       // to bottom
-      gsap.to(logoRef.current, {
-        y: '100%',
-        duration: 0.3,
-        ease: 'power3.in',
-        delay: 0.6,
-      });
-
-      // to bottom
       gsap.to(
         infoRef.current.map((p) => p.querySelector('span')),
         {
           y: '100%',
           duration: 0.3,
           ease: 'power3.in',
-          stagger: { each: 0.1, from: 'end' },
+          stagger: { each: 0.07, from: 'end' },
         }
       );
 
@@ -168,17 +146,10 @@ export default function Navbar() {
         y: '100%',
         duration: 0.3,
         ease: 'power3.in',
-        stagger: { each: 0.1, from: 'end' },
+        stagger: { each: 0.07, from: 'end' },
       },
       0
     );
-
-    tl.to(logoRef.current, {
-      y: '100%',
-      duration: 0.3,
-      ease: 'power3.in',
-      delay: 0,
-    });
 
     // Close menu links
     tl.to(
@@ -265,9 +236,6 @@ export default function Navbar() {
         </div>
 
         <div className="menu-info menu-right">
-          <h3>
-            <span ref={logoRef}>dp</span>
-          </h3>
           {infoItems.map((text, i) => (
             <p key={i} ref={(el) => (infoRef.current[i] = el)}>
               <span>{text}</span>
@@ -278,11 +246,12 @@ export default function Navbar() {
             <a href="https://www.linkedin.com/in/danu-agus-pratama" target="_blank" rel="noopener noreferrer">
               (LinkedIn)
             </a>
+            <a href="mailto:danupratama.dev@gmail.com">(email)</a>
             <a href="https://github.com/danutama" target="_blank" rel="noopener noreferrer">
               (GitHub)
             </a>
             <a href="https://danutama.github.io" target="_blank" rel="noopener noreferrer">
-              (Portfolio v3)
+              (v3)
             </a>
           </div>
         </div>

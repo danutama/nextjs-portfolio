@@ -4,7 +4,7 @@
 
 #hero h1 {
   font-size: 1.7rem;
-  margin-bottom: 1rem;
+  margin: 0;
   line-height: 1;
   letter-spacing: -1px;
   font-weight: 600;
@@ -12,8 +12,9 @@
 }
 
 #hero h2 {
-  font-size: 1.5rem;
+  font-size: 3rem;
   font-weight: 600;
+  line-height: 0.9;
   text-transform: uppercase;
   color: var(--color-text-inverse);
 }
@@ -42,7 +43,7 @@
 
 #hero .box {
   width: 400px;
-  /* height: 500px; */
+  height: 500px;
   background-color: var(--color-inverse);
   display: flex;
   flex-direction: column;
@@ -54,6 +55,11 @@
   width: 100%;
   overflow: hidden;
   display: flex;
+}
+
+.version {
+  color: var(--color-text-inverse);
+  font-weight: 500;
 }
 
 @media (max-width: 640px) {

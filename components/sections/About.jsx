@@ -174,20 +174,21 @@ export default function About() {
             <p className="text-start skill-subtitle">Turning your ideas into reality on the web through design and development</p>
 
             {/* skill/service */}
-            {skills.map((s, i) => (
-              <div key={i}>
-                <div className="skill-wrapper">
-                  <p className="skill-item text-start text-animate">
-                    {s.title} <br />
-                    <span className="text-secondary small">{s.subtitle}</span>
-                  </p>
-                  <ul className="skill-list text-animate">
-                    <li>{s.desc}</li>
-                  </ul>
+            <div className="custom-skill-grid">
+              {skills.map((s, i) => (
+                <div key={i} className="custom-skill-card">
+                  <div className="skill-wrapper custom">
+                    <span className="skill-number text-animate">({i + 1})</span>
+
+                    <p className="skill-item text-start text-animate">
+                      {s.title} <br />
+                      <span className="text-secondary small">{s.subtitle}</span>
+                    </p>
+                  </div>
+                  <hr ref={(el) => (hrRefs.current[i] = el)} />
                 </div>
-                <hr ref={(el) => (hrRefs.current[i] = el)} />
-              </div>
-            ))}
+              ))}
+            </div>
 
             {/* -------------------------------------- */}
 

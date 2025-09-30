@@ -147,19 +147,9 @@
   display: flex;
 }
 
-.menu-info h3 span,
 .menu-info p span {
   display: inline-block;
   transform: translateY(100%);
-}
-
-.menu-info h3 {
-  font-size: 4.3rem;
-  margin-bottom: 1rem;
-  font-weight: 500;
-  letter-spacing: -3px;
-  overflow: hidden;
-  display: flex;
 }
 
 .menu-socials {
@@ -199,8 +189,7 @@
     font-size: 2rem;
   }
 
-  .menu-link,
-  .menu-info h3 {
+  .menu-link {
     font-size: 3.5rem;
   }
 
