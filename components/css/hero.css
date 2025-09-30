@@ -3,21 +3,23 @@
 }
 
 #hero h1 {
-  font-size: 2rem;
+  font-size: 1.7rem;
   margin-bottom: 1rem;
   line-height: 1;
+  letter-spacing: -1px;
   font-weight: 600;
   color: var(--color-text-inverse);
 }
 
 #hero h2 {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
+  font-weight: 600;
   text-transform: uppercase;
   color: var(--color-text-inverse);
 }
 
 #hero h3 {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
   text-transform: uppercase;
   color: var(--color-text-inverse);
@@ -40,12 +42,18 @@
 
 #hero .box {
   width: 400px;
-  height: 500px;
+  /* height: 500px; */
   background-color: var(--color-inverse);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 1rem;
+}
+
+.text-wrapper {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
 }
 
 @media (max-width: 640px) {

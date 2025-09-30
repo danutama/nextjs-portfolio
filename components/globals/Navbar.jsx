@@ -128,9 +128,9 @@ export default function Navbar() {
       // overlay tutup ke atas
       gsap.to(menuRef.current, {
         clipPath: 'polygon(0 0, 100% 0, 100% 0.1%, 0 0.1%)',
-        duration: 0.5,
-        ease: 'power3.in',
-        delay: 0.5,
+        duration: 1,
+        ease: 'power4.inOut',
+        delay: 0.3,
         onComplete: () => {
           gsap.set(menuRef.current, {
             clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
@@ -195,9 +195,9 @@ export default function Navbar() {
     // Close overlay menu
     tl.to(menuRef.current, {
       clipPath: 'polygon(0 0, 100% 0, 100% 0.1%, 0 0.1%)',
-      duration: 0.5,
-      ease: 'power3.in',
-      delay: 0.5,
+      duration: 1,
+      ease: 'power4.inOut',
+      delay: 0.1,
       onComplete: () => {
         // Reset menu state
         gsap.set(menuRef.current, {
