@@ -21,7 +21,25 @@ const playfair = Playfair_Display({
 
 export const metadata = {
   title: 'Danu Pratama | Web Developer',
-  description: 'Personal Portfolio',
+  description: 'Portfolio — Creating engaging digital experiences through clean design and thoughtful development.',
+  keywords: ['Danu Pratama', 'Web Developer', 'Programmer', 'Portfolio'],
+  authors: [{ name: 'Danu Pratama', url: 'https://danupratama.vercel.app' }],
+  openGraph: {
+    title: 'Danu Pratama | Web Developer',
+    description: 'Portfolio — Creating engaging digital experiences through clean design and thoughtful development.',
+    url: 'https://danupratama.vercel.app',
+    siteName: 'Danu — Portfolio',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 720,
+        height: 711,
+        alt: 'Preview Danu Portfolio',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({ children }) {

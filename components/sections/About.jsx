@@ -153,7 +153,7 @@ export default function About() {
       <div className="container">
         <div className="content">
           <div ref={wrapperRef} className="profile-img-wrapper">
-            <Image src="/profile.png" alt="Profile picture" width={300} height={400} className={`profile-img ${loaded ? 'visible' : ''}`} onLoad={() => setLoaded(true)} priority />
+            <Image src="/profile.webp" alt="Danu Pratama" width={300} height={400} className={`profile-img ${loaded ? 'visible' : ''}`} onLoad={() => setLoaded(true)} priority />
             <span className="font-secondary">Ja·karta [dʒəˈkɑːtə]</span>
           </div>
           <h2 ref={h2Ref}>

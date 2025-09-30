@@ -81,6 +81,10 @@ export default function LoadingScreen() {
       tl.to(topRef.current, { yPercent: -100, duration: 0.8, ease: 'power3.inOut' }, '+=0.1');
       tl.to(bottomRef.current, { yPercent: 100, duration: 0.8, ease: 'power3.inOut' }, '<');
 
+      tl.add(() => {
+        window.dispatchEvent(new Event('hero-open'));
+      }, '-=0.5');
+
       tl.to(percentRef.current, { y: '100%', duration: 0.6, ease: 'power3.inOut' }, '<');
     };
   }, []);
