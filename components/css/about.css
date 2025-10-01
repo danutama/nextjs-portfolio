@@ -51,10 +51,6 @@
   overflow: hidden;
 }
 
-#about h2 > span {
-  display: none;
-}
-
 .profile-img-wrapper span {
   font-size: 0.8rem;
   color: var(--white);
@@ -67,9 +63,29 @@
   padding-top: 15rem;
 }
 
+.about-intro {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  padding: 0;
+}
+
+.about-intro span {
+  flex-shrink: 0;
+  height: 1px;
+  width: 50%;
+  background: var(--color-gray);
+  margin-top: 2rem;
+}
+
+.about-intro p {
+  border-left: 1px solid var(--color-gray);
+  padding-left: 10px;
+}
+
 .skill-list,
 .about-description p {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   line-height: 1.4;
 }
 
@@ -148,6 +164,11 @@ p.skill-subtitle {
     font-size: 5rem;
   }
 
+  .about-intro span {
+    width: 15%;
+    margin-top: 1.6rem;
+  }
+
   .custom-skill-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -184,17 +205,13 @@ p.skill-subtitle {
     margin: 0.5rem 0;
   }
 
-  #about h2 > span {
-    display: inline-block;
-  }
-
   .about-description {
-    padding-top: 1rem;
+    padding-top: 3rem;
   }
 
   .skill-list,
   .about-description p {
-    font-size: 1.2rem;
+    font-size: 1rem;
     text-align: start;
   }
 

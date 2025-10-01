@@ -157,15 +157,18 @@ export default function About() {
             <span className="font-secondary">Ja·karta [dʒəˈkɑːtə]</span>
           </div>
           <h2 ref={h2Ref}>
-            ABOUT ME <i className="font-secondary">AS A</i> <span>&mdash;</span> WEB DEVELOPER
+            ABOUT ME <i className="font-secondary">AS A</i> WEB DEVELOPER
           </h2>
         </div>
 
         <div className="about-description">
-          <p className="text-start text-animate">
-            My name is Danu Pratama, a web developer working on small to medium-scale projects. I focus on creating web interfaces that are visually appealing, responsive, and user-friendly. I also have experience developing complete web
-            applications, including both frontend and backend, helping to build functional web solutions that meet project needs.
-          </p>
+          <div className="about-intro">
+            <span></span>
+            <p className="text-start text-animate fw-normal">
+              Hi, I'm Danu Pratama, a web developer working on small to medium-scale projects. I focus on creating web interfaces that are visually appealing, responsive, and user-friendly. I also have experience developing complete web
+              applications, including both frontend and backend, helping to build functional web solutions that meet project needs.
+            </p>
+          </div>
 
           <div className="skill">
             <h3 className="text-start skill-title">
@@ -192,9 +195,7 @@ export default function About() {
 
             {/* -------------------------------------- */}
 
-            <h4 className="sub-heading fw-normal text-start">
-              My <i className="font-secondary fw-normal">Expertise</i>
-            </h4>
+            <h4 className="sub-heading font-secondary fw-normal text-start">Expertise</h4>
 
             {/* expertise */}
             {expertises.map((e, i) => (

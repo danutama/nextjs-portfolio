@@ -17,7 +17,7 @@ export default function Navbar() {
   const currentYear = new Date().getFullYear();
 
   const menuItems = ['Index', 'About', 'Projects', 'Archive'];
-  const infoItems = [`©${currentYear} Danu Pratama — Jakarta, ID`, 'Credits:', 'Next.js by Vercel', 'Subdomain by github.com/is-a-dev', 'Footer design inspired by zajno.com', 'Plus Jakarta Sans by Tokotype', 'Playfair Display'];
+  const infoItems = [`©${currentYear} Danu Pratama`, 'Credits:', 'Next.js by Vercel', 'Subdomain by github.com/is-a-dev', 'Footer design inspired by zajno.com', 'Plus Jakarta Sans by Tokotype', 'Playfair Display'];
 
   // --- THEME SETUP ---
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function Navbar() {
   // Setup GSAP
   useEffect(() => {
     gsap.set(menuRef.current, {
-      clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
+      clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
     });
     gsap.set(linksRef.current, { y: '-100%' });
   }, []);
@@ -54,7 +54,7 @@ export default function Navbar() {
   useEffect(() => {
     if (open) {
       gsap.to(menuRef.current, {
-        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+        clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
         duration: 1,
         ease: 'power4.inOut',
       });
@@ -103,17 +103,12 @@ export default function Navbar() {
         stagger: { each: 0.1, from: 'end' },
       });
 
-      // overlay tutup ke atas
+      // close menu
       gsap.to(menuRef.current, {
-        clipPath: 'polygon(0 0, 100% 0, 100% 0.1%, 0 0.1%)',
+        clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
         duration: 1,
         ease: 'power4.inOut',
         delay: 0.3,
-        onComplete: () => {
-          gsap.set(menuRef.current, {
-            clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
-          });
-        },
       });
     }
   }, [open]);
@@ -165,15 +160,12 @@ export default function Navbar() {
 
     // Close overlay menu
     tl.to(menuRef.current, {
-      clipPath: 'polygon(0 0, 100% 0, 100% 0.1%, 0 0.1%)',
+      clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
       duration: 1,
       ease: 'power4.inOut',
       delay: 0.1,
       onComplete: () => {
         // Reset menu state
-        gsap.set(menuRef.current, {
-          clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
-        });
         setOpen(false);
 
         // 3. Navigate

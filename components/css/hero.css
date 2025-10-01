@@ -1,3 +1,9 @@
+#hero {
+  background: url('/background.png');
+  background-size: cover;
+  background-position: center;
+}
+
 #hero .container {
   text-align: start;
 }
@@ -8,7 +14,7 @@
   line-height: 1;
   letter-spacing: -1px;
   font-weight: 600;
-  color: var(--color-text-inverse);
+  color: var(--black);
 }
 
 #hero h2 {
@@ -16,23 +22,21 @@
   font-weight: 600;
   line-height: 0.9;
   text-transform: uppercase;
-  color: var(--color-text-inverse);
+  color: var(--black);
 }
 
 #hero h3 {
   font-size: 1rem;
   font-weight: 500;
   text-transform: uppercase;
-  color: var(--color-text-inverse);
+  color: var(--black);
   margin: 0.8rem 0 2rem 0;
 }
 
 #hero .location {
-  display: block;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--color-gray);
-  text-align: end;
 }
 
 #hero .box-wrapper {
@@ -44,7 +48,7 @@
 #hero .box {
   width: 400px;
   height: 500px;
-  background-color: var(--color-inverse);
+  background-color: var(--white);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -58,7 +62,7 @@
 }
 
 .version {
-  color: var(--color-text-inverse);
+  color: var(--black);
   font-weight: 500;
 }
 
