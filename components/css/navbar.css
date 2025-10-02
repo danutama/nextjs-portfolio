@@ -122,9 +122,13 @@
   padding-right: 3px;
 }
 
-.menu-link.active,
 .menu-link:hover {
   color: var(--color-gray);
+}
+
+.menu-link.active,
+.menu-link.active:hover {
+  color: var(--color-accent);
 }
 
 .menu-link.menu-link.active {
@@ -153,8 +157,8 @@
 
 .menu-socials {
   display: flex;
-  gap: 5px;
-  justify-content: space-between;
+  gap: 2rem;
+  justify-content: start;
   margin-top: 2rem;
 }
 
@@ -195,5 +199,10 @@
   .menu-info p,
   .menu-socials a {
     font-size: 1rem;
+  }
+
+  .menu-socials {
+    gap: 5px;
+    justify-content: space-between;
   }
 }

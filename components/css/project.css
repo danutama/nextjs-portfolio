@@ -1,0 +1,9 @@
+#project h2 {
+  font-size: 3rem;
+}
+
+@media (max-width: 640px) {
+  #project h2 {
+    line-height: 1;
+  }
+}
