@@ -31,7 +31,7 @@ export default function LoadingScreen() {
         ease: 'power1.out',
         onUpdate: () => {
           if (percentRef.current) {
-            percentRef.current.innerText = `${Math.round(progress.value)}%`;
+            percentRef.current.innerText = `Loading ${Math.round(progress.value)}%`;
           }
         },
         onComplete: () => {
@@ -59,7 +59,7 @@ export default function LoadingScreen() {
       ease: 'linear',
       onUpdate: () => {
         if (percentRef.current) {
-          percentRef.current.innerText = `${Math.round(progress.value)}%`;
+          percentRef.current.innerText = `Loading ${Math.round(progress.value)}%`;
         }
       },
       onComplete: () => setTimeout(finishAnimation, 200),
@@ -92,7 +92,7 @@ export default function LoadingScreen() {
       <div className="block middle" ref={middleRef}></div>
       <div className="block bottom" ref={bottomRef}></div>
       <div className="percent">
-        <p ref={percentRef}>0%</p>
+        <p ref={percentRef}>Loading 0%</p>
       </div>
     </div>
   );

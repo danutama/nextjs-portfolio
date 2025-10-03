@@ -1,6 +1,7 @@
 import LoadingScreen from '@/components/globals/LoadingScreen';
 import Navbar from '@/components/globals/Navbar';
 import PageTransition from '@/components/globals/PageTransition';
+import RotateMessage from '@/components/globals/RotateMessage';
 import './globals.css';
 
 import { Plus_Jakarta_Sans, Playfair_Display } from 'next/font/google';
@@ -54,6 +55,7 @@ export default function RootLayout({ children }) {
         <LoadingScreen />
         <Navbar />
         <PageTransition />
+        <RotateMessage />
         {children}
       </body>
     </html>
