@@ -22,6 +22,7 @@
   white-space: nowrap;
   display: inline-block;
   line-height: 1;
+  letter-spacing: -1px;
 }
 
 #archive h2.reveal-title .char {
