@@ -34,7 +34,6 @@
 
 #archive h2.reveal-title .char-inner {
   display: inline-block;
-  clip-path: inset(100% 0 0 0);
   will-change: clip-path;
 }
 
@@ -88,10 +87,12 @@
 @media (max-width: 640px) {
   #archive h2.reveal-title {
     font-size: 21vw;
+    letter-spacing: -1px;
   }
 
   #archive h2 .archive-count {
     top: -1.5rem;
+    left: -0.5rem;
     font-size: 1.3rem;
     vertical-align: super;
   }

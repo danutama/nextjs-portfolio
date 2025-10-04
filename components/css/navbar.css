@@ -19,12 +19,21 @@
 
 .logo {
   font-size: 3rem;
-  letter-spacing: -1px;
-  font-weight: 600;
+  font-weight: bold;
+  line-height: 1;
+  letter-spacing: -1.7px;
   margin: 0;
+  display: flex;
+  align-items: end;
+  overflow: hidden;
 }
 
-.logo span {
+.logo .char {
+  display: inline-block;
+  will-change: clip-path;
+}
+
+.logo span:nth-child(1) {
   font-size: 2.3rem;
 }
 
@@ -197,8 +206,8 @@
     font-size: 2rem;
   }
 
-  .logo span {
-    font-size: 1.5rem;
+  .logo span:nth-child(1) {
+    font-size: 1.6rem;
   }
 
   .menu-link {

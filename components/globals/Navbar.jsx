@@ -2,8 +2,10 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import gsap from 'gsap';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import '../css/navbar.css';
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -11,6 +13,7 @@ export default function Navbar() {
   const menuRef = useRef(null);
   const linksRef = useRef([]);
   const infoRef = useRef([]);
+  const logoRef = useRef(null);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -41,6 +44,25 @@ export default function Navbar() {
     setTheme(mode);
     localStorage.setItem('theme', mode);
   };
+
+  useEffect(() => {
+    const chars = logoRef.current.querySelectorAll('.char');
+
+    gsap.set(chars, {
+      clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+    });
+
+    gsap.to(chars, {
+      clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)',
+      ease: 'power3.inOut',
+      scrollTrigger: {
+        trigger: document.documentElement,
+        start: 'top top',
+        end: '+=400',
+        scrub: true,
+      },
+    });
+  }, []);
 
   // Setup GSAP
   useEffect(() => {
@@ -183,8 +205,12 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <a href="/" className="logo">
-          <span>&copy;</span>danu
+        <a href="/" className="logo" ref={logoRef}>
+          <span className="char">&copy;</span>
+          <span className="char">d</span>
+          <span className="char">a</span>
+          <span className="char">n</span>
+          <span className="char">u</span>
         </a>
 
         {/* Menu Toggle*/}

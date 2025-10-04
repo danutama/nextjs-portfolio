@@ -24,13 +24,18 @@ export default function Archive() {
   useLayoutEffect(() => {
     const charInners = titleRef.current.querySelectorAll('.char-inner');
 
-    gsap.set(charInners, { clipPath: 'inset(100% 0 0 0)', willChange: 'clip-path' });
+    gsap.set(charInners, {
+      clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)',
+      willChange: 'clip-path',
+    });
 
-    gsap.to(charInners, {
-      clipPath: 'inset(0% 0 0 0)',
+    const tl = gsap.timeline({ delay: 0.8 });
+
+    tl.to(charInners, {
+      clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
       duration: 1.2,
       ease: 'power3.out',
-      stagger: 0.1,
+      stagger: 0.08,
     });
 
     // Images fade in
