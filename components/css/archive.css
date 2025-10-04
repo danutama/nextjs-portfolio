@@ -18,11 +18,13 @@
 
 #archive h2.reveal-title {
   font-size: 15rem;
+  text-transform: lowercase;
   margin-bottom: 3rem;
   white-space: nowrap;
-  display: inline-block;
   line-height: 1;
-  letter-spacing: -1px;
+  letter-spacing: -2px;
+  display: inline-block;
+  overflow: hidden;
 }
 
 #archive h2.reveal-title .char {
@@ -32,14 +34,15 @@
 
 #archive h2.reveal-title .char-inner {
   display: inline-block;
-  transform: translateY(300%);
+  clip-path: inset(100% 0 0 0);
+  will-change: clip-path;
 }
 
-#archive h2.reveal-title .char-number {
+#archive h2 .archive-count {
   font-size: 2rem;
   letter-spacing: normal;
   top: -8rem;
-  left: 0.5rem;
+  /* left: 0.5rem; */
   position: relative;
 }
 
@@ -53,6 +56,10 @@
 .image-item {
   text-align: end;
   z-index: 2;
+}
+
+.image-box {
+  background-color: var(--color-surface);
 }
 
 .image-item img {
@@ -69,7 +76,7 @@
     font-size: 18vw;
   }
 
-  #archive h2.reveal-title .char-number {
+  #archive h2 .archive-count {
     top: -5rem;
   }
 
@@ -83,7 +90,7 @@
     font-size: 21vw;
   }
 
-  #archive h2.reveal-title .char-number {
+  #archive h2 .archive-count {
     top: -1.5rem;
     font-size: 1.3rem;
     vertical-align: super;

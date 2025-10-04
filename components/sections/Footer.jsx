@@ -34,7 +34,6 @@ export default function Footer() {
       <div className="container">
         <div className="footer" ref={containerRef}>
           <span ref={textRef} className="footer-text" style={{ transform: `scale(${scale})` }}>
-            <span className="small fw-normal">&copy;</span>
             {year}
           </span>
         </div>

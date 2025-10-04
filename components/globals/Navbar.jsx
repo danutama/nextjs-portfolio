@@ -184,7 +184,7 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="navbar-container">
         <a href="/" className="logo">
-          dp
+          <span>&copy;</span>danu
         </a>
 
         {/* Menu Toggle*/}

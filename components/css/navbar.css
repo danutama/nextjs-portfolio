@@ -19,8 +19,13 @@
 
 .logo {
   font-size: 3rem;
-  font-weight: bold;
+  letter-spacing: -1px;
+  font-weight: 600;
   margin: 0;
+}
+
+.logo span {
+  font-size: 2.3rem;
 }
 
 /* toggle menu */
@@ -185,11 +190,15 @@
 @media (max-width: 640px) {
   /* mobile */
   .navbar {
-    padding: 1rem;
+    padding: 0.8rem 1rem;
   }
 
   .logo {
     font-size: 2rem;
+  }
+
+  .logo span {
+    font-size: 1.5rem;
   }
 
   .menu-link {

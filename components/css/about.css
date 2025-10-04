@@ -65,22 +65,17 @@
 
 .about-intro {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: start;
   padding: 0;
+  gap: 10rem;
 }
 
-.about-intro span {
-  flex-shrink: 0;
-  height: 1px;
-  width: 50%;
-  background: var(--color-gray);
-  margin-top: 2rem;
-}
-
-.about-intro p {
-  border-left: 1px solid var(--color-gray);
-  padding-left: 10px;
+.about-intro p:nth-child(1) {
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: -1px;
+  white-space: nowrap;
 }
 
 .skill-list,
@@ -164,9 +159,8 @@ p.skill-subtitle {
     font-size: 5rem;
   }
 
-  .about-intro span {
-    width: 15%;
-    margin-top: 1.6rem;
+  .about-intro {
+    gap: 5rem;
   }
 
   .custom-skill-grid {
@@ -207,6 +201,17 @@ p.skill-subtitle {
 
   .about-description {
     padding-top: 3rem;
+  }
+
+  .about-intro {
+    gap: 1.5rem;
+  }
+
+  .about-intro p:nth-child(1) {
+    font-size: 1.3rem;
+    white-space: unset;
+    line-height: 1;
+    padding-bottom: 5px;
   }
 
   .skill-list,

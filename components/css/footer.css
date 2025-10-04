@@ -24,14 +24,6 @@
   letter-spacing: -5px;
   white-space: nowrap;
   color: var(--color-accent);
-  padding: 0;
-  margin: 0;
-}
-
-.footer-text .small {
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 
 .footer-rights-wrapper {

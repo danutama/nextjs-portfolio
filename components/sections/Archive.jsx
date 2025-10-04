@@ -7,6 +7,7 @@ import '../css/archive.css';
 
 export default function Archive() {
   const titleRef = useRef(null);
+  const imagesWrapperRef = useRef(null);
 
   const archiveItems = [
     { src: '/archive1.jpg', label: 'AR001' },
@@ -17,22 +18,31 @@ export default function Archive() {
     { src: '/archive6.jpg', label: 'AR006' },
   ];
 
-  const title = `Archive (${archiveItems.length})`;
-  const chars = title.split('');
+  const text = 'Archive ';
+  const count = `(${archiveItems.length})`;
 
   useLayoutEffect(() => {
-    if (!titleRef.current) return;
+    const charInners = titleRef.current.querySelectorAll('.char-inner');
 
-    const charsEls = titleRef.current.querySelectorAll('.char-inner');
+    gsap.set(charInners, { clipPath: 'inset(100% 0 0 0)', willChange: 'clip-path' });
 
-    gsap.set(charsEls, { y: 300 });
-
-    gsap.to(charsEls, {
-      y: 0,
+    gsap.to(charInners, {
+      clipPath: 'inset(0% 0 0 0)',
+      duration: 1.2,
       ease: 'power3.out',
-      duration: 0.6,
-      stagger: 0.10,
-      delay: 0.3,
+      stagger: 0.1,
+    });
+
+    // Images fade in
+    const imageItems = imagesWrapperRef.current.querySelectorAll('.image-item');
+    gsap.set(imageItems, { opacity: 0, y: 20 });
+    gsap.to(imageItems, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: 'power2.out',
+      stagger: 0.15,
+      delay: 1,
     });
   }, []);
 
@@ -40,19 +50,23 @@ export default function Archive() {
     <section id="archive">
       <div className="container">
         <h2 ref={titleRef} className="reveal-title">
-          {chars.map((c, i) => {
-            const isNumberOrParen = /[0-9()]/.test(c);
-            return (
-              <span key={i} className={`char ${isNumberOrParen ? 'char-number' : ''}`}>
-                <span className="char-inner">{c}</span>
-              </span>
-            );
-          })}
+          {text.split('').map((c, i) => (
+            <span className="char" key={`text-${i}`}>
+              <span className="char-inner">{c === ' ' ? '\u00A0' : c}</span>
+            </span>
+          ))}
+
+          <span className={`char archive-count archive-count-${archiveItems.length}`}>
+            <span className="char-inner">{count}</span>
+          </span>
         </h2>
-        <div className="archive-images-wrapper">
+
+        <div ref={imagesWrapperRef} className="archive-images-wrapper">
           {archiveItems.map((item, index) => (
             <div className="image-item" key={index}>
-              <Image src={item.src} alt={item.label} width={250} height={350} priority />
+              <div className="image-box">
+                <Image src={item.src} alt={item.label} width={250} height={350} priority />
+              </div>
               <span>{item.label}</span>
             </div>
           ))}
