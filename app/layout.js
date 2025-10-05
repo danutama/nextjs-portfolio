@@ -24,11 +24,11 @@ export const metadata = {
   title: 'Danu Pratama | Web Developer',
   description: 'Portfolio — Creating engaging digital experiences through clean design and thoughtful development.',
   keywords: ['Danu Pratama', 'Web Developer', 'Programmer', 'Portfolio'],
-  authors: [{ name: 'Danu Pratama', url: 'https://danupratama.vercel.app' }],
+  authors: [{ name: 'Danu Pratama', url: 'https://danu.is-a.dev' }],
   openGraph: {
     title: 'Danu Pratama | Web Developer',
     description: 'Portfolio — Creating engaging digital experiences through clean design and thoughtful development.',
-    url: 'https://danupratama.vercel.app',
+    url: 'https://danu.is-a.dev',
     siteName: 'Danu — Portfolio',
     images: [
       {

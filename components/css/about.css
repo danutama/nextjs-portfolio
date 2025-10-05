@@ -69,6 +69,8 @@
   align-items: start;
   padding: 0;
   gap: 10rem;
+  border-top: 1px solid var(--color-gray);
+  border-bottom: 1px solid var(--color-gray);
 }
 
 .about-intro p:nth-child(1) {
@@ -207,15 +209,9 @@ p.skill-subtitle {
     gap: 1.5rem;
   }
 
-  .about-intro p:nth-child(1) {
-    font-size: 1.2rem;
-    white-space: unset;
-    line-height: 1;
-    padding-bottom: 5px;
-  }
-
   .skill-list,
-  .about-description p {
+  .about-description p,
+  .about-intro p:nth-child(1) {
     font-size: 1rem;
     text-align: start;
   }

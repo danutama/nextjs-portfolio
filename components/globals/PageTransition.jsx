@@ -47,7 +47,7 @@ export default function PageTransition() {
         stagger: { each: 0.05, from: 'start' },
       });
 
-      // callback
+      // run route change
       tl.add(() => callback?.());
 
       // exit
@@ -62,7 +62,14 @@ export default function PageTransition() {
         '+=0.1'
       );
 
-      // reset
+      // ✅ Fire event after route has changed (new Hero is mounted)
+      tl.add(() => {
+        setTimeout(() => {
+          window.dispatchEvent(new Event('hero-open'));
+        }, 100);
+      }, '+=0.1');
+
+      // reset overlay
       tl.set(overlayRef.current, { autoAlpha: 0 });
       tl.set(bars, { yPercent: -100 });
     };

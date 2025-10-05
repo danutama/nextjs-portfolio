@@ -16,6 +16,11 @@ export default function Archive() {
     { src: '/archive2.jpg', label: 'AR004' },
     { src: '/archive5.jpg', label: 'AR005' },
     { src: '/archive6.jpg', label: 'AR006' },
+    { src: '/archive7.webp', label: 'AR007' },
+    { src: '/archive8.webp', label: 'AR008' },
+    { src: '/archive9.webp', label: 'AR009' },
+    { src: '/archive10.webp', label: 'AR010' },
+    { src: '/archive11.webp', label: 'AR011' },
   ];
 
   const text = 'Archive ';

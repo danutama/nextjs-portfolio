@@ -12,14 +12,32 @@ export default function LoadingScreen() {
   const percentRef = useRef(null);
 
   useEffect(() => {
-    let loaded = 0;
-    let total = 0;
     const progress = { value: 0 };
-
     const resources = Array.from(document.querySelectorAll("img, link[rel='stylesheet'], script"));
-    total = resources.length || 1;
+    const total = resources.length || 1;
+    let loaded = 0;
+    let finished = false;
 
-    if (percentRef.current) gsap.set(percentRef.current, { y: '0%' });
+    const finishAnimation = () => {
+      if (finished) return;
+      finished = true;
+
+      const tl = gsap.timeline({
+        onComplete: () => {
+          // hide overlay
+          setTimeout(() => setShow(false), 400);
+        },
+      });
+
+      tl.to(middleRef.current, { xPercent: 100, duration: 1, ease: 'power3.inOut' });
+
+      tl.to(topRef.current, { yPercent: -100, duration: 0.8, ease: 'power3.inOut' }, '+=0.1');
+      tl.to(bottomRef.current, { yPercent: 100, duration: 0.8, ease: 'power3.inOut' }, '<');
+      tl.to(percentRef.current, { y: '100%', duration: 0.6, ease: 'power3.inOut' }, '<');
+      tl.add(() => {
+        window.dispatchEvent(new Event('hero-open'));
+      }, '-=0.8');
+    };
 
     const updatePercent = () => {
       loaded++;
@@ -35,52 +53,36 @@ export default function LoadingScreen() {
           }
         },
         onComplete: () => {
-          if (realPercent >= 100) {
-            setTimeout(finishAnimation, 200);
-          }
+          if (realPercent >= 100) setTimeout(finishAnimation, 300);
         },
       });
     };
 
     // Attach load listeners
     resources.forEach((res) => {
-      if (res.complete || res.readyState === 'complete') {
-        updatePercent();
-      } else {
+      if (res.complete || res.readyState === 'complete') updatePercent();
+      else {
         res.addEventListener('load', updatePercent);
         res.addEventListener('error', updatePercent);
       }
     });
 
-    // Fallback: fake progress if resources are too few
+    // fallback
     gsap.to(progress, {
       value: 100,
       duration: 2,
       ease: 'linear',
       onUpdate: () => {
-        if (percentRef.current) {
-          percentRef.current.innerText = `Loading ${Math.round(progress.value)}%`;
-        }
+        if (percentRef.current) percentRef.current.innerText = `Loading ${Math.round(progress.value)}%`;
       },
-      onComplete: () => setTimeout(finishAnimation, 200),
+      onComplete: () => setTimeout(finishAnimation, 300),
     });
 
-    const finishAnimation = () => {
-      const tl = gsap.timeline({
-        onComplete: () => setShow(false),
+    return () => {
+      resources.forEach((res) => {
+        res.removeEventListener('load', updatePercent);
+        res.removeEventListener('error', updatePercent);
       });
-
-      // Open middle first
-      tl.to(middleRef.current, {
-        xPercent: 100,
-        duration: 1,
-        ease: 'power3.inOut',
-      });
-
-      // Then open top & bottom together with small delay
-      tl.to(topRef.current, { yPercent: -100, duration: 0.8, ease: 'power3.inOut' }, '+=0.1');
-      tl.to(bottomRef.current, { yPercent: 100, duration: 0.8, ease: 'power3.inOut' }, '<');
-      tl.to(percentRef.current, { y: '100%', duration: 0.6, ease: 'power3.inOut' }, '<');
     };
   }, []);
 

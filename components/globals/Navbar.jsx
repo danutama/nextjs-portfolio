@@ -4,16 +4,16 @@ import { useState, useRef, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import ThemeToggle from './ThemeToggle';
+import NavbarLogo from './NavbarLogo';
 import '../css/navbar.css';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [theme, setTheme] = useState('system');
   const menuRef = useRef(null);
   const linksRef = useRef([]);
   const infoRef = useRef([]);
-  const logoRef = useRef(null);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -21,48 +21,6 @@ export default function Navbar() {
 
   const menuItems = ['Index', 'About', 'Projects', 'Archive'];
   const infoItems = [`©${currentYear} Danu Pratama`, 'Credits:', 'Next.js by Vercel', 'Subdomain by github.com/is-a-dev', 'Footer design inspired by zajno.com', 'Plus Jakarta Sans by Tokotype', 'Playfair Display'];
-
-  // --- THEME SETUP ---
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      applyTheme(savedTheme);
-    } else {
-      applyTheme('system'); // default
-    }
-  }, []);
-
-  const applyTheme = (mode) => {
-    let finalTheme = mode;
-
-    if (mode === 'system') {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      finalTheme = prefersDark ? 'dark' : 'light';
-    }
-
-    document.documentElement.setAttribute('data-theme', finalTheme);
-    setTheme(mode);
-    localStorage.setItem('theme', mode);
-  };
-
-  useEffect(() => {
-    const chars = logoRef.current.querySelectorAll('.char');
-
-    gsap.set(chars, {
-      clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-    });
-
-    gsap.to(chars, {
-      clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)',
-      ease: 'power3.inOut',
-      scrollTrigger: {
-        trigger: document.documentElement,
-        start: 'top top',
-        end: '+=400',
-        scrub: true,
-      },
-    });
-  }, []);
 
   // Setup GSAP
   useEffect(() => {
@@ -205,13 +163,8 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <a href="/" className="logo" ref={logoRef}>
-          <span className="char">&copy;</span>
-          <span className="char">d</span>
-          <span className="char">a</span>
-          <span className="char">n</span>
-          <span className="char">u</span>
-        </a>
+        {/* LOGO */}
+        <NavbarLogo />
 
         {/* Menu Toggle*/}
         <button className={`menu-btn ${open ? 'open' : ''}`} onClick={() => setOpen(!open)}>
@@ -240,17 +193,7 @@ export default function Navbar() {
           </ul>
 
           {/* THEME TOGGLE */}
-          <div className="theme-toggle">
-            <button onClick={() => applyTheme('light')} className={theme === 'light' ? 'active' : ''}>
-              Light
-            </button>
-            <button onClick={() => applyTheme('dark')} className={theme === 'dark' ? 'active' : ''}>
-              Dark
-            </button>
-            <button onClick={() => applyTheme('system')} className={theme === 'system' ? 'active' : ''}>
-              System
-            </button>
-          </div>
+          <ThemeToggle />
         </div>
 
         <div className="menu-info menu-right">

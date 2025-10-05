@@ -165,8 +165,8 @@ export default function About() {
           <div className="about-intro">
             <p className="text-start text-animate">2021&mdash;present</p>
             <p className="text-start text-animate fw-normal">
-              Hi, I'm Danu Pratama, a web developer focused on creating visually appealing and user-friendly web interfaces. I have experience developing complete web applications from frontend to backend, and I’m committed to
-              delivering reliable digital solutions that meet each project's goals.
+              Hi, I'm Danu Pratama, a web developer focused on creating visually appealing and user-friendly web interfaces. <br />
+              <br />I have experience developing complete web applications from frontend to backend, and I’m committed to delivering reliable digital solutions that meet each project's goals.
             </p>
           </div>
 

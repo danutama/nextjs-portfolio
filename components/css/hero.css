@@ -63,6 +63,9 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 1rem;
+  clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
+  will-change: clip-path;
+  overflow: hidden;
 }
 
 .text-wrapper {
