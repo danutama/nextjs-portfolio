@@ -225,7 +225,7 @@ export default function About() {
             <a href="https://github.com/danutama" target="_blank" rel="noopener noreferrer">
               (GitHub)
             </a>
-            <a href="mailto:danupratama.dev@gmail.com">(e-mail)</a>
+            <a href="mailto:danupratama.dev@gmail.com">(Email)</a>
           </div>
         </div>
       </div>

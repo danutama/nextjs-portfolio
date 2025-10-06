@@ -1,64 +1,38 @@
 #footer {
   width: 100%;
-  padding-bottom: 3rem;
+  padding-bottom: 0;
 }
 
-.footer {
-  width: 100%;
-  height: 50%;
-  padding: 0;
+#footer .container {
   display: flex;
   justify-content: center;
-  align-items: start;
-  overflow: hidden;
-  border-bottom: 1px solid var(--color-inverse);
-}
-
-.footer-text {
-  position: relative;
-  display: inline-block;
-  transform-origin: center top;
-  font-size: 20vw;
-  font-weight: bold;
-  line-height: 1;
-  letter-spacing: -5px;
-  white-space: nowrap;
-  color: var(--color-accent);
-}
-
-.footer-rights-wrapper {
-  display: flex;
-  gap: 4rem;
-}
-
-.footer-rights {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.footer-rights span {
-  font-weight: 600;
-  padding-top: 1rem;
-  padding-right: 1rem;
-}
-
-.footer-rights-item {
-  display: flex;
+  align-items: center;
   flex-direction: column;
-  align-items: start;
-  gap: 5px;
-  border-left: 1px solid var(--color-inverse);
-  padding: 1rem 0 1rem 1rem;
-  font-weight: 600;
-  text-align: start;
+}
+
+.footer-contact {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.footer-contact a {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#footer text {
+  fill: var(--color-text);
+  font-weight: bold;
+  letter-spacing: -8px;
 }
 
 @media (max-width: 640px) {
-  .footer {
-    height: 13vh;
+  .footer-contact {
+    margin-bottom: 1rem;
   }
 
-  .footer-text {
-    padding-top: 3px;
+  .footer-contact a {
+    font-size: 1rem;
   }
 }

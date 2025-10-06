@@ -66,7 +66,7 @@ export default function PageTransition() {
       tl.add(() => {
         setTimeout(() => {
           window.dispatchEvent(new Event('hero-open'));
-        }, 100);
+        }, 200);
       }, '+=0.1');
 
       // reset overlay

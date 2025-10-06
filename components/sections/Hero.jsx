@@ -10,6 +10,7 @@ export default function Hero() {
   const pathname = usePathname();
   const [showBox, setShowBox] = useState(false);
   const hasAnimated = useRef(false);
+  const isReady = useRef(false);
 
   const openHero = () => {
     if (!boxRef.current || hasAnimated.current) return;
@@ -17,51 +18,67 @@ export default function Hero() {
     gsap.fromTo(
       boxRef.current,
       {
-        clipPath: 'polygon(0 50%, 100% 50%, 100% 50%, 0 50%)', // hide 
+        clipPath: 'polygon(0 50%, 100% 50%, 100% 50%, 0 50%)',
       },
       {
-        clipPath: 'polygon(0 0%, 100% 0%, 100% 100%, 0 100%)', // open
+        clipPath: 'polygon(0 0%, 100% 0%, 100% 100%, 0 100%)',
         duration: 1.2,
         ease: 'power3.inOut',
-        onComplete: () => (hasAnimated.current = true),
+        onComplete: () => {
+          hasAnimated.current = true;
+        },
       }
     );
   };
 
+  // Reset state when pathname changes
   useEffect(() => {
-    // Initial state
+    hasAnimated.current = false;
     setShowBox(false);
+    isReady.current = false;
 
-    // Reset box
     if (boxRef.current) {
       gsap.set(boxRef.current, {
         clipPath: 'polygon(0 50%, 100% 50%, 100% 50%, 0 50%)',
       });
     }
+  }, [pathname]);
 
-    // Listen for event
+  // Setup event listener dan trigger animation
+  useEffect(() => {
+    // Show box immediately on mount
+    setShowBox(true);
+
+    // Mark as ready after box is rendered
+    requestAnimationFrame(() => {
+      isReady.current = true;
+
+      // Check if event was already fired
+      if (window.__heroOpenTriggered) {
+        delete window.__heroOpenTriggered;
+        openHero();
+      }
+    });
+
     const handleHeroOpen = () => {
-      setShowBox(true);
-      requestAnimationFrame(() => openHero());
+      if (isReady.current) {
+        openHero();
+      } else {
+        // Store flag if component not ready yet
+        window.__heroOpenTriggered = true;
+      }
     };
 
     window.addEventListener('hero-open', handleHeroOpen);
 
-    return () => window.removeEventListener('hero-open', handleHeroOpen);
-  }, []);
-
-  // Reset when route changes
-  useEffect(() => {
-    if (pathname === '/') {
-      hasAnimated.current = false;
-
-      if (boxRef.current) {
-        gsap.set(boxRef.current, {
-          clipPath: 'polygon(0 50%, 100% 50%, 100% 50%, 0 50%)',
-        });
-      }
-    }
+    return () => {
+      window.removeEventListener('hero-open', handleHeroOpen);
+      delete window.__heroOpenTriggered;
+    };
   }, [pathname]);
+
+  // Only render on home page
+  if (pathname !== '/') return null;
 
   return (
     <section id="hero">
