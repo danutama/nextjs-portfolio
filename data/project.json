@@ -1,32 +1,37 @@
 [
   {
-    "slug": "website-portfolio",
-    "title": "Project",
+    "slug": "personal-portfolio-v4",
+    "title": "Portfolio version 4",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "images": ["/projects/project.webp"]
+    "images": ["/projects/porto-v4-1.webp"],
+    "detailImages": ["/projects/porto-v4-1.webp", "/projects/porto-v4-2.webp", "/projects/porto-v4-3.webp", "/projects/porto-v4-4.webp"]
   },
   {
-    "slug": "mobile-app",
-    "title": "Project",
+    "slug": "landing-page",
+    "title": "Landing Page",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "images": ["/projects/project.webp"]
+    "images": ["/projects/porto-v4-2.webp"],
+    "detailImages": ["/projects/mobile-1.webp", "/projects/mobile-2.webp", "/projects/mobile-3.webp"]
   },
   {
     "slug": "company-profile",
-    "title": "Project",
+    "title": "Company Profile",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "images": ["/projects/project.webp"]
+    "images": ["/projects/porto-v4-3.webp"],
+    "detailImages": ["/projects/company-1.webp", "/projects/company-2.webp", "/projects/company-3.webp"]
   },
   {
-    "slug": "ecommerce-website",
-    "title": "Project",
+    "slug": "blog-news",
+    "title": "Blog / News",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "images": ["/projects/project.webp"]
+    "images": ["/projects/porto-v4-4.webp"],
+    "detailImages": ["/projects/ecommerce-1.webp", "/projects/ecommerce-2.webp", "/projects/ecommerce-3.webp"]
   },
   {
-    "slug": "dashboard-admin",
-    "title": "Project",
+    "slug": "others",
+    "title": "Others",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "images": ["/projects/project.webp"]
+    "images": ["/projects/project.webp"],
+    "detailImages": ["/projects/dashboard-1.webp", "/projects/dashboard-2.webp", "/projects/dashboard-3.webp"]
   }
 ]
