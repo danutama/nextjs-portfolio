@@ -79,8 +79,7 @@ export default function Approach() {
           clipPath: 'polygon(0 0%, 100% 0%, 100% 100%, 0 100%)',
           duration: 1.2,
           ease: 'power3.out',
-          stagger: 0.06,
-          scrub: true,
+          stagger: 0.05,
         });
       };
 
@@ -96,7 +95,23 @@ export default function Approach() {
       };
 
       window.addEventListener('scroll', handleScroll);
-      const handleResize = () => ScrollTrigger.refresh();
+
+      let lastHeight = window.innerHeight;
+      let resizeTimeout;
+
+      const handleResize = () => {
+        clearTimeout(resizeTimeout);
+
+        resizeTimeout = setTimeout(() => {
+          const newHeight = window.innerHeight;
+
+          if (Math.abs(newHeight - lastHeight) > 120) {
+            ScrollTrigger.refresh();
+            lastHeight = newHeight;
+          }
+        }, 300);
+      };
+
       window.addEventListener('resize', handleResize);
 
       return () => {
