@@ -17,7 +17,7 @@ export default function ProjectList() {
                   <h3 className="project-list-card-title">
                     <span className="project-number">({String(index + 1).padStart(2, '0')})</span> {project.title}
                   </h3>
-                  <p className="project-list-card-desc fw-normal">{project.description}</p>
+                  <p className="project-list-card-desc fw-normal">{project.overview}</p>
                 </div>
 
                 <div className="project-list-card-image-wrapper">
