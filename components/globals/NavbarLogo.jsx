@@ -9,22 +9,26 @@ export default function NavbarLogo() {
   const logoRef = useRef(null);
 
   useEffect(() => {
-    const chars = logoRef.current.querySelectorAll('.char');
+    const ctx = gsap.context(() => {
+      const chars = logoRef.current.querySelectorAll('.char');
 
-    gsap.set(chars, {
-      clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-    });
+      gsap.set(chars, {
+        clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+      });
 
-    gsap.to(chars, {
-      clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)',
-      ease: 'power3.inOut',
-      scrollTrigger: {
-        trigger: document.documentElement,
-        start: 'top top',
-        end: '+=400',
-        scrub: true,
-      },
-    });
+      gsap.to(chars, {
+        clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)',
+        ease: 'power3.inOut',
+        scrollTrigger: {
+          trigger: document.documentElement,
+          start: 'top top',
+          end: '+=400',
+          scrub: true,
+        },
+      });
+    }, logoRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (

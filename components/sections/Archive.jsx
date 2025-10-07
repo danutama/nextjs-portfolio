@@ -75,7 +75,7 @@ export default function Archive() {
           {archiveItems.map((item, index) => (
             <div className="image-item" key={index}>
               <div className="image-box">
-                <Image src={item.src} alt={item.label} width={250} height={350} priority />
+                <Image src={item.src} alt={item.label} width={300} height={350} priority />
               </div>
               <span>{item.label}</span>
             </div>

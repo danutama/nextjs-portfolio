@@ -3,7 +3,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import '../css/hero.css';
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const boxRef = useRef(null);
@@ -79,6 +81,28 @@ export default function Hero() {
 
   // Only render on home page
   if (pathname !== '/') return null;
+
+  useEffect(() => {
+    const handleHeroScroll = (e) => {
+      if (!boxRef.current) return;
+      const progress = e.detail?.progress ?? 0;
+
+      const adjusted = Math.min(progress / 0.85, 1);
+
+      const bottom = 100 - adjusted * 100;
+      const clipPath = `polygon(0 0, 100% 0, 100% ${bottom}%, 0 ${bottom}%)`;
+
+      gsap.to(boxRef.current, {
+        clipPath,
+        ease: 'none',
+        duration: 0.1,
+        overwrite: 'auto',
+      });
+    };
+
+    window.addEventListener('hero-scroll', handleHeroScroll);
+    return () => window.removeEventListener('hero-scroll', handleHeroScroll);
+  }, []);
 
   return (
     <section id="hero">

@@ -1,6 +1,8 @@
 #footer {
   width: 100%;
-  padding-bottom: 0;
+  padding: 8rem 0 0 0;
+  background-color: var(--color-bg);
+  z-index: 2;
 }
 
 #footer .container {
@@ -18,7 +20,7 @@
 
 .footer-contact a {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 #footer text {

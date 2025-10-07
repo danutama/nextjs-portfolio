@@ -1,8 +1,8 @@
 #hero {
-  position: relative;
   background: url('/juliette-contin-unsplash.jpg');
   background-size: cover;
   background-position: bottom;
+  position: fixed;
 }
 
 /* #hero::before {
@@ -71,7 +71,7 @@
 .text-wrapper {
   width: 100%;
   overflow: hidden;
-  display: flex;
+  align-items: end !important;
 }
 
 .version {

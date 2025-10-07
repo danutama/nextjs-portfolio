@@ -1,0 +1,78 @@
+#project-list h2 {
+  font-size: 3rem;
+  text-align: center;
+}
+
+.project-list-items {
+  width: 100%;
+}
+
+.project-list-card {
+  list-style: none;
+  border-top: 1px solid var(--color-gray);
+}
+
+.project-list-card:last-child {
+  border-bottom: 1px solid var(--color-gray);
+}
+
+.project-list-card-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+.project-list-card-text-wrapper {
+  display: block;
+}
+
+.project-list-card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.project-number {
+  letter-spacing: -1px;
+  margin-right: 0.5rem;
+}
+
+.project-list-card-desc {
+  font-size: 1.3rem;
+  line-height: 1.2;
+  margin: 10px 0 0 0;
+  color: var(--color-gray);
+}
+
+.project-list-card-image-wrapper {
+  position: relative;
+  min-width: 200px;
+  height: 200px;
+  background-color: var(--color-surface);
+  overflow: hidden;
+}
+
+.project-list-card-image {
+  object-fit: cover;
+}
+
+@media (max-width: 640px) {
+  #project-list h2 {
+    line-height: 1;
+    text-align: start;
+  }
+
+  .project-list-card-title {
+    font-size: 1.1rem;
+  }
+
+  .project-list-card-desc {
+    font-size: 1rem;
+  }
+
+  .project-list-card-image-wrapper {
+    min-width: 100px;
+    height: 100px;
+  }
+}

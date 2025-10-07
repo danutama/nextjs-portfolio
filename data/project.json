@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "website-portfolio",
+    "title": "Project",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "images": ["/projects/project.webp"]
+  },
+  {
+    "slug": "mobile-app",
+    "title": "Project",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "images": ["/projects/project.webp"]
+  },
+  {
+    "slug": "company-profile",
+    "title": "Project",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "images": ["/projects/project.webp"]
+  },
+  {
+    "slug": "ecommerce-website",
+    "title": "Project",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "images": ["/projects/project.webp"]
+  },
+  {
+    "slug": "dashboard-admin",
+    "title": "Project",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "images": ["/projects/project.webp"]
+  }
+]
