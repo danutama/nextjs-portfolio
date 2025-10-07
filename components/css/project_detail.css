@@ -48,17 +48,24 @@
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
-  background-color: var(--color-surface);
   overflow: hidden;
+  margin-bottom: 0;
+}
+
+.parallax-inner {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
 }
 
 .project-detail-image {
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transform-origin: center center;
+  will-change: transform;
 }
 
-.project-detail-image:hover {
-  transform: scale(1.05);
+.no-image-bg {
+  background-color: var(--color-surface);
 }
 
 .project-detail-next-wrapper {
@@ -105,6 +112,7 @@
 
   .project-detail-images {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
   .notfound-title,

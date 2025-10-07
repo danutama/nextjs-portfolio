@@ -1,15 +1,57 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import TransitionLink from '@/components/globals/TransitionLink';
 import projects from '../../data/project.json';
 import '../css/project_detail.css';
 
-export default function ProjectDetail({ project }) {
-  // current
-  const currentIndex = projects.findIndex((p) => p.slug === project.slug);
+gsap.registerPlugin(ScrollTrigger);
 
-  // next
+export default function ProjectDetail({ project }) {
+  const wrappersRef = useRef([]);
+  const triggersRef = useRef([]);
+  const [brokenImages, setBrokenImages] = useState({});
+
+  useEffect(() => {
+    const triggers = [];
+
+    wrappersRef.current.forEach((wrapper) => {
+      if (!wrapper) return;
+      const inner = wrapper.querySelector('.parallax-inner');
+      if (!inner) return;
+
+      gsap.set(inner, { yPercent: -10 });
+
+      const trigger = ScrollTrigger.create({
+        trigger: wrapper,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true,
+        onUpdate: (self) => {
+          gsap.to(inner, {
+            yPercent: gsap.utils.interpolate(-10, 10, self.progress),
+          });
+        },
+      });
+
+      triggers.push(trigger);
+    });
+
+    triggersRef.current = triggers;
+    return () => {
+      triggersRef.current.forEach((t) => t.kill());
+      triggersRef.current = [];
+    };
+  }, []);
+
+  const handleImageError = (index) => {
+    setBrokenImages((prev) => ({ ...prev, [index]: true }));
+  };
+
+  const currentIndex = projects.findIndex((p) => p.slug === project.slug);
   const nextProject = projects[(currentIndex + 1) % projects.length];
 
   return (
@@ -28,7 +70,7 @@ export default function ProjectDetail({ project }) {
           </div>
 
           <div className="project-detail-items">
-            <p className="fw-normal">Technology</p>
+            <p className="fw-normal">Tech stack</p>
             <p className="fw-normal">{project.technology.join(', ')}</p>
           </div>
 
@@ -62,11 +104,19 @@ export default function ProjectDetail({ project }) {
         <p className="project-detail-desc fw-normal">{project.description}</p>
 
         <div className="project-detail-images">
-          {project.detailImages?.map((src, i) => (
-            <div key={i} className="project-detail-image-wrapper">
-              <Image src={src} alt={`${project.title} image ${i + 1}`} fill className="project-detail-image" />
-            </div>
-          ))}
+          {project.detailImages?.length ? (
+            project.detailImages.map((src, i) => (
+              <div key={i} ref={(el) => (wrappersRef.current[i] = el)} className={`project-detail-image-wrapper ${brokenImages[i] ? 'no-image-bg' : ''}`}>
+                {!brokenImages[i] ? (
+                  <div className="parallax-inner">
+                    <Image src={src} alt={`${project.title} image ${i + 1}`} width={800} height={800} className="project-detail-image" onError={() => handleImageError(i)} />
+                  </div>
+                ) : null}
+              </div>
+            ))
+          ) : (
+            <div className="project-detail-image-wrapper no-image-bg" />
+          )}
         </div>
 
         <div className="project-detail-next-wrapper">
