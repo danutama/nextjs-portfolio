@@ -15,6 +15,13 @@ export async function generateMetadata({ params }) {
     return {
       title: 'Project Not Found | Danu Pratama',
       description: 'Project not found in portfolio.',
+      openGraph: {
+        title: 'Project Not Found | Danu Pratama',
+        description: 'Project not found in portfolio.',
+        siteName: 'Danu — Portfolio',
+        locale: 'en_US',
+        type: 'website',
+      },
     };
   }
 
@@ -24,9 +31,38 @@ export async function generateMetadata({ params }) {
     metaDescription = metaDescription.slice(0, maxLength).trim() + '…';
   }
 
+  const ogImage = currentProject.images?.[0] || '/og-image.png';
+
+  const keywords = [currentProject.title, 'Danu Pratama', 'Web Developer', 'GitHub', ...(currentProject.technology || [])];
+
   return {
     title: `${currentProject.title} | Danu Pratama`,
     description: metaDescription,
+    keywords,
+
+    openGraph: {
+      title: `${currentProject.title} | Danu Pratama`,
+      description: metaDescription,
+      url: `https://danu.is-a.dev/projects/${currentProject.slug}`,
+      siteName: 'Danu — Portfolio',
+      images: [
+        {
+          url: `https://danu.is-a.dev${ogImage}`,
+          width: 1200,
+          height: 1200,
+          alt: currentProject.title,
+        },
+      ],
+      locale: 'en_US',
+      type: 'article',
+    },
+
+    twitter: {
+      card: 'summary_large_image',
+      title: `${currentProject.title} | Danu Pratama`,
+      description: metaDescription,
+      images: [`https://danu.is-a.dev${ogImage}`],
+    },
   };
 }
 
