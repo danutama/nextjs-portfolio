@@ -81,9 +81,10 @@
 
 .hero-bottom {
   position: absolute;
-  right: 2rem;
-  left: 2rem;
+  right: 0;
+  left: 0;
   bottom: 1rem;
+  padding: 0 2rem;
 }
 
 .hero-about-btn,
@@ -110,8 +111,7 @@
   }
 
   .hero-bottom {
-    right: 1rem;
-    left: 1rem;
+    padding: 0 1rem;
   }
 
   .hero-about-btn,
