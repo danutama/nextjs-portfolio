@@ -15,13 +15,11 @@ export default function ProjectList() {
           Selected Projects<span className="number">({String(projectCount).padStart(2, '0')})</span>
         </h2>
         <ul className="project-list-items">
-          {projects.map((project, index) => (
+          {projects.map((project) => (
             <li key={project.slug} className="project-list-card">
               <TransitionLink href={`/projects/${project.slug}`} className="project-list-card-link">
                 <div className="project-list-card-text-wrapper">
-                  <h3 className="project-list-card-title">
-                    <span className="project-number">({String(index + 1).padStart(2, '0')})</span> {project.title}
-                  </h3>
+                  <h3 className="project-list-card-title">{project.title}</h3>
                   <p className="project-list-card-desc fw-normal">{project.overview}</p>
                 </div>
 

@@ -129,6 +129,17 @@
     font-size: 1rem;
   }
 
+  .project-detail-items.custom {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+  }
+
+  .project-detail-items.custom p:nth-child(1) {
+    min-width: 130px;
+    line-height: 2.1;
+  }
+
   .project-detail-images {
     grid-template-columns: 1fr;
     gap: 1.5rem;

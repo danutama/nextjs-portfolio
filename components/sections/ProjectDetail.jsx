@@ -64,22 +64,22 @@ export default function ProjectDetail({ project }) {
         </p>
 
         <div className="project-detail-data">
-          <div className="project-detail-items">
+          <div className="project-detail-items custom">
             <p className="fw-normal">Role</p>
             <p className="fw-normal">{project.role}</p>
           </div>
 
-          <div className="project-detail-items">
+          <div className="project-detail-items custom">
             <p className="fw-normal">Tech stack</p>
             <p className="fw-normal">{project.technology.join(', ')}</p>
           </div>
 
-          <div className="project-detail-items">
+          <div className="project-detail-items custom">
             <p className="fw-normal">Design</p>
             <p className="fw-normal">{project.designBy}</p>
           </div>
 
-          <div className="project-detail-items">
+          <div className="project-detail-items custom">
             <p className="fw-normal">Development</p>
             <p className="fw-normal">{project.developmentBy}</p>
           </div>
@@ -120,7 +120,7 @@ export default function ProjectDetail({ project }) {
         </div>
 
         <div className="project-detail-next-wrapper">
-          <span className="font-secondary">Next</span>
+          <span className="font-secondary">Next&mdash;</span>
           <TransitionLink href={`/projects/${nextProject.slug}`} className="project-detail-next">
             {nextProject.title}
           </TransitionLink>
