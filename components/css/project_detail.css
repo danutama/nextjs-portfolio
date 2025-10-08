@@ -33,8 +33,27 @@
 }
 
 .project-detail-items p:nth-child(1) {
+  font-size: 0.8rem;
   text-transform: uppercase;
   color: var(--color-gray);
+}
+
+.project-detail-items.responsibilities {
+  max-width: 550px;
+}
+
+.project-detail-items a {
+  display: inline-flex;
+  align-items: end;
+  gap: 4px;
+}
+
+.project-detail-items .material-symbols-outlined {
+  font-size: 20px;
+  vertical-align: middle;
+  line-height: 1;
+  display: inline-flex;
+  align-items: end;
 }
 
 .project-detail-images {

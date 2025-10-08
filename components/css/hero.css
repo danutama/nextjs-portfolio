@@ -79,6 +79,26 @@
   font-weight: 500;
 }
 
+.hero-bottom {
+  position: absolute;
+  right: 2rem;
+  left: 2rem;
+  bottom: 1rem;
+}
+
+.hero-about-btn,
+.hero-bottom span {
+  color: var(--white);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+}
+
+.hero-about-btn:hover {
+  color: var(--white);
+}
+
 @media (max-width: 640px) {
   /* mobile */
   #hero .box {
@@ -87,5 +107,15 @@
 
   #hero h3 {
     text-align: justify;
+  }
+
+  .hero-bottom {
+    right: 1rem;
+    left: 1rem;
+  }
+
+  .hero-about-btn,
+  .hero-bottom span {
+    font-size: 0.8rem;
   }
 }

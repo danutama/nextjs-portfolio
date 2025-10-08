@@ -84,9 +84,9 @@ export default function ProjectDetail({ project }) {
             <p className="fw-normal">{project.developmentBy}</p>
           </div>
 
-          <div className="project-detail-items">
+          <div className="project-detail-items responsibilities">
             <p className="fw-normal">Responsibilities</p>
-            <p className="fw-normal">{project.task.join(', ')}</p>
+            <p className="fw-normal">{project.task.map((item, index) => `(${index + 1}) ${item}`).join(' ')}</p>
           </div>
 
           {project.url && (
@@ -94,7 +94,7 @@ export default function ProjectDetail({ project }) {
               <p className="fw-normal">URL</p>
               <p className="fw-normal">
                 <a href={project.url} target="_blank" rel="noopener noreferrer">
-                  Live preview
+                  Live preview <span className="material-symbols-outlined">arrow_outward</span>
                 </a>
               </p>
             </div>

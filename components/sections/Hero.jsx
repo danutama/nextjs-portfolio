@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import TransitionLink from '@/components/globals/TransitionLink';
 import '../css/hero.css';
 gsap.registerPlugin(ScrollTrigger);
 
@@ -128,6 +129,13 @@ export default function Hero() {
               </div>
             </div>
           )}
+        </div>
+
+        <div className="hero-bottom d-flex between">
+          <span className="font-secondary fw-normal">scroll</span>
+          <TransitionLink href="/about" className="hero-about-btn">
+            Get to Know Me
+          </TransitionLink>
         </div>
       </div>
     </section>

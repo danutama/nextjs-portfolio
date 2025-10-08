@@ -1,18 +1,31 @@
-#project-list h2 {
-  font-size: 3rem;
-  text-align: center;
+.project-list-heading {
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  margin-bottom: 1rem;
+  padding-right: 2rem;
+  position: relative;
+  display: inline-block;
+}
+
+.project-list-heading .number {
+  font-size: 1rem;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .project-list-items {
   width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 0;
+  column-gap: 2rem;
+  border-top: 1px solid var(--color-gray);
 }
 
 .project-list-card {
   list-style: none;
-  border-top: 1px solid var(--color-gray);
-}
-
-.project-list-card:last-child {
   border-bottom: 1px solid var(--color-gray);
 }
 
@@ -22,6 +35,10 @@
   align-items: start;
   gap: 2rem;
   padding: 1rem 0;
+}
+
+.project-list-card-link:hover .project-list-card-image {
+  transform: scale(1.05);
 }
 
 .project-list-card-text-wrapper {
@@ -56,12 +73,24 @@
 
 .project-list-card-image {
   object-fit: cover;
+  transform: scale(1);
+  transition: transform 0.4s ease;
 }
 
 @media (max-width: 640px) {
-  #project-list h2 {
-    line-height: 1;
-    text-align: start;
+  .project-list-heading {
+    font-size: 1.3rem;
+    padding-right: 1.8rem;
+  }
+
+  .project-list-heading .number {
+    font-size: 0.8rem;
+    top: -5%;
+  }
+
+  .project-list-items {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0;
   }
 
   .project-list-card-title {

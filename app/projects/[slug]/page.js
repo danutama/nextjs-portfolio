@@ -7,9 +7,28 @@ export async function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
 }
 
-export const metadata = {
-  title: 'Project Detail | Danu Pratama',
-};
+export async function generateMetadata({ params }) {
+  const { slug } = params;
+  const currentProject = projects.find((p) => p.slug === slug);
+
+  if (!currentProject) {
+    return {
+      title: 'Project Not Found | Danu Pratama',
+      description: 'Project not found in portfolio.',
+    };
+  }
+
+  const maxLength = 155;
+  let metaDescription = currentProject.overview || '';
+  if (metaDescription.length > maxLength) {
+    metaDescription = metaDescription.slice(0, maxLength).trim() + '…';
+  }
+
+  return {
+    title: `${currentProject.title} | Danu Pratama`,
+    description: metaDescription,
+  };
+}
 
 export default function ProjectDetailPage({ params }) {
   const { slug } = params;

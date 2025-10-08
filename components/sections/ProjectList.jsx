@@ -6,9 +6,14 @@ import projects from '../../data/project.json';
 import '../css/project_list.css';
 
 export default function ProjectList() {
+  const projectCount = projects.length;
+
   return (
     <section id="project-list">
       <div className="container">
+        <h2 className="project-list-heading">
+          Selected Projects<span className="number">({String(projectCount).padStart(2, '0')})</span>
+        </h2>
         <ul className="project-list-items">
           {projects.map((project, index) => (
             <li key={project.slug} className="project-list-card">
