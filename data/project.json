@@ -55,8 +55,8 @@
     "task": [
       "Developed a comprehensive POS and inventory management system tailored for cooperative and MSME workflows.",
       "Created a fully responsive layout that adapts seamlessly across desktop, tablet, and mobile devices.",
-      "Implemented multi-role authentication and authorization for administrators, cashiers, and managers.",
-      "Integrated CAPTCHA verification for secure authentication",
+      "Implemented multi-role authentication and authorization.",
+      "Integrated CAPTCHA verification and rate limiting for a secure and reliable authentication.",
       "Designed a clean and timeless Bootstrap-based interface focusing on usability and readability.",
       "Utilized ApexCharts to visualize sales performance and inventory statistics.",
       "Optimized MySQL queries for faster reporting and improved data consistency across modules."

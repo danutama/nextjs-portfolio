@@ -4,9 +4,10 @@
 
 .project-detail-title {
   letter-spacing: -1px;
-  line-height: 1;
+  line-height: 0.8;
   text-transform: uppercase;
   margin-bottom: 2rem;
+  font-size: 7vw;
 }
 
 .project-detail-year {
@@ -47,7 +48,8 @@
 }
 
 .responsibilities-wrapper {
-  margin-top: 3rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
   border-top: 1px solid var(--color-gray);
 }
 
@@ -139,9 +141,14 @@
 }
 
 @media (max-width: 640px) {
+  .project-detail-title {
+    line-height: 0.9;
+    font-size: 13vw;
+  }
+
   .project-detail-data {
     grid-template-columns: repeat(1, 1fr);
-    gap: 1.5rem;
+    gap: 1rem;
   }
 
   .project-detail-items .material-symbols-outlined {

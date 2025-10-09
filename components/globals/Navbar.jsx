@@ -174,46 +174,48 @@ export default function Navbar() {
       </div>
 
       <div ref={menuRef} className="menu-overlay">
-        <div className="menu-left">
-          <ul>
-            {menuItems.map((item, i) => {
-              const href = item === 'Index' ? '/' : `/${item.toLowerCase()}`;
-              const isActive = pathname === href;
-              const number = String(i + 1).padStart(2, '0');
+        <div className="menu-wrapper">
+          <div className="menu-left">
+            <ul>
+              {menuItems.map((item, i) => {
+                const href = item === 'Index' ? '/' : `/${item.toLowerCase()}`;
+                const isActive = pathname === href;
+                const number = String(i + 1).padStart(2, '0');
 
-              return (
-                <li key={item} className="menu-item">
-                  <button className={`menu-link ${isActive ? 'active' : ''}`} ref={(el) => (linksRef.current[i] = el)} onClick={() => handleLinkClick(href)} onMouseEnter={() => handleLinkHover(href)}>
-                    {item}
-                    <span className="small">{number}</span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+                return (
+                  <li key={item} className="menu-item">
+                    <button className={`menu-link ${isActive ? 'active' : ''}`} ref={(el) => (linksRef.current[i] = el)} onClick={() => handleLinkClick(href)} onMouseEnter={() => handleLinkHover(href)}>
+                      {item}
+                      <span className="small">{number}</span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
 
-          {/* THEME TOGGLE */}
-          <ThemeToggle />
-        </div>
+            {/* THEME TOGGLE */}
+            <ThemeToggle />
+          </div>
 
-        <div className="menu-info menu-right">
-          {infoItems.map((text, i) => (
-            <p key={i} ref={(el) => (infoRef.current[i] = el)}>
-              <span>{text}</span>
-            </p>
-          ))}
+          <div className="menu-info menu-right">
+            {infoItems.map((text, i) => (
+              <p key={i} ref={(el) => (infoRef.current[i] = el)}>
+                <span>{text}</span>
+              </p>
+            ))}
 
-          <div className="menu-socials">
-            <a href="https://www.linkedin.com/in/danu-agus-pratama" target="_blank" rel="noopener noreferrer">
-              (LinkedIn)
-            </a>
-            <a href="mailto:danupratama.dev@gmail.com">(email)</a>
-            <a href="https://github.com/danutama" target="_blank" rel="noopener noreferrer">
-              (GitHub)
-            </a>
-            <a href="https://danutama.github.io" target="_blank" rel="noopener noreferrer">
-              (v3)
-            </a>
+            <div className="menu-socials">
+              <a href="https://www.linkedin.com/in/danu-agus-pratama" target="_blank" rel="noopener noreferrer">
+                (LinkedIn)
+              </a>
+              <a href="mailto:danupratama.dev@gmail.com">(email)</a>
+              <a href="https://github.com/danutama" target="_blank" rel="noopener noreferrer">
+                (GitHub)
+              </a>
+              <a href="https://danutama.github.io" target="_blank" rel="noopener noreferrer">
+                (v3)
+              </a>
+            </div>
           </div>
         </div>
       </div>
