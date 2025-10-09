@@ -13,14 +13,6 @@
   margin-bottom: 2rem;
 }
 
-.project-detail-desc {
-  font-size: 1.3rem;
-  line-height: 1.4;
-  margin-top: 3rem;
-  padding-top: 3rem;
-  border-top: 1px solid var(--color-gray);
-}
-
 .project-detail-data {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -28,18 +20,16 @@
 }
 
 .project-detail-items p {
+  font-size: 1.3rem;
   line-height: 1.5;
   margin: 0;
 }
 
+.responsibilities-head,
 .project-detail-items p:nth-child(1) {
   font-size: 0.8rem;
   text-transform: uppercase;
   color: var(--color-gray);
-}
-
-.project-detail-items.responsibilities {
-  max-width: 550px;
 }
 
 .project-detail-items a {
@@ -49,11 +39,40 @@
 }
 
 .project-detail-items .material-symbols-outlined {
-  font-size: 20px;
+  font-size: 25px;
   vertical-align: middle;
   line-height: 1;
   display: inline-flex;
   align-items: end;
+}
+
+.responsibilities-wrapper {
+  margin-top: 3rem;
+  border-top: 1px solid var(--color-gray);
+}
+
+.project-detail-task {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.task-line {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+}
+
+.task-line p {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.task-number {
+  min-width: 50px;
+  max-width: 50px;
 }
 
 .project-detail-images {
@@ -125,19 +144,29 @@
     gap: 1.5rem;
   }
 
-  .project-detail-desc {
-    font-size: 1rem;
+  .project-detail-items .material-symbols-outlined {
+    font-size: 20px;
   }
 
-  .project-detail-items.custom {
+  .project-detail-items {
     display: flex;
     justify-content: start;
     align-items: start;
   }
 
-  .project-detail-items.custom p:nth-child(1) {
+  .project-detail-items p:nth-child(1) {
     min-width: 130px;
     line-height: 2.1;
+  }
+
+  .project-detail-items p,
+  .task-line p {
+    font-size: 1rem;
+  }
+
+  .task-number {
+    min-width: 30px;
+    max-width: 30px;
   }
 
   .project-detail-images {

@@ -64,30 +64,36 @@ export default function ProjectDetail({ project }) {
         </p>
 
         <div className="project-detail-data">
-          <div className="project-detail-items custom">
+          <div className="project-detail-items">
             <p className="fw-normal">Role</p>
             <p className="fw-normal">{project.role}</p>
           </div>
 
-          <div className="project-detail-items custom">
+          <div className="project-detail-items">
             <p className="fw-normal">Tech stack</p>
             <p className="fw-normal">{project.technology.join(', ')}</p>
           </div>
 
-          <div className="project-detail-items custom">
+          <div className="project-detail-items">
             <p className="fw-normal">Design</p>
             <p className="fw-normal">{project.designBy}</p>
           </div>
 
-          <div className="project-detail-items custom">
+          <div className="project-detail-items">
             <p className="fw-normal">Development</p>
             <p className="fw-normal">{project.developmentBy}</p>
           </div>
 
-          <div className="project-detail-items responsibilities">
-            <p className="fw-normal">Responsibilities</p>
-            <p className="fw-normal">{project.task.map((item, index) => `(${index + 1}) ${item}`).join(' ')}</p>
-          </div>
+          {project.repository && (
+            <div className="project-detail-items">
+              <p className="fw-normal">Repository</p>
+              <p className="fw-normal">
+                <a href={project.repository} target="_blank" rel="noopener noreferrer">
+                  GitHub <span className="material-symbols-outlined">arrow_outward</span>
+                </a>
+              </p>
+            </div>
+          )}
 
           {project.url && (
             <div className="project-detail-items">
@@ -101,7 +107,18 @@ export default function ProjectDetail({ project }) {
           )}
         </div>
 
-        <p className="project-detail-desc fw-normal">{project.description}</p>
+        <div className="responsibilities-wrapper">
+          <p className="fw-normal responsibilities-head">Responsibilities</p>
+
+          <div className="project-detail-task">
+            {project.task.map((item, index) => (
+              <div key={index} className="task-line">
+                <p className="fw-normal task-number">({index + 1})</p>
+                <p className="fw-normal task-text">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
 
         <div className="project-detail-images">
           {project.detailImages?.length ? (
