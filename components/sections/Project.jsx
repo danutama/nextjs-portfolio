@@ -33,12 +33,18 @@ export default function Project() {
             </div>
           </div>
 
-          <div className="project-thumbnails">
-            {projects.map((p, i) => (
-              <div key={p.slug} className={`project-thumb ${i === activeIndex ? 'active' : ''}`} onMouseEnter={() => setActiveIndex(i)}>
-                <img src={p.images?.[0]} alt={p.title} />
-              </div>
-            ))}
+          <div>
+            <span className="fw-normal project-thumb-count">
+              {activeIndex + 1}&mdash;{projects.length}
+            </span>
+
+            <div className="project-thumbnails">
+              {projects.map((p, i) => (
+                <div key={p.slug} className={`project-thumb ${i === activeIndex ? 'active' : ''}`} onMouseEnter={() => setActiveIndex(i)}>
+                  <img src={p.images?.[0]} alt={p.title} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

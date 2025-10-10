@@ -22,7 +22,7 @@ export default function NavbarLogo() {
         scrollTrigger: {
           trigger: document.documentElement,
           start: 'top top',
-          end: '+=400',
+          end: '+=300',
           scrub: true,
         },
       });

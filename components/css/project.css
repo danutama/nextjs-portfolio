@@ -1,7 +1,7 @@
 #project {
   position: relative;
   padding-top: 5rem;
-  padding-bottom: 3rem;
+  padding-bottom: 0;
 }
 
 .project-header {
@@ -13,18 +13,16 @@
   font-size: 11vw;
   text-transform: uppercase;
   text-align: start;
-  letter-spacing: -3px;
+  letter-spacing: -1px;
   line-height: 1;
 }
 
 #project h2 > span {
   font-size: 8vw;
-  letter-spacing: -1px;
 }
 
 #project h2 .project-number {
   font-size: 6vw;
-  letter-spacing: -1px;
   margin-left: 5px;
   top: -1.5rem;
   vertical-align: super;
@@ -56,7 +54,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: opacity 0.5s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 
 .project-main-title {
@@ -77,16 +75,21 @@
   text-transform: uppercase;
 }
 
+.project-thumb-count {
+  font-size: 1rem;
+}
+
 .project-thumbnails {
   display: flex;
   gap: 1rem;
   justify-content: start;
   align-items: center;
   z-index: 3;
+  margin-top: 5px;
 }
 
 .project-thumb {
-  opacity: 0.7;
+  opacity: 0.5;
   transition: all 0.3s ease;
 }
 
@@ -104,11 +107,17 @@
 
 @media (max-width: 640px) {
   #project {
-    padding-bottom: 2rem;
+    padding: 7rem 0 1.5rem 0;
   }
 
   .project-header {
     display: block;
+  }
+
+  .project-content {
+    justify-content: space-between;
+    min-height: 100vh;
+    padding-top: 20vh;
   }
 
   .project-main {
@@ -123,13 +132,13 @@
   }
 
   .project-main-title {
-    font-size: 1.3rem;
+    font-size: 2rem;
     letter-spacing: -1px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
 
   .project-main-role {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     letter-spacing: 0;
   }
 
@@ -137,7 +146,11 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    padding-right: 1rem;
+  }
+
+  .project-thumb-count {
+    display: block;
+    text-align: right;
   }
 
   .project-thumb {
