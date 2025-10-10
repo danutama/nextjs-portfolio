@@ -56,6 +56,7 @@
   line-height: 1.2;
   margin: 10px 0 0 0;
   color: var(--color-gray);
+  letter-spacing: -0.8px;
 }
 
 .project-list-card-image-wrapper {
@@ -70,6 +71,27 @@
   object-fit: cover;
   transform: scale(1);
   transition: transform 0.4s ease;
+}
+
+.project-list-nav-wrapper {
+  display: flex;
+  justify-content: end;
+  margin-top: 1rem;
+}
+
+.project-list-nav {
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.project-list-nav .material-symbols-outlined {
+  font-size: 25px;
+  vertical-align: middle;
+  line-height: 1;
+  display: inline-flex;
+  align-items: end;
 }
 
 @media (max-width: 640px) {

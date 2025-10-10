@@ -1,6 +1,6 @@
 #footer {
   width: 100%;
-  padding: 10rem 0 0 0;
+  padding: 8rem 0 0 0;
   background-color: var(--color-bg);
   z-index: 2;
 }
@@ -10,6 +10,24 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.cta {
+  margin-bottom: 5rem;
+}
+
+.cta h2 {
+  font-size: 3rem;
+  line-height: 0.9;
+  letter-spacing: -2px;
+  margin-bottom: 2rem;
+}
+
+.cta p {
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  font-weight: 600;
+  margin: 0;
 }
 
 .footer-contact {

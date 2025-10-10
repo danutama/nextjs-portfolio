@@ -152,7 +152,7 @@
 
 .menu-link.active,
 .menu-link.active:hover {
-  color: var(--color-accent);
+  color: var(--color-gray);
 }
 
 .menu-link.menu-link.active {

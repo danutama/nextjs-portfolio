@@ -1,7 +1,7 @@
 #hero {
-  background: url('/juliette-contin-unsplash.jpg');
+  background: url('/milad-fakurian-unsplash.jpg');
   background-size: cover;
-  background-position: bottom;
+  background-position: center;
   position: fixed;
 }
 
@@ -42,11 +42,16 @@
   margin: 0.8rem 0 2rem 0;
 }
 
-#hero .location {
+#hero .location,
+.hero-about-btn {
   font-size: 1rem;
   font-weight: 600;
   color: var(--color-gray);
   letter-spacing: -1px;
+}
+
+.hero-about-btn:hover {
+  color: var(--color-text-inverse);
 }
 
 #hero .box-wrapper {
@@ -74,30 +79,15 @@
   align-items: end !important;
 }
 
+#hero .text-wrapper:nth-child(3) {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
 .version {
   color: var(--color-text-inverse);
   font-weight: 500;
-}
-
-.hero-bottom {
-  position: absolute;
-  right: 0;
-  left: 0;
-  bottom: 1rem;
-  padding: 0 2rem;
-}
-
-.hero-about-btn,
-.hero-bottom span {
-  color: var(--white);
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: -1px;
-  text-transform: uppercase;
-}
-
-.hero-about-btn:hover {
-  color: var(--white);
 }
 
 @media (max-width: 640px) {
@@ -108,14 +98,5 @@
 
   #hero h3 {
     text-align: justify;
-  }
-
-  .hero-bottom {
-    padding: 0 1rem;
-  }
-
-  .hero-about-btn,
-  .hero-bottom span {
-    font-size: 0.8rem;
   }
 }

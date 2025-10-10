@@ -124,18 +124,15 @@ export default function Hero() {
                   <h3>Focused on crafting clean and minimal web experiences with a timeless design.</h3>
                 </div>
                 <div className="text-wrapper">
-                  <span className="location">Based in Jakarta, ID</span>
+                  <span className="location">Based in Jakarta</span>
+
+                  <TransitionLink href="/about" className="hero-about-btn">
+                    Get to know me
+                  </TransitionLink>
                 </div>
               </div>
             </div>
           )}
-        </div>
-
-        <div className="hero-bottom d-flex between">
-          <span className="font-secondary fw-normal">scroll</span>
-          <TransitionLink href="/about" className="hero-about-btn">
-            Get to Know Me
-          </TransitionLink>
         </div>
       </div>
     </section>

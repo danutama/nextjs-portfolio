@@ -30,6 +30,11 @@ export default function ProjectList() {
             </li>
           ))}
         </ul>
+        <div className="project-list-nav-wrapper">
+          <TransitionLink href="/projects" className="project-list-nav">
+            view all projects  <span className="material-symbols-outlined">arrow_outward</span>
+          </TransitionLink>
+        </div>
       </div>
     </section>
   );

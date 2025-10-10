@@ -10,7 +10,7 @@
 }
 
 #project h2 {
-  font-size: 11vw;
+  font-size: 12vw;
   text-transform: uppercase;
   text-align: start;
   letter-spacing: -1px;
@@ -132,7 +132,7 @@
   }
 
   .project-main-title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     letter-spacing: -1px;
     margin-bottom: 10px;
   }

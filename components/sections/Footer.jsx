@@ -33,6 +33,12 @@ export default function Footer() {
   return (
     <footer id="footer" ref={footerRef}>
       <div className="container">
+        <div className="cta">
+          <h2 className="text-center">
+            Interested in <span className="font-secondary">working</span> together?
+          </h2>
+          <p className="text-center">Get in touch</p>
+        </div>
         <div className="footer-contact">
           <a href="mailto:danupratama.dev@gmail.com">(Email)</a>
           <a href="https://github.com/danutama" target="_blank" rel="noopener noreferrer">
