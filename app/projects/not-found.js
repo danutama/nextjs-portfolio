@@ -1,16 +1,9 @@
-import TransitionLink from '@/components/globals/TransitionLink';
+import NotFound from '@/components/globals/NotFound';
 
-export default function NotFound() {
+export default function ProjectNotFound() {
   return (
-    <main className="notfound-container">
-      <span className="notfound-404">404</span>
-      <div className="notfound-text-wrapper">
-        <h1 className="notfound-title">Project Not Found</h1>
-        <p className="notfound-text fw-normal">The project you are looking for doesn’t exist or has been removed.</p>
-        <TransitionLink href="/" className="notfound-btn">
-          Back to Index
-        </TransitionLink>
-      </div>
+    <main>
+      <NotFound title="Project Not Found" message="The project you requested isn’t here anymore. Maybe check out my other builds?" buttonText="See Other Projects" buttonHref="/projects" />
     </main>
   );
 }

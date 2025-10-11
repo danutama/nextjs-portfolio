@@ -88,11 +88,6 @@
 
 .project-list-nav .material-symbols-outlined {
   font-size: 25px;
-  font-weight: 400;
-  vertical-align: middle;
-  line-height: 1;
-  display: inline-flex;
-  align-items: end;
 }
 
 @media (max-width: 640px) {

@@ -24,6 +24,7 @@ export default function Project() {
           <div className="project-main">
             <TransitionLink href={`/projects/${activeProject.slug}`} className="project-link">
               <div className="project-main-image">
+                <span className="material-symbols-outlined">arrow_outward</span>
                 <img src={activeProject.images?.[0]} alt={activeProject.title} key={activeProject.slug} />
               </div>
             </TransitionLink>

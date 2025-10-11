@@ -107,10 +107,27 @@
 
 .menu-right {
   align-self: flex-end;
+  position: relative;
+  z-index: 2;
 }
 
 .menu-left {
   align-self: flex-start;
+  z-index: 2;
+  position: relative;
+}
+
+.menu-text-background {
+  font-size: 45vw;
+  font-weight: 700;
+  letter-spacing: -15px;
+  color: var(--color-gray);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  opacity: 0.2;
 }
 
 .menu-overlay ul {
@@ -204,6 +221,14 @@
 
   .menu-info {
     width: 100%;
+  }
+
+  .menu-text-background {
+    font-size: 100vw;
+    top: 80%;
+    right: 0;
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: right center;
   }
 }
 

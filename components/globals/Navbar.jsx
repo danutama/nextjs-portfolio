@@ -175,6 +175,7 @@ export default function Navbar() {
 
       <div ref={menuRef} className="menu-overlay">
         <div className="menu-wrapper">
+          <span className="menu-text-background">NAV</span>
           <div className="menu-left">
             <ul>
               {menuItems.map((item, i) => {

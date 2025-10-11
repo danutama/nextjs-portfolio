@@ -5,6 +5,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 import Image from 'next/image';
+import TransitionLink from '@/components/globals/TransitionLink';
 import '../css/about.css';
 
 export default function About() {
@@ -217,6 +218,12 @@ export default function About() {
           <h3 className="text-start">
             Let’s turn your <i className="font-secondary">ideas</i> into reality on the web.
           </h3>
+
+          <div className="about-cta-wrapper">
+            <TransitionLink href="/projects" className="about-cta btn-icon">
+              See my <i className="font-secondary">work</i> <span className="material-symbols-outlined">arrow_outward</span>
+            </TransitionLink>
+          </div>
 
           <div className="about-socials">
             <a href="https://www.linkedin.com/in/danu-agus-pratama" target="_blank" rel="noopener noreferrer">

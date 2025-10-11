@@ -93,6 +93,23 @@
   letter-spacing: -1px;
 }
 
+.about-cta-wrapper {
+  margin-bottom: 5rem;
+  display: flex;
+  justify-content: end;
+}
+
+.about-cta {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.about-cta .material-symbols-outlined {
+  font-size: 3rem;
+}
+
 h3.skill-title {
   margin-bottom: 1rem;
 }
@@ -219,5 +236,13 @@ p.skill-subtitle {
 
   .skill-wrapper {
     grid-template-columns: 130px 1fr;
+  }
+
+  .about-cta-wrapper {
+    justify-content: start;
+  }
+
+  .about-cta {
+    letter-spacing: -2px;
   }
 }
