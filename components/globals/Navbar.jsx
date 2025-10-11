@@ -20,7 +20,7 @@ export default function Navbar() {
   const currentYear = new Date().getFullYear();
 
   const menuItems = ['Index', 'About', 'Projects', 'Archive'];
-  const infoItems = [`©${currentYear} Danu Pratama`, 'Credits:', 'Next.js by Vercel', 'Animated by GSAP', 'Subdomain by github.com/is-a-dev', 'Plus Jakarta Sans by Tokotype', 'Playfair Display'];
+  const infoItems = [`©${currentYear} Danu Pratama`, 'Credits:', 'Next.js by Vercel', 'Animated by GSAP & Three.js', 'Subdomain by github.com/is-a-dev', 'Plus Jakarta Sans by Tokotype', 'Playfair Display'];
 
   // Setup GSAP
   useEffect(() => {

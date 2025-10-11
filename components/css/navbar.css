@@ -225,8 +225,8 @@
 
   .menu-text-background {
     font-size: 100vw;
-    top: 80%;
-    right: 0;
+    top: 75%;
+    right: -10%;
     transform: translateY(-50%) rotate(-90deg);
     transform-origin: right center;
   }
