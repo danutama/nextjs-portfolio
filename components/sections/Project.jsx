@@ -8,129 +8,214 @@ import '../css/project.css';
 
 export default function Project() {
   const sectionRef = useRef(null);
-  const containerRef = useRef({});
+  const rendererRef = useRef(null);
+  const scenesRef = useRef([]);
+  const animateIdRef = useRef(null);
+  const isActiveRef = useRef(true);
 
   useEffect(() => {
-    const items = document.querySelectorAll('.project-item');
+    let rafId;
 
-    items.forEach((item, i) => {
-      const imageElement = item.querySelector('.project-image');
+    const waitForLayout = () => {
+      return new Promise((resolve) => {
+        const check = () => {
+          const items = document.querySelectorAll('.project-item');
+          if (items.length > 0 && items[0].getBoundingClientRect().width > 0) {
+            resolve();
+          } else {
+            rafId = requestAnimationFrame(check);
+          }
+        };
+        check();
+      });
+    };
 
-      // --- Setup canvas & Three.js scene ---
+    async function init() {
+      await waitForLayout();
+
+      // === Three.js setup ===
       const canvas = document.createElement('canvas');
       Object.assign(canvas.style, {
-        position: 'absolute',
+        position: 'fixed',
         top: '0',
         left: '0',
-        width: '100%',
-        height: '100%',
+        pointerEvents: 'none',
+        zIndex: '10',
+        opacity: '0',
       });
-      imageElement.style.position = 'relative';
-      imageElement.prepend(canvas);
+      document.body.appendChild(canvas);
 
-      const scene = new THREE.Scene();
-      const rect = imageElement.getBoundingClientRect();
-      const camera = new THREE.PerspectiveCamera(45, rect.width / rect.height, 0.1, 1000);
-      camera.position.z = 2;
-
-      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(rect.width, rect.height);
+      const renderer = new THREE.WebGLRenderer({
+        canvas,
+        alpha: true,
+        antialias: false,
+      });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
       renderer.setClearColor(0x000000, 0);
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      rendererRef.current = renderer;
 
-      // --- Texture & Mesh setup ---
-      const img = imageElement.querySelector('img');
-      const textureLoader = new THREE.TextureLoader();
-      const texture = textureLoader.load(img.src, () => {
-        texture.minFilter = THREE.LinearFilter;
-        texture.magFilter = THREE.LinearFilter;
-        texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        texture.colorSpace = THREE.SRGBColorSpace;
-        renderer.outputColorSpace = THREE.SRGBColorSpace;
-      });
-
-      const geometry = new THREE.PlaneGeometry(1.7, 1.7, 64, 64);
-      const material = new THREE.MeshBasicMaterial({ map: texture });
-      const mesh = new THREE.Mesh(geometry, material);
-      scene.add(mesh);
-
-      const positionAttribute = geometry.getAttribute('position');
-      const originalPositions = positionAttribute.array.slice();
-
-      // --- Wave variables ---
+      const items = document.querySelectorAll('.project-item');
       let scrollStrength = 0;
       let targetStrength = 0;
       let lastScrollY = window.scrollY;
 
-      // --- Handle scroll event ---
+      items.forEach((item, i) => {
+        const imageElement = item.querySelector('.project-image');
+        const img = imageElement.querySelector('img');
+        img.style.transition = 'opacity 0.3s ease';
+        img.style.opacity = '0';
+
+        const scene = new THREE.Scene();
+        const rect = imageElement.getBoundingClientRect();
+        const camera = new THREE.PerspectiveCamera(45, rect.width / rect.height, 0.1, 1000);
+        camera.position.z = 2;
+
+        const textureLoader = new THREE.TextureLoader();
+        textureLoader.load(img.src, (texture) => {
+          texture.minFilter = THREE.LinearFilter;
+          texture.magFilter = THREE.LinearFilter;
+          texture.colorSpace = THREE.SRGBColorSpace;
+
+          const geometry = new THREE.PlaneGeometry(1.7, 1.7, 64, 64);
+          const material = new THREE.MeshBasicMaterial({ map: texture });
+          const mesh = new THREE.Mesh(geometry, material);
+          scene.add(mesh);
+
+          scenesRef.current[i] = {
+            scene,
+            camera,
+            imageElement,
+            img,
+            geometry,
+            material,
+            mesh,
+            positionAttribute: geometry.getAttribute('position'),
+            originalPositions: geometry.getAttribute('position').array.slice(),
+            time: 0,
+          };
+
+          renderer.render(scene, camera);
+          img.style.opacity = '1';
+        });
+
+        scenesRef.current[i] = { imageElement, img, scene, camera };
+      });
+
+      // === Scroll handler ===
       const handleScroll = () => {
         const diff = Math.abs(window.scrollY - lastScrollY);
         lastScrollY = window.scrollY;
         targetStrength = Math.min(diff / 120, 1);
       };
+      window.addEventListener('scroll', handleScroll, { passive: true });
 
-      window.addEventListener('scroll', handleScroll);
-
-      // --- Responsive resize ---
+      // === Resize handler ===
       const handleResize = () => {
-        const rect = imageElement.getBoundingClientRect();
-        renderer.setSize(rect.width, rect.height);
-        camera.aspect = rect.width / rect.height;
-        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        scenesRef.current.forEach((sceneObj) => {
+          if (sceneObj.camera) {
+            const rect = sceneObj.imageElement.getBoundingClientRect();
+            sceneObj.camera.aspect = rect.width / rect.height;
+            sceneObj.camera.updateProjectionMatrix();
+          }
+        });
       };
 
-      const resizeObserver = new ResizeObserver(handleResize);
-      resizeObserver.observe(imageElement);
+      const images = Array.from(document.querySelectorAll('.project-image img'));
+      Promise.all(
+        images.map((img) => {
+          if (img.complete) return Promise.resolve();
+          return new Promise((res) => (img.onload = res));
+        })
+      ).then(() => {
+        handleResize();
+        canvas.style.transition = 'opacity 0.4s ease';
+        canvas.style.opacity = '1';
+      });
 
-      // --- Animation loop ---
-      let time = 0;
+      window.addEventListener('resize', handleResize);
+
+      // === Clock & Render Throttle ===
+      const clock = new THREE.Clock();
+      let frameCount = 0;
+
       const animate = () => {
-        requestAnimationFrame(animate);
+        if (!isActiveRef.current) return;
+        animateIdRef.current = requestAnimationFrame(animate);
 
-        // delay after scroll
+        const delta = clock.getDelta();
         scrollStrength += (targetStrength - scrollStrength) * 0.08;
-
         targetStrength *= 0.95;
+        frameCount++;
 
-        if (scrollStrength < 0.001) {
-          renderer.render(scene, camera);
-          return;
+        // Render 10 frame (~6fps idle)
+        if (scrollStrength > 0.001 || frameCount % 10 === 0) {
+          scenesRef.current.forEach((sceneObj) => {
+            if (!sceneObj.positionAttribute) return;
+
+            // Update wave when moving
+            if (scrollStrength > 0.001) {
+              sceneObj.time += delta * 2;
+              const positions = sceneObj.positionAttribute.array;
+
+              for (let i = 0; i < positions.length; i += 3) {
+                const x = sceneObj.originalPositions[i];
+                const y = sceneObj.originalPositions[i + 1];
+                const z = sceneObj.originalPositions[i + 2];
+                const waveZ = Math.sin(x * 6 + sceneObj.time) * Math.cos(y * 6 + sceneObj.time) * 0.6 * scrollStrength;
+                positions[i + 2] = z + waveZ;
+              }
+
+              sceneObj.positionAttribute.needsUpdate = true;
+            }
+
+            const rect = sceneObj.imageElement.getBoundingClientRect();
+            renderer.setScissorTest(true);
+            renderer.setScissor(rect.left, window.innerHeight - rect.bottom, rect.width, rect.height);
+            renderer.setViewport(rect.left, window.innerHeight - rect.bottom, rect.width, rect.height);
+            renderer.render(sceneObj.scene, sceneObj.camera);
+            renderer.setScissorTest(false);
+          });
         }
-
-        time += 0.1;
-        const positions = positionAttribute.array;
-
-        for (let i = 0; i < positions.length; i += 3) {
-          const x = originalPositions[i];
-          const y = originalPositions[i + 1];
-          const z = originalPositions[i + 2];
-          const waveZ = Math.sin(x * 6 + time) * Math.cos(y * 6 + time) * 0.6 * scrollStrength;
-          positions[i + 2] = z + waveZ;
-        }
-
-        positionAttribute.needsUpdate = true;
-        renderer.render(scene, camera);
       };
 
       animate();
 
-      // --- Cleanup ---
-      containerRef.current[i] = {
-        cleanup: () => {
-          window.removeEventListener('scroll', handleScroll);
-          resizeObserver.disconnect();
-          geometry.dispose();
-          material.dispose();
-          renderer.dispose();
-        },
+      // === Pause animation ===
+      const handleVisibilityChange = () => {
+        if (document.hidden) {
+          isActiveRef.current = false;
+          cancelAnimationFrame(animateIdRef.current);
+        } else {
+          isActiveRef.current = true;
+          clock.start();
+          animate();
+        }
       };
-    });
+      document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    return () => {
-      Object.values(containerRef.current).forEach((item) => {
-        if (item.cleanup) item.cleanup();
-      });
-    };
+      // === Cleanup ===
+      return () => {
+        isActiveRef.current = false;
+        cancelAnimationFrame(animateIdRef.current);
+        window.removeEventListener('scroll', handleScroll);
+        window.removeEventListener('resize', handleResize);
+        document.removeEventListener('visibilitychange', handleVisibilityChange);
+        scenesRef.current.forEach((sceneObj) => {
+          if (sceneObj.geometry) sceneObj.geometry.dispose();
+          if (sceneObj.material) sceneObj.material.dispose();
+          if (sceneObj.img) sceneObj.img.style.opacity = '1';
+        });
+        renderer.dispose();
+        canvas.remove();
+        rendererRef.current = null;
+        scenesRef.current = [];
+      };
+    }
+
+    init();
+    return () => cancelAnimationFrame(rafId);
   }, []);
 
   return (
