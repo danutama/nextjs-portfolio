@@ -134,7 +134,7 @@
   line-height: 1;
   background-color: transparent;
   border: none;
-  letter-spacing: -0.02em;
+  letter-spacing: -3px;
   color: var(--color-text);
   text-decoration: none;
   transform: translateY(-100%);
@@ -144,6 +144,7 @@
 .menu-link span {
   margin-left: 10px;
   padding-right: 3px;
+  letter-spacing: -1px;
 }
 
 .menu-link:hover {

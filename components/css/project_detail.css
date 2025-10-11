@@ -28,7 +28,7 @@
 
 .responsibilities-head,
 .project-detail-items p:nth-child(1) {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   text-transform: uppercase;
   color: var(--color-gray);
 }
@@ -163,7 +163,7 @@
 
   .project-detail-items p:nth-child(1) {
     min-width: 130px;
-    line-height: 2.1;
+    line-height: 1.8;
   }
 
   .project-detail-items p,

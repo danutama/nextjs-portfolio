@@ -1,5 +1,5 @@
+import { notFound } from 'next/navigation';
 import ProjectDetail from '@/components/sections/ProjectDetail';
-import TransitionLink from '@/components/globals/TransitionLink';
 import '@/components/css/project_detail.css';
 import projects from '@/data/project.json';
 
@@ -14,10 +14,13 @@ export async function generateMetadata({ params }) {
   if (!currentProject) {
     return {
       title: 'Project Not Found | Danu Pratama',
-      description: 'Project not found in portfolio.',
+      description: 'The requested project could not be found in the portfolio.',
+      alternates: {
+        canonical: 'https://danu.is-a.dev/projects',
+      },
       openGraph: {
         title: 'Project Not Found | Danu Pratama',
-        description: 'Project not found in portfolio.',
+        description: 'The requested project could not be found in the portfolio.',
         siteName: 'Danu — Portfolio',
         locale: 'en_US',
         type: 'website',
@@ -32,18 +35,20 @@ export async function generateMetadata({ params }) {
   }
 
   const ogImage = currentProject.images?.[0] || '/og-image.png';
-
-  const keywords = [currentProject.title, 'Danu Pratama', 'Web Developer', 'GitHub', ...(currentProject.technology || [])];
+  const canonicalUrl = `https://danu.is-a.dev/projects/${currentProject.slug}`;
+  const keywords = [currentProject.title, 'Danu Pratama', 'Web Developer', 'Portfolio', ...(currentProject.technology || [])];
 
   return {
     title: `${currentProject.title} | Danu Pratama`,
     description: metaDescription,
     keywords,
-
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title: `${currentProject.title} | Danu Pratama`,
       description: metaDescription,
-      url: `https://danu.is-a.dev/projects/${currentProject.slug}`,
+      url: canonicalUrl,
       siteName: 'Danu — Portfolio',
       images: [
         {
@@ -56,7 +61,6 @@ export async function generateMetadata({ params }) {
       locale: 'en_US',
       type: 'article',
     },
-
     twitter: {
       card: 'summary_large_image',
       title: `${currentProject.title} | Danu Pratama`,
@@ -71,14 +75,7 @@ export default function ProjectDetailPage({ params }) {
   const currentProject = projects.find((p) => p.slug === slug);
 
   if (!currentProject) {
-    return (
-      <main className="container" style={{ padding: '8rem 0', minHeight: '100vh' }}>
-        <h2 className="notfound-title">Project not found</h2>
-        <TransitionLink href="/" className="notfound-btn">
-          Back to Index
-        </TransitionLink>
-      </main>
-    );
+    notFound();
   }
 
   return (

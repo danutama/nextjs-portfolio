@@ -88,7 +88,7 @@ export default function ProjectDetail({ project }) {
             <div className="project-detail-items">
               <p className="fw-normal">Repository</p>
               <p className="fw-normal">
-                <a href={project.repository} target="_blank" rel="noopener noreferrer">
+                <a href={project.repository} target="_blank" rel="noopener noreferrer" className="btn-icon">
                   GitHub <span className="material-symbols-outlined">arrow_outward</span>
                 </a>
               </p>
@@ -99,7 +99,7 @@ export default function ProjectDetail({ project }) {
             <div className="project-detail-items">
               <p className="fw-normal">URL</p>
               <p className="fw-normal">
-                <a href={project.url} target="_blank" rel="noopener noreferrer">
+                <a href={project.url} target="_blank" rel="noopener noreferrer" className="btn-icon">
                   Live preview <span className="material-symbols-outlined">arrow_outward</span>
                 </a>
               </p>
