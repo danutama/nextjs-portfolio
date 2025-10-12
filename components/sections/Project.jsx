@@ -14,28 +14,25 @@ export default function Project() {
 
   useEffect(() => {
     const items = document.querySelectorAll('.project-item');
-    let scrollStrength = 0;
-    let targetStrength = 0;
-    let lastScrollY = window.scrollY;
-
     const isMobile = window.innerWidth < 640;
-    const SEGMENTS = isMobile ? 8 : 64; // mesh for mobile
+    const SEGMENTS = isMobile ? 16 : 64;
     const MAX_DPR = 2;
-    // const MAX_DPR = isMobile ? 1 : 2; // when mobile
 
     items.forEach((item, i) => {
       const imageElement = item.querySelector('.project-image');
       const img = imageElement.querySelector('img');
       img.style.opacity = '0';
 
-      // Canvas per project
+      // === Canvas per image ===
       const canvas = document.createElement('canvas');
-      canvas.style.position = 'absolute';
-      canvas.style.top = '0';
-      canvas.style.left = '0';
-      canvas.style.width = '100%';
-      canvas.style.height = '100%';
-      canvas.style.zIndex = '1';
+      Object.assign(canvas.style, {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: '1',
+      });
       imageElement.appendChild(canvas);
 
       const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
@@ -54,7 +51,6 @@ export default function Project() {
       const distance = height / (2 * Math.tan((fov * Math.PI) / 360));
       const camera = new THREE.PerspectiveCamera(fov, aspect, 0.1, 1000);
       camera.position.z = distance;
-      camera.aspect = aspect;
       camera.updateProjectionMatrix();
 
       const scene = new THREE.Scene();
@@ -74,6 +70,39 @@ export default function Project() {
           const mesh = new THREE.Mesh(geometry, material);
           scene.add(mesh);
 
+          const hover = { x: 0, y: 0, active: false };
+
+          // === EVENT HANDLER ===
+          const triggerRipple = (x, y) => {
+            hover.active = true;
+            hover.x = x;
+            hover.y = y;
+            hover.startTime = performance.now() / 1000;
+            if (!animateIdRef.current) animate(); // restart loop when idle
+          };
+
+          canvas.addEventListener('mouseenter', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            triggerRipple(((e.clientX - rect.left) / rect.width - 0.5) * 2, -((e.clientY - rect.top) / rect.height - 0.5) * 2);
+          });
+
+          canvas.addEventListener('mousemove', (e) => {
+            if (!hover.active) return;
+            const rect = canvas.getBoundingClientRect();
+            triggerRipple(((e.clientX - rect.left) / rect.width - 0.5) * 2, -((e.clientY - rect.top) / rect.height - 0.5) * 2);
+          });
+
+          canvas.addEventListener('mouseleave', () => {
+            hover.active = false;
+          });
+
+          // mobile: tap = trigger ripple
+          canvas.addEventListener('touchstart', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            triggerRipple(((touch.clientX - rect.left) / rect.width - 0.5) * 2, -((touch.clientY - rect.top) / rect.height - 0.5) * 2);
+          });
+
           scenesRef.current[i] = {
             scene,
             camera,
@@ -81,6 +110,7 @@ export default function Project() {
             geometry,
             material,
             mesh,
+            hover,
             positionAttribute: geometry.getAttribute('position'),
             originalPositions: geometry.getAttribute('position').array.slice(),
             time: 0,
@@ -96,21 +126,13 @@ export default function Project() {
       );
     });
 
-    // Scroll handler
-    const handleScroll = () => {
-      const diff = Math.abs(window.scrollY - lastScrollY);
-      lastScrollY = window.scrollY;
-      targetStrength = Math.min(diff / 120, 1);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    // Resize handler
+    // === Resize handler ===
     const handleResize = () => {
       items.forEach((item, i) => {
-        const imageElement = item.querySelector('.project-image');
         const s = scenesRef.current[i];
         if (!s) return;
         const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
+        const imageElement = item.querySelector('.project-image');
         const cw = imageElement.clientWidth * dpr;
         const ch = imageElement.clientHeight * dpr;
         s.renderer.setSize(cw, ch, false);
@@ -122,57 +144,81 @@ export default function Project() {
     };
     window.addEventListener('resize', handleResize);
 
-    // Animate loop with wave
+    // === Animation with auto-pause ===
     const clock = new THREE.Clock();
+    let idleTime = 0;
+
     const animate = () => {
       if (!isActiveRef.current) return;
       animateIdRef.current = requestAnimationFrame(animate);
-      const delta = Math.min(clock.getDelta(), 0.016);
 
-      scrollStrength += (targetStrength - scrollStrength) * 0.08;
-      targetStrength *= 0.95;
+      const delta = Math.min(clock.getDelta(), 0.016);
+      let anyActive = false;
 
       scenesRef.current.forEach((s) => {
         if (!s || !s.loaded) return;
-        const positions = s.positionAttribute.array;
 
-        if (scrollStrength > 0.001) {
-          s.time += delta * 2;
-          for (let i = 0; i < positions.length; i += 3) {
-            const x = s.originalPositions[i];
-            const y = s.originalPositions[i + 1];
-            const z = s.originalPositions[i + 2];
-            const waveZ = Math.sin(x * 6 + s.time) * Math.cos(y * 6 + s.time) * 0.3 * scrollStrength;
-            positions[i + 2] = z + waveZ;
+        s.time += delta * 2;
+        const positions = s.positionAttribute.array;
+        const hover = s.hover;
+        if (hover.active) anyActive = true;
+
+        for (let i = 0; i < positions.length; i += 3) {
+          const x = s.originalPositions[i];
+          const y = s.originalPositions[i + 1];
+          const z = s.originalPositions[i + 2];
+
+          let waveZ = 0;
+          if (hover.active && hover.startTime) {
+            const timeSince = performance.now() / 1000 - hover.startTime;
+            const dx = x - hover.x;
+            const dy = y - hover.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const wave = Math.sin(dist * 12 - timeSince * 6);
+            const attenuation = Math.exp(-dist * 3) * Math.exp(-timeSince * 1.5);
+            waveZ = wave * attenuation * 0.45;
           }
-        } else {
-          for (let i = 0; i < positions.length; i += 3) {
-            positions[i + 2] += (s.originalPositions[i + 2] - positions[i + 2]) * 0.08;
-          }
+
+          positions[i + 2] += (z + waveZ - positions[i + 2]) * 0.15;
         }
 
         s.positionAttribute.needsUpdate = true;
         s.renderer.render(s.scene, s.camera);
       });
+
+      // === Auto pause logic ===
+      if (!anyActive) {
+        idleTime += delta;
+        if (idleTime > 3) {
+          cancelAnimationFrame(animateIdRef.current);
+          animateIdRef.current = null;
+          return;
+        }
+      } else {
+        idleTime = 0;
+      }
     };
+
     animate();
 
+    // === Pause if tab not visible ===
     const handleVisibilityChange = () => {
       if (document.hidden) {
         isActiveRef.current = false;
         cancelAnimationFrame(animateIdRef.current);
+        animateIdRef.current = null;
       } else {
         isActiveRef.current = true;
         clock.start();
-        animate();
+        if (!animateIdRef.current) animate();
       }
     };
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
+    // === Cleanup ===
     return () => {
       cancelAnimationFrame(animateIdRef.current);
       window.removeEventListener('resize', handleResize);
-      window.removeEventListener('scroll', handleScroll);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
 
       scenesRef.current.forEach((s) => {
