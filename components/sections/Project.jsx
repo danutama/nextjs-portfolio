@@ -3,81 +3,73 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import projects from '@/data/project.json';
-import TransitionLink from '../globals/TransitionLink';
-import '../css/project.css';
+import TransitionLink from '@/components/globals/TransitionLink';
+import '@/components/css/project.css';
 
 export default function Project() {
   const sectionRef = useRef(null);
-  const rendererRef = useRef(null);
   const scenesRef = useRef([]);
   const animateIdRef = useRef(null);
   const isActiveRef = useRef(true);
 
   useEffect(() => {
-    let rafId;
+    const items = document.querySelectorAll('.project-item');
+    let scrollStrength = 0;
+    let targetStrength = 0;
+    let lastScrollY = window.scrollY;
 
-    const waitForLayout = () => {
-      return new Promise((resolve) => {
-        const check = () => {
-          const items = document.querySelectorAll('.project-item');
-          if (items.length > 0 && items[0].getBoundingClientRect().width > 0) {
-            resolve();
-          } else {
-            rafId = requestAnimationFrame(check);
-          }
-        };
-        check();
-      });
-    };
+    const isMobile = window.innerWidth < 640;
+    const SEGMENTS = isMobile ? 8 : 64; // mesh for mobile
+    const MAX_DPR = 2;
+    // const MAX_DPR = isMobile ? 1 : 2; // when mobile
 
-    async function init() {
-      await waitForLayout();
+    items.forEach((item, i) => {
+      const imageElement = item.querySelector('.project-image');
+      const img = imageElement.querySelector('img');
+      img.style.opacity = '0';
 
-      // === Three.js setup ===
+      // Canvas per project
       const canvas = document.createElement('canvas');
-      Object.assign(canvas.style, {
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        pointerEvents: 'none',
-        zIndex: '10',
-        opacity: '0',
-      });
-      document.body.appendChild(canvas);
+      canvas.style.position = 'absolute';
+      canvas.style.top = '0';
+      canvas.style.left = '0';
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
+      canvas.style.zIndex = '1';
+      imageElement.appendChild(canvas);
 
-      const renderer = new THREE.WebGLRenderer({
-        canvas,
-        alpha: true,
-        antialias: false,
-      });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
+      const cw = imageElement.clientWidth * dpr;
+      const ch = imageElement.clientHeight * dpr;
+      renderer.setPixelRatio(dpr);
+      renderer.setSize(cw, ch, false);
       renderer.setClearColor(0x000000, 0);
       renderer.outputColorSpace = THREE.SRGBColorSpace;
-      rendererRef.current = renderer;
 
-      const items = document.querySelectorAll('.project-item');
-      let scrollStrength = 0;
-      let targetStrength = 0;
-      let lastScrollY = window.scrollY;
+      const rect = imageElement.getBoundingClientRect();
+      const aspect = rect.width / rect.height;
+      const fov = 45;
+      const height = 1.7;
+      const distance = height / (2 * Math.tan((fov * Math.PI) / 360));
+      const camera = new THREE.PerspectiveCamera(fov, aspect, 0.1, 1000);
+      camera.position.z = distance;
+      camera.aspect = aspect;
+      camera.updateProjectionMatrix();
 
-      items.forEach((item, i) => {
-        const imageElement = item.querySelector('.project-image');
-        const img = imageElement.querySelector('img');
-        img.style.transition = 'opacity 0.3s ease';
-        img.style.opacity = '0';
+      const scene = new THREE.Scene();
 
-        const scene = new THREE.Scene();
-        const rect = imageElement.getBoundingClientRect();
-        const camera = new THREE.PerspectiveCamera(45, rect.width / rect.height, 0.1, 1000);
-        camera.position.z = 2;
-
-        const textureLoader = new THREE.TextureLoader();
-        textureLoader.load(img.src, (texture) => {
-          texture.minFilter = THREE.LinearFilter;
+      const textureLoader = new THREE.TextureLoader();
+      textureLoader.load(
+        img.src,
+        (texture) => {
+          texture.minFilter = THREE.LinearMipMapLinearFilter;
           texture.magFilter = THREE.LinearFilter;
+          texture.generateMipmaps = true;
           texture.colorSpace = THREE.SRGBColorSpace;
 
-          const geometry = new THREE.PlaneGeometry(1.7, 1.7, 64, 64);
+          const width = height * aspect;
+          const geometry = new THREE.PlaneGeometry(width, height, SEGMENTS, SEGMENTS);
           const material = new THREE.MeshBasicMaterial({ map: texture });
           const mesh = new THREE.Mesh(geometry, material);
           scene.add(mesh);
@@ -85,137 +77,112 @@ export default function Project() {
           scenesRef.current[i] = {
             scene,
             camera,
-            imageElement,
-            img,
+            renderer,
             geometry,
             material,
             mesh,
             positionAttribute: geometry.getAttribute('position'),
             originalPositions: geometry.getAttribute('position').array.slice(),
             time: 0,
+            loaded: true,
           };
 
           renderer.render(scene, camera);
+        },
+        undefined,
+        () => {
           img.style.opacity = '1';
-        });
+        }
+      );
+    });
 
-        scenesRef.current[i] = { imageElement, img, scene, camera };
+    // Scroll handler
+    const handleScroll = () => {
+      const diff = Math.abs(window.scrollY - lastScrollY);
+      lastScrollY = window.scrollY;
+      targetStrength = Math.min(diff / 120, 1);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Resize handler
+    const handleResize = () => {
+      items.forEach((item, i) => {
+        const imageElement = item.querySelector('.project-image');
+        const s = scenesRef.current[i];
+        if (!s) return;
+        const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
+        const cw = imageElement.clientWidth * dpr;
+        const ch = imageElement.clientHeight * dpr;
+        s.renderer.setSize(cw, ch, false);
+
+        const rect = imageElement.getBoundingClientRect();
+        s.camera.aspect = rect.width / rect.height;
+        s.camera.updateProjectionMatrix();
       });
+    };
+    window.addEventListener('resize', handleResize);
 
-      // === Scroll handler ===
-      const handleScroll = () => {
-        const diff = Math.abs(window.scrollY - lastScrollY);
-        lastScrollY = window.scrollY;
-        targetStrength = Math.min(diff / 120, 1);
-      };
-      window.addEventListener('scroll', handleScroll, { passive: true });
+    // Animate loop with wave
+    const clock = new THREE.Clock();
+    const animate = () => {
+      if (!isActiveRef.current) return;
+      animateIdRef.current = requestAnimationFrame(animate);
+      const delta = Math.min(clock.getDelta(), 0.016);
 
-      // === Resize handler ===
-      const handleResize = () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        scenesRef.current.forEach((sceneObj) => {
-          if (sceneObj.camera) {
-            const rect = sceneObj.imageElement.getBoundingClientRect();
-            sceneObj.camera.aspect = rect.width / rect.height;
-            sceneObj.camera.updateProjectionMatrix();
+      scrollStrength += (targetStrength - scrollStrength) * 0.08;
+      targetStrength *= 0.95;
+
+      scenesRef.current.forEach((s) => {
+        if (!s || !s.loaded) return;
+        const positions = s.positionAttribute.array;
+
+        if (scrollStrength > 0.001) {
+          s.time += delta * 2;
+          for (let i = 0; i < positions.length; i += 3) {
+            const x = s.originalPositions[i];
+            const y = s.originalPositions[i + 1];
+            const z = s.originalPositions[i + 2];
+            const waveZ = Math.sin(x * 6 + s.time) * Math.cos(y * 6 + s.time) * 0.3 * scrollStrength;
+            positions[i + 2] = z + waveZ;
           }
-        });
-      };
-
-      const images = Array.from(document.querySelectorAll('.project-image img'));
-      Promise.all(
-        images.map((img) => {
-          if (img.complete) return Promise.resolve();
-          return new Promise((res) => (img.onload = res));
-        })
-      ).then(() => {
-        handleResize();
-        canvas.style.transition = 'opacity 0.4s ease';
-        canvas.style.opacity = '1';
-      });
-
-      window.addEventListener('resize', handleResize);
-
-      // === Clock & Render Throttle ===
-      const clock = new THREE.Clock();
-      let frameCount = 0;
-
-      const animate = () => {
-        if (!isActiveRef.current) return;
-        animateIdRef.current = requestAnimationFrame(animate);
-
-        const delta = clock.getDelta();
-        scrollStrength += (targetStrength - scrollStrength) * 0.08;
-        targetStrength *= 0.95;
-        frameCount++;
-
-        // Render 10 frame (~6fps idle)
-        if (scrollStrength > 0.001 || frameCount % 10 === 0) {
-          scenesRef.current.forEach((sceneObj) => {
-            if (!sceneObj.positionAttribute) return;
-
-            // Update wave when moving
-            if (scrollStrength > 0.001) {
-              sceneObj.time += delta * 2;
-              const positions = sceneObj.positionAttribute.array;
-
-              for (let i = 0; i < positions.length; i += 3) {
-                const x = sceneObj.originalPositions[i];
-                const y = sceneObj.originalPositions[i + 1];
-                const z = sceneObj.originalPositions[i + 2];
-                const waveZ = Math.sin(x * 6 + sceneObj.time) * Math.cos(y * 6 + sceneObj.time) * 0.6 * scrollStrength;
-                positions[i + 2] = z + waveZ;
-              }
-
-              sceneObj.positionAttribute.needsUpdate = true;
-            }
-
-            const rect = sceneObj.imageElement.getBoundingClientRect();
-            renderer.setScissorTest(true);
-            renderer.setScissor(rect.left, window.innerHeight - rect.bottom, rect.width, rect.height);
-            renderer.setViewport(rect.left, window.innerHeight - rect.bottom, rect.width, rect.height);
-            renderer.render(sceneObj.scene, sceneObj.camera);
-            renderer.setScissorTest(false);
-          });
-        }
-      };
-
-      animate();
-
-      // === Pause animation ===
-      const handleVisibilityChange = () => {
-        if (document.hidden) {
-          isActiveRef.current = false;
-          cancelAnimationFrame(animateIdRef.current);
         } else {
-          isActiveRef.current = true;
-          clock.start();
-          animate();
+          for (let i = 0; i < positions.length; i += 3) {
+            positions[i + 2] += (s.originalPositions[i + 2] - positions[i + 2]) * 0.08;
+          }
         }
-      };
-      document.addEventListener('visibilitychange', handleVisibilityChange);
 
-      // === Cleanup ===
-      return () => {
+        s.positionAttribute.needsUpdate = true;
+        s.renderer.render(s.scene, s.camera);
+      });
+    };
+    animate();
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
         isActiveRef.current = false;
         cancelAnimationFrame(animateIdRef.current);
-        window.removeEventListener('scroll', handleScroll);
-        window.removeEventListener('resize', handleResize);
-        document.removeEventListener('visibilitychange', handleVisibilityChange);
-        scenesRef.current.forEach((sceneObj) => {
-          if (sceneObj.geometry) sceneObj.geometry.dispose();
-          if (sceneObj.material) sceneObj.material.dispose();
-          if (sceneObj.img) sceneObj.img.style.opacity = '1';
-        });
-        renderer.dispose();
-        canvas.remove();
-        rendererRef.current = null;
-        scenesRef.current = [];
-      };
-    }
+      } else {
+        isActiveRef.current = true;
+        clock.start();
+        animate();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    init();
-    return () => cancelAnimationFrame(rafId);
+    return () => {
+      cancelAnimationFrame(animateIdRef.current);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+
+      scenesRef.current.forEach((s) => {
+        if (!s) return;
+        s.geometry.dispose();
+        s.material.map.dispose();
+        s.material.dispose();
+        s.renderer.dispose();
+      });
+    };
   }, []);
 
   return (
@@ -229,7 +196,6 @@ export default function Project() {
             work
           </h2>
         </div>
-
         <div className="project-grid">
           {projects.map((project) => (
             <div key={project.slug} className="project-item">

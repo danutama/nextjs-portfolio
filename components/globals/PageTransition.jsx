@@ -1,96 +1,52 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useRouter } from 'next/navigation';
 import '../css/transition.css';
 
 export default function PageTransition() {
-  const [count, setCount] = useState(15);
-  const barsRef = useRef([]);
   const overlayRef = useRef(null);
   const router = useRouter();
 
-  // update bar count based on screen size
   useEffect(() => {
-    const updateCount = () => {
-      setCount(window.innerWidth < 640 ? 7 : 15);
-    };
-    updateCount();
-    window.addEventListener('resize', updateCount);
-    return () => window.removeEventListener('resize', updateCount);
-  }, []);
+    const overlay = overlayRef.current;
 
-  useEffect(() => {
-    const getBars = () => barsRef.current.filter(Boolean);
-
-    gsap.set(overlayRef.current, { autoAlpha: 0 });
-    gsap.set(getBars(), { yPercent: -100 });
+    gsap.set(overlay, { autoAlpha: 0, clipPath: 'inset(100% 0 0 0)' });
 
     const runTransition = (callback) => {
-      const bars = getBars();
-      if (!bars.length) {
-        callback?.();
-        return;
-      }
-
       const tl = gsap.timeline();
 
-      // show
-      tl.set(overlayRef.current, { autoAlpha: 1 });
+      // overlay in
+      tl.set(overlay, { autoAlpha: 1 });
+      tl.to(overlay, { clipPath: 'inset(0% 0 0 0)', duration: 1, ease: 'power3.inOut' });
 
-      // enter
-      tl.to(bars, {
-        yPercent: 0,
-        duration: 0.5,
-        ease: 'power2.out',
-        stagger: { each: 0.05, from: 'start' },
-      });
-
-      // run route change
-      tl.add(() => callback?.());
-
-      // exit
-      tl.to(
-        bars,
-        {
-          yPercent: 100,
-          duration: 0.5,
-          ease: 'power2.out',
-          stagger: { each: 0.05, from: 'start' },
-        },
-        '+=0.1'
-      );
-
-      // ✅ Fire event after route has changed (new Hero is mounted)
+      // run callback
       tl.add(() => {
-        setTimeout(() => {
-          window.dispatchEvent(new Event('hero-open'));
-        }, 200);
-      }, '+=0.1');
+        if (typeof callback === 'function') callback();
+      }, '+=0.05');
+
+      // overlay out
+      tl.to(overlay, { clipPath: 'inset(0% 0 100% 0)', duration: 1, ease: 'power3.inOut' });
+
+      // trigger hero-open
+      tl.add(() => window.dispatchEvent(new Event('hero-open')), '+=0.05');
 
       // reset overlay
-      tl.set(overlayRef.current, { autoAlpha: 0 });
-      tl.set(bars, { yPercent: -100 });
+      tl.set(overlay, { autoAlpha: 0, clipPath: 'inset(100% 0 0 0)' });
     };
 
-    const showTransition = (e) => runTransition(e?.detail?.callback);
-    window.addEventListener('page-transition', showTransition);
-
+    const handlePageTransition = (e) => runTransition(e?.detail?.callback);
     const handlePopState = () => runTransition();
+
+    window.addEventListener('page-transition', handlePageTransition);
     window.addEventListener('popstate', handlePopState);
 
     return () => {
-      window.removeEventListener('page-transition', showTransition);
+      window.removeEventListener('page-transition', handlePageTransition);
       window.removeEventListener('popstate', handlePopState);
     };
-  }, [router, count]);
+  }, [router]);
 
-  return (
-    <div ref={overlayRef} className="page-transition" aria-hidden>
-      {Array.from({ length: count }).map((_, i) => (
-        <div key={i} ref={(el) => (barsRef.current[i] = el)} className="bar" />
-      ))}
-    </div>
-  );
+  return <div ref={overlayRef} className="page-transition" aria-hidden />;
 }
