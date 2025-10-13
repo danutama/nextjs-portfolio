@@ -49,31 +49,37 @@ export default function ProjectList() {
     <section id="project-list">
       <div className="container">
         <h2 className="project-list-heading">
-          Selected Projects<span className="number">({String(projectCount).padStart(2, '0')})</span>
+          Selected Works<span className="number">({String(projectCount).padStart(2, '0')})</span>
         </h2>
 
         <ul className="project-list-items">
-          {projects.map((project, i) => (
-            <li key={project.slug} className="project-list-card">
-              <TransitionLink href={`/projects/${project.slug}`} className="project-list-card-link">
-                <div ref={(el) => (wrappersRef.current[i] = el)} className="project-list-card-image-wrapper">
-                  <div className="parallax-inner">
-                    <Image src={project.images?.[0] || '/projects/placeholder.png'} alt={project.title} fill className="project-list-card-image" />
+          {projects.slice(0, 4).map((project, i) => {
+            const number = String(i + 1).padStart(2, '0');
+            return (
+              <li key={project.slug} className="project-list-card">
+                <TransitionLink href={`/projects/${project.slug}`} className="project-list-card-link">
+                  <div ref={(el) => (wrappersRef.current[i] = el)} className="project-list-card-image-wrapper">
+                    <div className="parallax-inner">
+                      <Image src={project.images?.[0]} alt={project.title} fill className="project-list-card-image" />
+                    </div>
                   </div>
-                </div>
 
-                <div className="project-list-card-text-wrapper">
-                  <h3 className="project-list-card-title">{project.title}</h3>
-                  <p className="project-list-card-desc">{project.role}</p>
-                </div>
-              </TransitionLink>
-            </li>
-          ))}
+                  <div className="project-list-card-text-wrapper">
+                    <span className="project-list-card-number">{number},</span>
+                    <div>
+                      <h3 className="project-list-card-title fw-normal font-secondary">{project.title}</h3>
+                      <p className="project-list-card-desc fw-normal">{project.role}</p>
+                    </div>
+                  </div>
+                </TransitionLink>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="project-list-nav-wrapper">
           <TransitionLink href="/projects" className="project-list-nav btn-icon">
-            view all projects <span className="material-symbols-outlined">arrow_outward</span>
+            view all <span className="material-symbols-outlined">arrow_outward</span>
           </TransitionLink>
         </div>
       </div>
