@@ -3,9 +3,9 @@
 }
 
 .project-detail-title {
-  letter-spacing: -1px;
+  letter-spacing: -3px;
   line-height: 0.8;
-  text-transform: uppercase;
+  text-transform: capitalize;
   margin-bottom: 2rem;
   font-size: 7vw;
 }
@@ -138,6 +138,7 @@
 
 @media (max-width: 640px) {
   .project-detail-title {
+    letter-spacing: -2px;
     line-height: 0.9;
     font-size: 13vw;
   }

@@ -19,9 +19,10 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  row-gap: 0;
+  row-gap: 1rem;
   column-gap: 2rem;
   border-top: 1px solid var(--color-gray);
+  padding-top: 1rem;
 }
 
 .project-list-card {
@@ -33,12 +34,34 @@
   display: flex;
   justify-content: space-between;
   align-items: start;
-  gap: 2rem;
-  padding: 1rem 0;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
 }
 
-.project-list-card-link:hover .project-list-card-image {
-  transform: scale(1.05);
+.project-list-card-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background: url('/background.png');
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.parallax-inner {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.project-list-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  scale: 0.8;
+  transform-origin: center center;
+  will-change: transform;
 }
 
 .project-list-card-text-wrapper {
@@ -46,31 +69,18 @@
 }
 
 .project-list-card-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  letter-spacing: -0.8px;
+  font-size: 1.5rem;
+  letter-spacing: -1px;
+  text-transform: uppercase;
 }
 
 .project-list-card-desc {
   font-size: 1.3rem;
+  font-weight: 600;
   line-height: 1.2;
-  margin: 10px 0 0 0;
+  margin: 0;
   color: var(--color-gray);
   letter-spacing: -0.8px;
-}
-
-.project-list-card-image-wrapper {
-  position: relative;
-  min-width: 200px;
-  height: 200px;
-  background-color: var(--color-surface);
-  overflow: hidden;
-}
-
-.project-list-card-image {
-  object-fit: cover;
-  transform: scale(1);
-  transition: transform 0.4s ease;
 }
 
 .project-list-nav-wrapper {
@@ -92,7 +102,7 @@
 
 @media (max-width: 640px) {
   .project-list-heading {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     padding-right: 1.8rem;
   }
 
@@ -103,19 +113,14 @@
 
   .project-list-items {
     grid-template-columns: repeat(1, 1fr);
-    gap: 0;
+    gap: 2rem;
   }
 
   .project-list-card-title {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
   }
 
   .project-list-card-desc {
-    font-size: 1rem;
-  }
-
-  .project-list-card-image-wrapper {
-    min-width: 100px;
-    height: 100px;
+    font-size: 1.1rem;
   }
 }
