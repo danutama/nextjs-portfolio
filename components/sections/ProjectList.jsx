@@ -1,71 +1,73 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import Image from 'next/image';
-import TransitionLink from '@/components/globals/TransitionLink';
-import projects from '../../data/project.json';
+import { useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import TransitionLink from '@/components/globals/TransitionLink';
+import projects from '../../data/project.json';
 import '../css/project_list.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ProjectList() {
-  const wrappersRef = useRef([]);
+  const projectCount = projects.length;
 
   useEffect(() => {
-    const triggers = [];
+    const numbers = document.querySelectorAll('.card-number');
 
-    wrappersRef.current.forEach((wrapper) => {
-      if (!wrapper) return;
+    numbers.forEach((wrapper) => {
+      const tens = wrapper.querySelector('.digit.tens');
+      const ones = wrapper.querySelector('.digit.ones');
 
-      const inner = wrapper.querySelector('.parallax-inner');
-      if (!inner) return;
+      gsap.set([tens, ones], { y: '100%' });
 
-      gsap.set(inner, { yPercent: -10 });
-
-      const trigger = ScrollTrigger.create({
+      ScrollTrigger.create({
         trigger: wrapper,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: true,
-        onUpdate: (self) => {
-          gsap.to(inner, {
-            yPercent: gsap.utils.interpolate(-10, 10, self.progress),
-            overwrite: 'auto',
+        start: 'top 90%',
+        once: true,
+        onEnter: () => {
+          gsap.to([tens, ones], {
+            y: '0%',
+            duration: 1,
+            ease: 'power3.inOut',
+            stagger: 0.2,
           });
         },
       });
-
-      triggers.push(trigger);
     });
 
-    return () => triggers.forEach((t) => t.kill());
+    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
   }, []);
-
-  const projectCount = projects.length;
 
   return (
     <section id="project-list">
       <div className="container">
         <h2 className="project-list-heading">
-          Selected Works<span className="number">({String(projectCount).padStart(2, '0')})</span>
+          Selected Works
+          <span className="number">({String(projectCount).padStart(2, '0')})</span>
         </h2>
 
         <ul className="project-list-items">
           {projects.slice(0, 4).map((project, i) => {
-            const number = String(i + 1).padStart(2, '0');
+            const num = String(i + 1).padStart(2, '0');
+            const tens = num[0];
+            const ones = num[1];
             return (
               <li key={project.slug} className="project-list-card">
                 <TransitionLink href={`/projects/${project.slug}`} className="project-list-card-link">
-                  <div ref={(el) => (wrappersRef.current[i] = el)} className="project-list-card-image-wrapper">
-                    <div className="parallax-inner">
-                      <Image src={project.images?.[0]} alt={project.title} fill className="project-list-card-image" />
-                    </div>
+                  <div className="project-list-card-image-wrapper">
+                    <span className="card-overview fw-normal">{project.overview}</span>
+                    <span className="card-number-wrapper">
+                      <span className="card-number">
+                        <span className="digit tens">{tens}</span>
+                        <span className="digit ones" data-final={ones}>
+                          {ones}
+                        </span>
+                      </span>
+                    </span>
                   </div>
 
                   <div className="project-list-card-text-wrapper">
-                    <span className="project-list-card-number">{number},</span>
                     <div>
                       <h3 className="project-list-card-title fw-normal font-secondary">{project.title}</h3>
                       <p className="project-list-card-desc fw-normal">{project.role}</p>

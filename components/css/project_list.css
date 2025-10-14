@@ -1,3 +1,8 @@
+#project-list {
+  margin-bottom: 80vh;
+  padding-bottom: 2rem;
+}
+
 .project-list-heading {
   font-size: 2rem;
   text-transform: uppercase;
@@ -18,7 +23,7 @@
 .project-list-items {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   row-gap: 1rem;
   column-gap: 2rem;
   border-top: 1px solid var(--color-gray);
@@ -43,17 +48,52 @@
   position: relative;
   width: 100%;
   height: 400px;
-  background: url('/background.png');
+  background: var(--color-inverse);
+  padding: 1rem;
   background-size: cover;
   background-position: center;
   overflow: hidden;
 }
 
-.parallax-inner {
+.card-overview {
+  font-size: 1.3rem;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: var(--color-text-inverse);
+}
+
+.card-number-wrapper {
+  bottom: 1rem;
+  left: 1rem;
+  position: absolute;
+  overflow: hidden;
+  display: flex;
+  height: 7.5rem;
+}
+
+.card-number {
+  display: flex;
+  font-size: 8rem;
+  line-height: 1;
+  letter-spacing: -7px;
+  color: var(--color-surface);
+}
+
+.digit {
+  display: inline-block;
+  transform: translateY(0);
+  will-change: transform;
+}
+
+.digit.ones {
+  transform: translateY(100%);
+}
+
+/* .parallax-inner {
   position: absolute;
   inset: 0;
   will-change: transform;
-}
+} */
 
 .project-list-card-image {
   width: 100%;
@@ -62,11 +102,12 @@
   scale: 0.8;
   transform-origin: center center;
   will-change: transform;
+  display: none;
 }
 
 .project-list-card-text-wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   align-items: start;
   width: 100%;
 }
@@ -109,7 +150,27 @@
   font-size: 25px;
 }
 
+@media (max-width: 1030px) {
+  .project-list-items {
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 1rem;
+    column-gap: 2rem;
+  }
+}
+
+@media (max-width: 840px) {
+  .project-list-items {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 1rem;
+    column-gap: 2rem;
+  }
+}
+
 @media (max-width: 640px) {
+  #project-list {
+    margin-bottom: 60vh;
+  }
+
   .project-list-heading {
     font-size: 1.6rem;
     padding-right: 1.8rem;

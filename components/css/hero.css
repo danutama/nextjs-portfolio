@@ -1,16 +1,9 @@
 #hero {
-  background: url('/milad-fakurian-unsplash.jpg');
+  background: url('/banner.webp');
   background-size: cover;
-  background-position: center;
+  background-position: top center;
   position: fixed;
 }
-
-/* #hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.3);
-} */
 
 #hero .container {
   text-align: start;

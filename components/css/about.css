@@ -45,7 +45,8 @@
 #about h2 {
   font-size: 7rem;
   line-height: 0.9;
-  color: var(--color-gray);
+  color: var(--white);
+  mix-blend-mode: difference;
   position: relative;
   z-index: 2;
   overflow: hidden;
@@ -54,6 +55,7 @@
 .profile-img-wrapper span {
   font-size: 0.8rem;
   color: var(--white);
+  display: none;
   position: absolute;
   top: 0;
   right: 3px;
