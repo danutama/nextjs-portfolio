@@ -14,7 +14,16 @@ export default function Project() {
 
   useEffect(() => {
     const items = document.querySelectorAll('.project-item');
-    const isMobile = window.innerWidth < 640;
+    const isMobile = window.innerWidth < 640 || window.matchMedia('(pointer: coarse)').matches;
+
+    if (isMobile) {
+      items.forEach((item) => {
+        const img = item.querySelector('.project-image img');
+        img.style.opacity = '1';
+      });
+      return;
+    }
+
     const SEGMENTS = isMobile ? 16 : 64;
     const MAX_DPR = 2;
 

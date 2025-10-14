@@ -18,8 +18,8 @@
     "designBy": "Danu Pratama",
     "developmentBy": "Danu Pratama",
     "type": "Portfolio",
-    "images": ["/projects/porto-v4-3.webp"],
-    "detailImages": ["/projects/porto-v4-1.webp", "/projects/porto-v4-2.webp", "/projects/porto-v4-3.webp", "/projects/porto-v4-4.webp"]
+    "images": ["/projects/porto-v4-6.webp"],
+    "detailImages": ["/projects/porto-v4-6.webp", "/projects/porto-v4-1.webp", "/projects/porto-v4-2.webp", "/projects/porto-v4-3.webp", "/projects/porto-v4-4.webp"]
   },
   {
     "slug": "the-movie-database",
