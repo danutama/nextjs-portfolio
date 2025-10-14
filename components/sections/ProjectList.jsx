@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import TransitionLink from '@/components/globals/TransitionLink';
@@ -11,36 +11,39 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function ProjectList() {
   const projectCount = projects.length;
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    const numbers = document.querySelectorAll('.card-number');
+    const ctx = gsap.context(() => {
+      const numbers = containerRef.current.querySelectorAll('.card-number');
 
-    numbers.forEach((wrapper) => {
-      const tens = wrapper.querySelector('.digit.tens');
-      const ones = wrapper.querySelector('.digit.ones');
+      numbers.forEach((wrapper) => {
+        const tens = wrapper.querySelector('.digit.tens');
+        const ones = wrapper.querySelector('.digit.ones');
 
-      gsap.set([tens, ones], { y: '100%' });
+        gsap.set([tens, ones], { y: '100%' });
 
-      ScrollTrigger.create({
-        trigger: wrapper,
-        start: 'top 90%',
-        once: true,
-        onEnter: () => {
-          gsap.to([tens, ones], {
-            y: '0%',
-            duration: 1,
-            ease: 'power3.inOut',
-            stagger: 0.2,
-          });
-        },
+        ScrollTrigger.create({
+          trigger: wrapper,
+          start: 'top 90%',
+          once: true,
+          onEnter: () => {
+            gsap.to([tens, ones], {
+              y: '0%',
+              duration: 1,
+              ease: 'power3.inOut',
+              stagger: 0.2,
+            });
+          },
+        });
       });
-    });
+    }, containerRef);
 
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section id="project-list">
+    <section id="project-list" ref={containerRef}>
       <div className="container">
         <h2 className="project-list-heading">
           Selected Works
