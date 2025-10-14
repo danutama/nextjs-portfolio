@@ -8,6 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Approach() {
   const headingRef = useRef(null);
+  const principles = ['Clarity in code and design', 'Performance that feels invisible', 'Purpose over decoration', 'Empathy for the end user'];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -134,6 +135,15 @@ export default function Approach() {
           <span className="font-secondary"> clarity </span> and
           <span className="font-secondary"> performance</span>
         </h2>
+
+        <div className="approach-items">
+          {principles.map((point, index) => (
+            <div key={index} className="approach-item-wrapper">
+              <p className="fw-normal">{point}</p>
+              <p className="fw-normal">({index + 1})</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

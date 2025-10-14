@@ -55,6 +55,13 @@
   overflow: hidden;
 }
 
+.project-list-card-image-wrapper .material-symbols-outlined {
+  position: absolute;
+  bottom: 0.7rem;
+  right: 1rem;
+  color: var(--color-text-inverse);
+}
+
 .card-overview {
   font-size: 1.3rem;
   line-height: 1;
@@ -112,24 +119,9 @@
   width: 100%;
 }
 
-.project-list-card-number {
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: -1.5px;
-  line-height: 1.2;
-}
-
 .project-list-card-title {
-  font-size: 1.5rem;
-  letter-spacing: -1px;
+  font-size: 1.1rem;
   text-transform: uppercase;
-  text-align: end;
-}
-
-.project-list-card-desc {
-  font-size: 1.3rem;
-  margin: 5px 0;
-  letter-spacing: -0.8px;
   text-align: end;
 }
 
@@ -181,18 +173,13 @@
     top: -5%;
   }
 
+  .card-overview {
+    font-size: 1.2rem;
+  }
+
   .project-list-items {
     grid-template-columns: repeat(1, 1fr);
     gap: 2rem;
-  }
-
-  .project-list-card-number,
-  .project-list-card-title {
-    font-size: 1.3rem;
-  }
-
-  .project-list-card-desc {
-    font-size: 1.1rem;
   }
 
   .project-list-nav-wrapper {

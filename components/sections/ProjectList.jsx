@@ -68,13 +68,11 @@ export default function ProjectList() {
                         </span>
                       </span>
                     </span>
+                    <span className="material-symbols-outlined">arrow_outward</span>
                   </div>
 
                   <div className="project-list-card-text-wrapper">
-                    <div>
-                      <h3 className="project-list-card-title fw-normal font-secondary">{project.title}</h3>
-                      <p className="project-list-card-desc fw-normal">{project.role}</p>
-                    </div>
+                    <h3 className="project-list-card-title fw-normal font-secondary">{project.title}</h3>
                   </div>
                 </TransitionLink>
               </li>
