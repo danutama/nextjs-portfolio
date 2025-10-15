@@ -70,7 +70,7 @@ export default function ProjectList() {
       <div className="container">
         <h2 className="project-list-heading">
           Selected Works
-          <span className="number">({String(projectCount).padStart(2, '0')})</span>
+          <span className="number">({projectCount})</span>
         </h2>
 
         <ul className="project-list-items">

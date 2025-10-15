@@ -154,40 +154,46 @@ export default function Approach() {
           <span className="font-secondary"> performance</span>
         </h2>
 
-        <h3 className="approach-item-heading">
-          DRIVEN <i className="font-secondary">BY</i> <span className="material-symbols-outlined">arrow_outward</span>
-        </h3>
-        <div className="approach-items">
-          {principles.map((point, index) => (
-            <div key={index} className="approach-item-wrapper">
-              <div className="aprroach-text-anim">
-                <p className="fw-normal">{point}</p>
-                <p className="fw-normal">({index + 1})</p>
-              </div>
+        <div className="approach-flex">
+          <div className="approach-flex-right">
+            <h3 className="approach-item-heading">
+              DRIVEN <i className="font-secondary">BY</i> <span className="material-symbols-outlined">arrow_outward</span>
+            </h3>
+            <div className="approach-items">
+              {principles.map((point, index) => (
+                <div key={index} className="approach-item-wrapper">
+                  <div className="aprroach-text-anim">
+                    <p className="fw-normal">{point}</p>
+                    <p className="fw-normal">({index + 1})</p>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
 
-        <h3 className="approach-item-heading">
-          WHAT I BUILD <span className="material-symbols-outlined">arrow_outward</span>
-        </h3>
-        <div className="service-items">
-          {services.map((service, index) => (
-            <div key={index} className="service-item-wrapper">
-              <div className="aprroach-text-anim">
-                <p className="fw-normal">
-                  {service.title}
-                  {service.title === 'Others' && (
-                    <>
-                      {' '}
-                      &mdash; <span>{service.subtitle}</span>
-                    </>
-                  )}
-                </p>
-                <p className="fw-normal">({index + 1})</p>
-              </div>
+          <div className="approach-flex-left">
+            <h3 className="approach-item-heading">
+              WHAT I BUILD <span className="material-symbols-outlined">arrow_outward</span>
+            </h3>
+            <div className="service-items">
+              {services.map((service, index) => (
+                <div key={index} className="service-item-wrapper">
+                  <div className="aprroach-text-anim">
+                    <p className="fw-normal">
+                      {service.title}
+                      {service.title === 'Others' && (
+                        <>
+                          {' '}
+                          &mdash; <span>{service.subtitle}</span>
+                        </>
+                      )}
+                    </p>
+                    <p className="fw-normal">({index + 1})</p>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>
