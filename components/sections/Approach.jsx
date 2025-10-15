@@ -15,9 +15,11 @@ export default function Approach() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // === Heading text reveal ===
-      const el = headingRef.current;
-      if (el) {
+      // === Heading animation ===
+      const buildAnimation = () => {
+        const el = headingRef.current;
+        if (!el) return;
+
         const originalHTML = el.innerHTML;
         el.innerHTML = '';
         const temp = document.createElement('div');
@@ -78,9 +80,12 @@ export default function Approach() {
             once: true,
           },
         });
-      }
+      };
 
-      // ===  Animate <p> ===
+      buildAnimation();
+      ScrollTrigger.addEventListener('refreshInit', buildAnimation);
+
+      // === Flip-in animation for approach & service items ===
       const animatePs = (wrapperSelector, triggerSelector) => {
         const ps = gsap.utils.toArray(`${wrapperSelector} p`);
         gsap.set(ps, { y: '100%', transformOrigin: 'top center' });
@@ -100,6 +105,39 @@ export default function Approach() {
 
       animatePs('.approach-item-wrapper', '.approach-items');
       animatePs('.service-item-wrapper', '.service-items');
+
+      // === Hero scroll ===
+      const handleScroll = () => {
+        if (!document.querySelector('#hero')) return;
+        const heroHeight = window.innerHeight;
+        const scrollY = window.scrollY;
+        const progress = Math.min(scrollY / heroHeight, 1);
+        window.dispatchEvent(new CustomEvent('hero-scroll', { detail: { progress } }));
+      };
+
+      window.addEventListener('scroll', handleScroll);
+
+      let lastHeight = window.innerHeight;
+      let resizeTimeout;
+
+      const handleResize = () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          const newHeight = window.innerHeight;
+          if (Math.abs(newHeight - lastHeight) > 120) {
+            ScrollTrigger.refresh();
+            lastHeight = newHeight;
+          }
+        }, 300);
+      };
+
+      window.addEventListener('resize', handleResize);
+
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+        window.removeEventListener('resize', handleResize);
+        ScrollTrigger.removeEventListener('refreshInit', buildAnimation);
+      };
     }, containerRef);
 
     return () => ctx.revert();
