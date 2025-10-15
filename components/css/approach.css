@@ -34,6 +34,12 @@
   margin: 5rem 0 1rem 0;
 }
 
+.approach-item-heading .material-symbols-outlined {
+  font-size: 1.8rem;
+  rotate: 90deg;
+  line-height: 0;
+}
+
 .approach-items,
 .service-items {
   display: grid;
@@ -80,6 +86,11 @@
   .approach-item-heading {
     font-size: 1rem;
     margin-bottom: 0.5rem;
+  }
+
+  .approach-item-heading .material-symbols-outlined {
+    font-size: 1.4rem;
+    margin-bottom: 0.1rem;
   }
 
   .service-items,

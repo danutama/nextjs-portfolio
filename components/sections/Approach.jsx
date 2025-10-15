@@ -155,7 +155,7 @@ export default function Approach() {
         </h2>
 
         <h3 className="approach-item-heading">
-          DRIVEN <i className="font-secondary">BY</i>
+          DRIVEN <i className="font-secondary">BY</i> <span className="material-symbols-outlined">arrow_outward</span>
         </h3>
         <div className="approach-items">
           {principles.map((point, index) => (
@@ -168,7 +168,9 @@ export default function Approach() {
           ))}
         </div>
 
-        <h3 className="approach-item-heading">WHAT I BUILD</h3>
+        <h3 className="approach-item-heading">
+          WHAT I BUILD <span className="material-symbols-outlined">arrow_outward</span>
+        </h3>
         <div className="service-items">
           {services.map((service, index) => (
             <div key={index} className="service-item-wrapper">
