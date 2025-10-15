@@ -1,0 +1,53 @@
+{
+  "items": [
+    {
+      "type": "skill",
+      "title": "Company Profile",
+      "subtitle": "Website",
+      "desc": "Create a professional online presence that represents your brand and builds trust."
+    },
+    {
+      "type": "skill",
+      "title": "Landing Page",
+      "subtitle": "Website",
+      "desc": "Goal-oriented pages that engage visitors and capture leads effectively."
+    },
+    {
+      "type": "skill",
+      "title": "Personal Portfolio",
+      "subtitle": "Website",
+      "desc": "Showcase your skills, projects, and achievements in a memorable way."
+    },
+    {
+      "type": "skill",
+      "title": "Blog / News",
+      "subtitle": "Website",
+      "desc": "Share your insights, updates, and stories with your audience."
+    },
+    {
+      "type": "skill",
+      "title": "Others",
+      "subtitle": "Web Application",
+      "desc": "Develop tailored web applications to meet your business requirements."
+    },
+    {
+      "type": "expertise",
+      "title": "Frontend",
+      "subtitle": "Development",
+      "desc": "HTML, CSS, Bootstrap, React.js, Next.js, Axios, Vite, GSAP"
+    },
+    {
+      "type": "expertise",
+      "title": "Backend",
+      "subtitle": "Development",
+      "desc": "PHP, Laravel, Node.js, Express, Supabase, MySQL, PostgreSQL"
+    },
+    {
+      "type": "expertise",
+      "title": "Tools",
+      "subtitle": "& others",
+      "desc": "GitHub, Visual Studio Code, Vercel, Netlify, Webflow"
+    }
+  ],
+  "principles": ["Clarity in code and design", "Performance that feels invisible", "Purpose over decoration", "Empathy for the end user"]
+}

@@ -40,8 +40,8 @@
     "designBy": "Danu Pratama",
     "developmentBy": "Danu Pratama",
     "type": "Progressive Web App",
-    "images": ["/projects/movie3.webp"],
-    "detailImages": ["/projects/movie1.webp", "/projects/movie2.webp", "/projects/movie3.webp", "/projects/movie4.webp"]
+    "images": ["/projects/movie6.webp"],
+    "detailImages": ["/projects/movie1.webp", "/projects/movie2.webp", "/projects/movie3.webp", "/projects/movie4.webp", "/projects/movie5.webp", "/projects/movie6.webp"]
   },
   {
     "slug": "pos-management-system",
@@ -64,8 +64,8 @@
     "designBy": "Danu Pratama",
     "developmentBy": "Danu Pratama",
     "type": "Web Application",
-    "images": ["/projects/pos1.webp"],
-    "detailImages": ["/projects/pos1.webp", "/projects/pos2.webp", "/projects/pos3.webp", "/projects/pos4.webp", "/projects/pos5.webp", "/projects/pos6.webp", "/projects/pos7.webp"]
+    "images": ["/projects/pos8.webp"],
+    "detailImages": ["/projects/pos1.webp", "/projects/pos2.webp", "/projects/pos3.webp", "/projects/pos4.webp", "/projects/pos5.webp", "/projects/pos6.webp", "/projects/pos7.webp", "/projects/pos8.webp", "/projects/pos9.webp"]
   },
   {
     "slug": "others",

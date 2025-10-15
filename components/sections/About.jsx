@@ -5,6 +5,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 import Image from 'next/image';
+import aboutData from '@/data/about.json';
 import TransitionLink from '@/components/globals/TransitionLink';
 import '../css/about.css';
 
@@ -14,52 +15,9 @@ export default function About() {
   const hrRefs = useRef([]);
   const [loaded, setLoaded] = useState(false);
 
-  // data skill
-  const skills = [
-    {
-      title: 'Company Profile',
-      subtitle: 'Website',
-      desc: 'Create a professional online presence that represents your brand and builds trust.',
-    },
-    {
-      title: 'Landing Page',
-      subtitle: 'Website',
-      desc: 'Goal-oriented pages that engage visitors and capture leads effectively.',
-    },
-    {
-      title: 'Personal Portfolio',
-      subtitle: 'Website',
-      desc: 'Showcase your skills, projects, and achievements in a memorable way.',
-    },
-    {
-      title: 'Blog / News',
-      subtitle: 'Website',
-      desc: 'Share your insights, updates, and stories with your audience.',
-    },
-    {
-      title: 'Others',
-      subtitle: 'Web Application',
-      desc: 'Develop tailored web applications to meet your business requirements.',
-    },
-  ];
-
-  const expertises = [
-    {
-      title: 'Frontend',
-      subtitle: 'Development',
-      desc: 'HTML, CSS, Bootstrap, React.js, Next.js, Axios, Vite, GSAP',
-    },
-    {
-      title: 'Backend',
-      subtitle: 'Development',
-      desc: 'PHP, Laravel, Node.js, Express, Supabase, MySQL, PostgreSQL',
-    },
-    {
-      title: 'Tools',
-      subtitle: '& others',
-      desc: 'GitHub, Visual Studio Code, Vercel, Netlify, Webflow',
-    },
-  ];
+  const { items } = aboutData;
+  const skills = items.filter((item) => item.type === 'skill');
+  const expertises = items.filter((item) => item.type === 'expertise');
 
   useEffect(() => {
     const hrs = hrRefs.current;
@@ -183,7 +141,6 @@ export default function About() {
                 <div key={i} className="custom-skill-card">
                   <div className="skill-wrapper custom">
                     <span className="skill-number text-animate">({i + 1})</span>
-
                     <p className="skill-item text-start text-animate">
                       {s.title} <br />
                       <span className="text-secondary small">{s.subtitle}</span>

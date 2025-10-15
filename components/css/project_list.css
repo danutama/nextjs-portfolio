@@ -44,6 +44,20 @@
   padding: 0.5rem 0;
 }
 
+.project-list-preview-image {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60vh;
+  height: 60vh;
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 999;
+}
+
 .project-list-card-image-wrapper {
   position: relative;
   width: 100%;

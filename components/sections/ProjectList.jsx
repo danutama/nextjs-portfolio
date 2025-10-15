@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function ProjectList() {
   const projectCount = projects.length;
   const containerRef = useRef(null);
+  const previewRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -37,6 +38,28 @@ export default function ProjectList() {
           },
         });
       });
+
+      // --- Hover preview ---
+      if (window.innerWidth >= 768) {
+        const cards = containerRef.current.querySelectorAll('.project-list-card-link');
+
+        cards.forEach((card, i) => {
+          const project = projects[i];
+          card.addEventListener('mouseenter', () => {
+            if (!project.images || !project.images[0]) return;
+            const preview = previewRef.current;
+            preview.style.backgroundImage = `url(${project.images[0]})`;
+            gsap.killTweensOf(preview);
+            gsap.set(preview, { opacity: 0, scale: 0.9 });
+            gsap.to(preview, { opacity: 1, scale: 1, duration: 0.5, ease: 'power3.out' });
+          });
+
+          card.addEventListener('mouseleave', () => {
+            const preview = previewRef.current;
+            gsap.to(preview, { opacity: 0, scale: 0.9, duration: 0.4, ease: 'power3.inOut' });
+          });
+        });
+      }
     }, containerRef);
 
     return () => ctx.revert();
@@ -63,9 +86,7 @@ export default function ProjectList() {
                     <span className="card-number-wrapper">
                       <span className="card-number">
                         <span className="digit tens">{tens}</span>
-                        <span className="digit ones" data-final={ones}>
-                          {ones}
-                        </span>
+                        <span className="digit ones">{ones}</span>
                       </span>
                     </span>
                     <span className="material-symbols-outlined">arrow_outward</span>
@@ -86,6 +107,9 @@ export default function ProjectList() {
           </TransitionLink>
         </div>
       </div>
+
+      {/* Preview image*/}
+      <div ref={previewRef} className="project-list-preview-image"></div>
     </section>
   );
 }
