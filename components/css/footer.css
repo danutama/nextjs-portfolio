@@ -13,7 +13,11 @@
 }
 
 .cta {
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .cta h2 {
@@ -25,9 +29,9 @@
 
 .cta p {
   text-transform: uppercase;
-  letter-spacing: -1px;
+  letter-spacing: -0.5;
   font-weight: 600;
-  margin: 0;
+  margin-bottom: 2rem;
 }
 
 .footer-contact {
@@ -39,19 +43,20 @@
 .footer-contact a {
   font-size: 1.5rem;
   font-weight: 600;
+  letter-spacing: -0.8;
 }
 
 #footer text {
   fill: var(--color-text);
   font-weight: bold;
-  letter-spacing: -8px;
+  letter-spacing: -20px;
+  user-select: none; /* Standar */
+  -webkit-user-select: none; /* Safari/Chrome */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none;
 }
 
 @media (max-width: 640px) {
-  .footer-contact {
-    margin-bottom: 1rem;
-  }
-
   .footer-contact a {
     font-size: 1rem;
   }

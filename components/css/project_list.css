@@ -79,7 +79,7 @@
 .card-overview {
   font-size: 1.3rem;
   line-height: 1;
-  letter-spacing: -1px;
+  letter-spacing: -0.5;
   color: var(--color-text-inverse);
 }
 
@@ -147,13 +147,13 @@
 
 .project-list-nav {
   text-transform: uppercase;
-  letter-spacing: -0.8px;
+  letter-spacing: -0.5;
   font-size: 1rem;
   font-weight: 600;
 }
 
 .project-list-nav .material-symbols-outlined {
-  font-size: 25px;
+  font-size: 23px;
 }
 
 @media (max-width: 1030px) {

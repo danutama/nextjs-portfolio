@@ -8,7 +8,6 @@ import '../css/footer.css';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Footer() {
-  const footerRef = useRef(null);
   const textRef = useRef(null);
 
   useEffect(() => {
@@ -23,43 +22,49 @@ export default function Footer() {
       duration: 1.2,
       ease: 'power3.inOut',
       scrollTrigger: {
-        trigger: footerRef.current,
-        start: 'top bottom-=60',
+        trigger: text,
+        start: 'top 85%',
         end: 'bottom bottom',
       },
     });
   }, []);
 
   return (
-    <footer id="footer" ref={footerRef}>
+    <footer id="footer">
       <div className="container">
         <div className="cta">
           <h2 className="text-center">
             Interested in <span className="font-secondary">working</span> together?
           </h2>
           <p className="text-center">Get in touch</p>
-        </div>
-        <div className="footer-contact">
-          <a href="mailto:danupratama.dev@gmail.com">(Email)</a>
-          <a href="https://github.com/danutama" target="_blank" rel="noopener noreferrer">
-            (GitHub)
-          </a>
-          <a href="https://www.linkedin.com/in/danu-agus-pratama" target="_blank" rel="noopener noreferrer">
-            (LinkedIn)
-          </a>
+
+          <div className="footer-contact">
+            <a href="mailto:danupratama.dev@gmail.com">(Email)</a>
+            <a href="https://github.com/danutama" target="_blank" rel="noopener noreferrer">
+              (GitHub)
+            </a>
+            <a href="https://www.linkedin.com/in/danu-agus-pratama" target="_blank" rel="noopener noreferrer">
+              (LinkedIn)
+            </a>
+          </div>
         </div>
 
         <svg
-          viewBox="0 0 1000 200"
-          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 1000 300"
+          preserveAspectRatio="xMidYMax meet"
           style={{
             width: '100vw',
             height: 'auto',
             display: 'block',
           }}
         >
-          <text ref={textRef} x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fontSize="152" fontWeight="700">
-            danupratama
+          <text ref={textRef} x="48%" y="45%" dominantBaseline="middle" textAnchor="middle" fontSize="320" fontWeight="700">
+            <tspan fontSize="225" dy="70">
+              &copy;
+            </tspan>
+            <tspan dx="5" dy="-20">
+              danu
+            </tspan>
           </text>
         </svg>
       </div>

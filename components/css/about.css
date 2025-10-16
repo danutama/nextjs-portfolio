@@ -86,7 +86,7 @@
 .about-description p {
   font-size: 1.3rem;
   line-height: 1.4;
-  letter-spacing: -0.8px;
+  letter-spacing: -0.5;
 }
 
 .about-description h3 {
@@ -160,6 +160,10 @@ p.skill-subtitle {
   gap: 1rem;
 }
 
+.about-socials a {
+  letter-spacing: -0.5;
+}
+
 @media (max-width: 700px) {
   #about h2 {
     font-size: 5rem;
@@ -203,6 +207,8 @@ p.skill-subtitle {
     position: static;
     font-size: 3rem;
     margin: 0.5rem 0;
+    color: var(--color-gray);
+    mix-blend-mode: unset;
   }
 
   .about-description {
