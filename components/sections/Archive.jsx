@@ -10,17 +10,17 @@ export default function Archive() {
   const imagesWrapperRef = useRef(null);
 
   const archiveItems = [
-    { src: '/archive1.jpg', label: 'AR001' },
-    { src: '/archive4.jpg', label: 'AR002' },
-    { src: '/archive3.jpg', label: 'AR003' },
-    { src: '/archive2.jpg', label: 'AR004' },
-    { src: '/archive5.jpg', label: 'AR005' },
-    { src: '/archive6.jpg', label: 'AR006' },
-    { src: '/archive7.webp', label: 'AR007' },
-    { src: '/archive8.webp', label: 'AR008' },
-    { src: '/archive9.webp', label: 'AR009' },
-    { src: '/archive10.webp', label: 'AR010' },
-    { src: '/archive11.webp', label: 'AR011' },
+    { src: '/archive1.jpg' },
+    { src: '/archive4.jpg' },
+    { src: '/archive3.jpg' },
+    { src: '/archive2.jpg' },
+    { src: '/archive5.jpg' },
+    { src: '/archive6.jpg' },
+    { src: '/archive7.webp' },
+    { src: '/archive8.webp' },
+    { src: '/archive9.webp' },
+    { src: '/archive10.webp' },
+    { src: '/archive11.webp' },
   ];
 
   const text = 'Archive ';
@@ -77,7 +77,6 @@ export default function Archive() {
               <div className="image-box">
                 <Image src={item.src} alt={item.label} width={350} height={350} priority />
               </div>
-              <span>{item.label}</span>
             </div>
           ))}
         </div>

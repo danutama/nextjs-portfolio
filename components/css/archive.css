@@ -46,15 +46,14 @@
 }
 
 .archive-images-wrapper {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 2rem;
-  align-items: end;
+  column-count: 6;
+  column-gap: 1rem;
 }
 
 .image-item {
-  text-align: end;
   z-index: 2;
+  break-inside: avoid;
+  margin-bottom: 1rem;
 }
 
 .image-box {
@@ -63,11 +62,6 @@
 
 .image-item img {
   border: 1px solid var(--color-surface);
-}
-
-.image-item span {
-  font-weight: 700;
-  font-size: 0.8rem;
 }
 
 @media (max-width: 1100px) {
@@ -80,7 +74,7 @@
   }
 
   .archive-images-wrapper {
-    grid-template-columns: repeat(3, 1fr);
+    column-count: 4;
   }
 }
 
@@ -98,7 +92,6 @@
   }
 
   .archive-images-wrapper {
-    row-gap: 2rem;
-    column-gap: 1rem;
+    column-count: 3;
   }
 }
