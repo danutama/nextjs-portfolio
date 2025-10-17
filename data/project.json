@@ -6,7 +6,7 @@
     "url": "https://danu.is-a.dev",
     "repository": "https://github.com/danutama",
     "year": 2025,
-    "technology": ["Next.js", "GSAP", "Vercel"],
+    "technology": ["Next.js", "GSAP", "Three.js", "Vercel"],
     "role": "Frontend Development",
     "task": [
       "Handled the frontend development using Next.js with SSR and dynamic metadata for SEO optimization.",

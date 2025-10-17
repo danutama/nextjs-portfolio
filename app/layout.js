@@ -4,7 +4,7 @@ import PageTransition from '@/components/globals/PageTransition';
 import RotateMessage from '@/components/globals/RotateMessage';
 import './globals.css';
 
-import { Plus_Jakarta_Sans, Playfair_Display } from 'next/font/google';
+import { Plus_Jakarta_Sans, Playfair_Display, Plaster } from 'next/font/google';
 
 // Font Jakarta
 const jakarta = Plus_Jakarta_Sans({
@@ -18,6 +18,13 @@ const playfair = Playfair_Display({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-playfair',
+});
+
+// Font Plaster
+const plaster = Plaster({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-plaster',
 });
 
 export const metadata = {
@@ -50,7 +57,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${playfair.variable}`}>
+    <html lang="en" className={`${jakarta.variable} ${playfair.variable} ${plaster.variable}`}>
       <head>
         <meta name="google-site-verification" content="CHNS67Hvsj7-6xW7W3gb_e2a93ojk8n1a7O6udP64Qs" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

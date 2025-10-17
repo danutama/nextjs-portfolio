@@ -8,6 +8,7 @@
 :root {
   --font-jakarta: 'Plus Jakarta Sans', sans-serif;
   --font-playfair: 'Playfair Display', serif;
+  --font-plaster: 'Plaster';
 
   /* Backgrounds */
   --white: #fff;
@@ -111,6 +112,10 @@ p {
 .font-secondary {
   font-family: var(--font-playfair);
   font-weight: 500;
+}
+
+.font-logo {
+  font-family: var(--font-plaster);
 }
 
 .fw-normal {
