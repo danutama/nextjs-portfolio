@@ -1,4 +1,5 @@
 import Archive from '@/components/sections/Archive';
+import Footer from '@/components/sections/Footer';
 
 export const metadata = {
   title: 'Archive | Danu Pratama',
@@ -9,6 +10,7 @@ export default function ArchivePage() {
   return (
     <main>
       <Archive />
+      <Footer />
     </main>
   );
 }

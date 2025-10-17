@@ -20,7 +20,7 @@
 .logo {
   font-size: 3rem;
   font-weight: bold;
-  line-height: 1.1;
+  line-height: 1;
   letter-spacing: -1px;
   text-transform: uppercase;
   margin: 0;
@@ -32,10 +32,6 @@
 .logo .char {
   display: inline-block;
   will-change: clip-path;
-}
-
-.logo span:nth-child(1) {
-  font-size: 2.4rem;
 }
 
 /* toggle menu */
@@ -243,16 +239,12 @@
     font-size: 2rem;
   }
 
-  .logo span:nth-child(1) {
-    font-size: 1.6rem;
-  }
-
   .menu-wrapper {
     max-height: 850px;
   }
 
   .menu-link {
-    font-size: 3rem;
+    font-size: 3.3rem;
   }
 
   .menu-info p,

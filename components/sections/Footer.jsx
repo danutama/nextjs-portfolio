@@ -56,7 +56,7 @@ export default function Footer() {
 
           <div className="footer-links">
             <div>
-              <p>pages</p>
+              <p className="fw-normal">pages</p>
               <div className="footer-nav">
                 <TransitionLink href="/" className={pathname === '/' ? 'active' : ''}>
                   Index
@@ -74,7 +74,7 @@ export default function Footer() {
             </div>
 
             <div>
-              <p>around the web</p>
+              <p className="fw-normal">around the web</p>
               <div className="footer-contact">
                 <a href="mailto:danupratama.dev@gmail.com">Email</a>
                 <a href="https://github.com/danutama" target="_blank" rel="noopener noreferrer">

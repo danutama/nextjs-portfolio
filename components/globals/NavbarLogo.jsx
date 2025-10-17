@@ -33,7 +33,6 @@ export default function NavbarLogo() {
 
   return (
     <a href="/" className="logo font-logo" ref={logoRef}>
-      <span className="char">&copy;</span>
       <span className="char">d</span>
       <span className="char">a</span>
       <span className="char">n</span>

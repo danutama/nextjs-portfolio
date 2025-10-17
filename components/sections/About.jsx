@@ -170,20 +170,6 @@ export default function About() {
               </div>
             ))}
           </div>
-
-          <h3 className="text-start">
-            Let’s turn your <i className="font-secondary">ideas</i> into reality on the web.
-          </h3>
-
-          <div className="about-socials">
-            <a href="https://www.linkedin.com/in/danu-agus-pratama" target="_blank" rel="noopener noreferrer">
-              (LinkedIn)
-            </a>
-            <a href="https://github.com/danutama" target="_blank" rel="noopener noreferrer">
-              (GitHub)
-            </a>
-            <a href="mailto:danupratama.dev@gmail.com">(Email)</a>
-          </div>
         </div>
       </div>
     </section>
