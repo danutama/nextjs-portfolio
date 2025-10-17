@@ -8,13 +8,15 @@
   justify-content: space-between;
   align-items: center;
   z-index: 100;
+  background-color: transparent;
 }
 
 .navbar-container {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: end;
+  background-color: transparent;
 }
 
 .logo {
@@ -36,17 +38,20 @@
 
 /* toggle menu */
 .menu-btn {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
+  position: fixed;
+  top: 2rem;
+  right: 2.3rem;
+  font-family: var(--font-jakarta);
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: -0.5;
+  line-height: 0.9;
+  text-transform: capitalize;
+  color: var(--white);
+  mix-blend-mode: difference;
   border: none;
-  background: var(--color-inverse);
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: transparent;
   cursor: pointer;
-  transition: background 0.3s ease;
   z-index: 110;
 }
 
@@ -237,6 +242,12 @@
 
   .logo {
     font-size: 2rem;
+  }
+
+  .menu-btn {
+    font-size: 1.2rem;
+    top: 1.5rem;
+    right: 1rem;
   }
 
   .menu-wrapper {

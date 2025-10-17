@@ -1,16 +1,17 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useMenu } from '@/context/MenuContext';
 import ThemeToggle from './ThemeToggle';
 import NavbarLogo from './NavbarLogo';
 import '../css/navbar.css';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
+  const { open, setOpen } = useMenu();
   const menuRef = useRef(null);
   const linksRef = useRef([]);
   const infoRef = useRef([]);
@@ -165,12 +166,6 @@ export default function Navbar() {
       <div className="navbar-container">
         {/* LOGO */}
         <NavbarLogo />
-
-        {/* Menu Toggle*/}
-        <button className={`menu-btn ${open ? 'open' : ''}`} onClick={() => setOpen(!open)}>
-          <span></span>
-          <span></span>
-        </button>
       </div>
 
       <div ref={menuRef} className="menu-overlay">

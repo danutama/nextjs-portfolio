@@ -1,4 +1,6 @@
+import { MenuProvider } from '@/context/MenuContext';
 import LoadingScreen from '@/components/globals/LoadingScreen';
+import MenuToggle from '@/components/globals/MenuToggle';
 import Navbar from '@/components/globals/Navbar';
 import PageTransition from '@/components/globals/PageTransition';
 import RotateMessage from '@/components/globals/RotateMessage';
@@ -68,10 +70,13 @@ export default function RootLayout({ children }) {
 
       <body>
         <LoadingScreen />
-        <Navbar />
-        <PageTransition />
-        <RotateMessage />
-        {children}
+        <MenuProvider>
+          <Navbar />
+          <MenuToggle />
+          <PageTransition />
+          <RotateMessage />
+          {children}
+        </MenuProvider>
       </body>
     </html>
   );
