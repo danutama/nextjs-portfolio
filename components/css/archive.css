@@ -1,48 +1,12 @@
 #archive {
-  padding: 6rem 0;
+  padding: 8rem 0 6rem 0;
 }
 
-/* #archive h2 {
-  font-size: 15rem;
-  letter-spacing: -5px;
+.archive-title {
+  font-size: 7vw;
   margin-bottom: 3rem;
-}
-
-#archive h2 > span {
-  font-size: 2rem;
-  letter-spacing: normal;
-  left: -1.5rem;
-  top: -8rem;
-  position: relative;
-} */
-
-#archive h2.reveal-title {
-  font-size: 15rem;
-  text-transform: lowercase;
-  margin-bottom: 3rem;
-  white-space: nowrap;
   line-height: 1;
-  letter-spacing: -2px;
-  display: inline-block;
-  overflow: hidden;
-}
-
-#archive h2.reveal-title .char {
-  display: inline-block;
-  overflow: hidden;
-}
-
-#archive h2.reveal-title .char-inner {
-  display: inline-block;
-  will-change: clip-path;
-}
-
-#archive h2 .archive-count {
-  font-size: 2rem;
-  letter-spacing: normal;
-  top: -8rem;
-  /* left: 0.5rem; */
-  position: relative;
+  letter-spacing: -3px;
 }
 
 .archive-images-wrapper {
@@ -65,12 +29,8 @@
 }
 
 @media (max-width: 1100px) {
-  #archive h2.reveal-title {
-    font-size: 18vw;
-  }
-
-  #archive h2 .archive-count {
-    top: -5rem;
+  .archive-title {
+    font-size: 13vw;
   }
 
   .archive-images-wrapper {
@@ -79,16 +39,8 @@
 }
 
 @media (max-width: 640px) {
-  #archive h2.reveal-title {
-    font-size: 21vw;
-    letter-spacing: -1px;
-  }
-
-  #archive h2 .archive-count {
-    top: -1.5rem;
-    left: -0.5rem;
-    font-size: 1.3rem;
-    vertical-align: super;
+  .archive-title {
+    letter-spacing: -2px;
   }
 
   .archive-images-wrapper {

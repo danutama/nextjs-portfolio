@@ -74,9 +74,19 @@ export default function Footer() {
             </div>
 
             <div>
-              <p className="fw-normal">around the web</p>
+              <p className="fw-normal">get in touch</p>
               <div className="footer-contact">
-                <a href="mailto:danupratama.dev@gmail.com">Email</a>
+                <a
+                  href="#"
+                  rel="nofollow"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.location.href = 'mailto:' + ['danupratama.dev', 'gmail.com'].join('@');
+                  }}
+                >
+                  Email
+                </a>
+
                 <a href="https://github.com/danutama" target="_blank" rel="noopener noreferrer">
                   GitHub
                 </a>

@@ -21,7 +21,7 @@ export default function Navbar() {
   const currentYear = new Date().getFullYear();
 
   const menuItems = ['Index', 'About', 'Projects', 'Archive'];
-  const infoItems = [`©${currentYear} Danu Pratama`, 'Credits:', 'Next.js by Vercel', 'Animated by GSAP & Three.js', 'Subdomain by github.com/is-a-dev', 'Plus Jakarta Sans by Tokotype', 'Playfair Display & Plaster by Google Fonts'];
+  const infoItems = ['CREDITS:', 'Next.js by Vercel', 'Animated by GSAP & Three.js', 'Subdomain by github.com/is-a-dev', 'Plus Jakarta Sans by Tokotype', 'Playfair Display & Plaster by Google Fonts'];
 
   // Setup GSAP
   useEffect(() => {
@@ -200,17 +200,9 @@ export default function Navbar() {
               </p>
             ))}
 
-            <div className="menu-socials">
-              <a href="https://www.linkedin.com/in/danu-agus-pratama" target="_blank" rel="noopener noreferrer">
-                (LinkedIn)
-              </a>
-              <a href="mailto:danupratama.dev@gmail.com">(email)</a>
-              <a href="https://github.com/danutama" target="_blank" rel="noopener noreferrer">
-                (GitHub)
-              </a>
-              <a href="https://danutama.github.io" target="_blank" rel="noopener noreferrer">
-                (v3)
-              </a>
+            <div className="menu-copyright">
+              <p>&copy;{currentYear} Danu Pratama</p>
+              <p>Jakarta</p>
             </div>
           </div>
         </div>

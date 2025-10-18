@@ -57,15 +57,14 @@
   flex-direction: column;
 }
 
-.footer-nav a,
-.footer-contact a {
+.footer-links a {
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: -0.8;
   line-height: 1.4;
 }
 
-.footer-nav a.active {
+.footer-links a.active {
   color: var(--color-gray);
 }
 
@@ -81,12 +80,13 @@
 }
 
 @media (max-width: 640px) {
-  .footer-title p {
+  .footer-title p,
+  .footer-links a {
     font-size: 1rem;
   }
 
   .cta {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
   }
 
   .footer-nav,
@@ -94,8 +94,7 @@
     gap: 3px;
   }
 
-  .footer-nav a,
-  .footer-contact a {
-    font-size: 1rem;
+  .footer-links p {
+    font-size: 0.9rem;
   }
 }

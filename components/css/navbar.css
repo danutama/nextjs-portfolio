@@ -36,7 +36,7 @@
   will-change: clip-path;
 }
 
-/* toggle menu */
+/* --- toggle menu --- */
 .menu-btn {
   position: fixed;
   top: 2rem;
@@ -55,31 +55,27 @@
   z-index: 110;
 }
 
-.menu-btn span {
+.flip-wrapper {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  height: 1em;
+  min-width: 90px;
+}
+
+.flip-text {
   position: absolute;
-  width: 22px;
-  height: 2px;
-  background: var(--color-text-inverse);
-  border-radius: 2px;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  will-change: transform;
+  transform: translateY(0);
+  backface-visibility: hidden;
+  color: inherit;
+  pointer-events: none;
 }
-
-.menu-btn span:nth-child(1) {
-  transform: translateY(-4px);
-}
-
-.menu-btn span:nth-child(2) {
-  transform: translateY(4px);
-}
-
-/* X */
-.menu-btn.open span:nth-child(1) {
-  transform: rotate(45deg);
-}
-
-.menu-btn.open span:nth-child(2) {
-  transform: rotate(-45deg);
-}
+/* ---- */
 
 .menu-overlay {
   position: fixed;
@@ -175,11 +171,6 @@
   color: var(--color-gray);
 }
 
-.menu-link.menu-link.active {
-  font-family: var(--font-playfair);
-  font-weight: 400;
-}
-
 .menu-info {
   color: var(--color-text);
   width: 50%;
@@ -194,21 +185,26 @@
   display: flex;
 }
 
+.menu-info p:nth-child(1) {
+  font-weight: 600;
+}
+
 .menu-info p span {
   display: inline-block;
   transform: translateY(100%);
 }
 
-.menu-socials {
+.menu-copyright {
   display: flex;
-  gap: 2rem;
+  gap: 5rem;
   justify-content: start;
   margin-top: 2rem;
 }
 
-.menu-socials a {
-  font-size: 1.3rem;
-  font-weight: 500;
+.menu-copyright p {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.5;
 }
 
 @media (max-width: 890px) {
@@ -246,8 +242,13 @@
 
   .menu-btn {
     font-size: 1.2rem;
+    font-weight: 600;
     top: 1.5rem;
     right: 1rem;
+  }
+
+  .flip-wrapper {
+    min-width: 55px;
   }
 
   .menu-wrapper {
@@ -258,13 +259,15 @@
     font-size: 3.3rem;
   }
 
-  .menu-info p,
-  .menu-socials a {
+  .menu-info p {
     font-size: 1rem;
   }
 
-  .menu-socials {
-    gap: 5px;
+  .menu-copyright p {
+    font-size: 0.9rem;
+  }
+
+  .menu-copyright {
     justify-content: space-between;
   }
 }

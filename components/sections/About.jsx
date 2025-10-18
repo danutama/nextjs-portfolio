@@ -106,6 +106,28 @@ export default function About() {
     });
   }, []);
 
+  useEffect(() => {
+    const images = gsap.utils.toArray('.about-images img');
+
+    images.forEach((img) => {
+      gsap.set(img, {
+        clipPath: 'inset(0 0 100% 0)',
+      });
+
+      gsap.to(img, {
+        clipPath: 'inset(0% 0 0% 0)',
+        duration: 1.2,
+        ease: 'power3.inOut',
+        scrollTrigger: {
+          trigger: img,
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+          once: true,
+        },
+      });
+    });
+  }, []);
+
   return (
     <section id="about">
       <div className="container">
@@ -121,11 +143,19 @@ export default function About() {
 
         <div className="about-description">
           <div className="about-intro">
-            <p className="text-start text-animate">2021&mdash;present</p>
+            <p className="text-start text-animate">
+              2021<span className="font-secondary">&mdash;Present</span>
+            </p>
             <p className="text-start text-animate fw-normal">
               Hi, I'm Danu Pratama, a web developer focused on creating visually appealing and user-friendly web interfaces. <br />
               <br />I have experience developing complete web applications from frontend to backend, and I’m committed to delivering reliable digital solutions that meet each project's goals.
             </p>
+
+            <div className="about-images">
+              <Image src="/danu2.webp" alt="Danu Pratama" width={600} height={400} priority />
+              <Image src="/danu3.webp" alt="Danu Pratama" width={600} height={400} priority />
+              <Image src="/danu1.webp" alt="Danu Pratama" width={600} height={400} priority />
+            </div>
           </div>
 
           <div className="skill">
